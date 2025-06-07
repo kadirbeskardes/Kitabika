@@ -1,0 +1,190 @@
+﻿@model List<BookStore.Web.Helpers.CartItemDto>
+@{
+    ViewData["Title"] = "Alışveriş Sepeti";
+}
+
+<style>
+    :root {
+        --primary-color: #FF8C00;
+        --primary-dark: #E67E00;
+        --primary-light: #FFA726;
+        --light-bg: #FFF3E0;
+    }
+
+    h2 {
+        color: var(--primary-dark);
+        font-weight: 700;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--light-bg);
+    }
+
+    .alert-info {
+        background-color: var(--light-bg);
+        border-color: #FFE0B2;
+        color: var(--primary-dark);
+    }
+
+        .alert-info a {
+            color: var(--primary-dark);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            .alert-info a:hover {
+                text-decoration: underline;
+            }
+
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+
+        .table thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .table th {
+            border: none;
+            font-weight: 600;
+            padding: 15px;
+        }
+
+        .table td {
+            vertical-align: middle;
+            padding: 15px;
+            border-color: #f0f0f0;
+        }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border-color: #e74c3c;
+    }
+
+    .btn-secondary {
+        background-color: #95a5a6;
+        border-color: #95a5a6;
+    }
+
+    .form-control {
+        border: 1px solid #FFE0B2;
+    }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(255, 140, 0, 0.15);
+        }
+
+    tfoot td {
+        font-size: 1.1rem;
+        color: var(--primary-dark);
+        background-color: var(--light-bg);
+    }
+
+    .cart-actions {
+        margin-top: 30px;
+    }
+
+        .cart-actions .btn {
+            padding: 10px 25px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+    .quantity-form {
+        display: flex;
+        align-items: center;
+    }
+
+        .quantity-form .form-control {
+            width: 80px;
+            text-align: center;
+        }
+
+        .quantity-form .btn {
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+</style>
+
+<div class="container">
+    <h2><i class="fas fa-shopping-cart mr-2"></i>Alışveriş Sepeti</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle mr-2"></i>Sepetiniz boş. <a asp-controller="Home" asp-action="Index">Alışverişe devam et</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Kitap</th>
+                        <th>Fiyat</th>
+                        <th>Adet</th>
+                        <th>Toplam</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><i class="fas fa-book mr-2" style="color: var(--primary-color);"></i>@item.BookTitle</td>
+                            <td>@item.UnitPrice.ToString("C")</td>
+                            <td>
+                                <form asp-action="UpdateCart" method="post" class="quantity-form">
+                                    <input type="hidden" name="bookId" value="@item.BookId" />
+                                    <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control form-control-sm" />
+                                    <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+                                </form>
+                            </td>
+                            <td>@item.TotalPrice.ToString("C")</td>
+                            <td>
+                                <form asp-action="RemoveFromCart" method="post">
+                                    <input type="hidden" name="bookId" value="@item.BookId" />
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right"><strong>Genel Toplam:</strong></td>
+                        <td><strong>@Model.Sum(i => i.TotalPrice).ToString("C")</strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="text-right cart-actions">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left mr-2"></i>Alışverişe Devam Et
+            </a>
+            <a asp-action="Checkout" class="btn btn-primary">
+                <i class="fas fa-credit-card mr-2"></i>Satın Almaya Geç
+            </a>
+        </div>
+    }
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

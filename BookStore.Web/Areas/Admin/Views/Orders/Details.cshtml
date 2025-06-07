@@ -1,0 +1,65 @@
+﻿@model BookStore.Service.DTOs.OrderDto
+@{
+    ViewData["Title"] = "Sipariş Detayları";
+}
+
+<h2>Sipariş Detayları #@Model.Id</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Sipariş Bilgileri</h4>
+        <p><strong>Sipariş Tarihi:</strong> @Model.OrderDate.ToString("g")</p>
+        <p><strong>Durum:</strong> @Model.Status</p>
+        <p><strong>Toplam Tutar:</strong> @Model.TotalAmount.ToString("C")</p>
+    </div>
+    <div class="col-md-6">
+        <h4>Müşteri Bilgileri</h4>
+        <p><strong>Müşteri:</strong> @Model.Username</p>
+    </div>
+</div>
+
+<h4 class="mt-4">Sipariş Kalemleri</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Kitap</th>
+            <th>Fiyat</th>
+            <th>Adet</th>
+            <th>Toplam</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.BookTitle</td>
+                <td>@item.UnitPrice.ToString("C")</td>
+                <td>@item.Quantity</td>
+                <td>@((item.UnitPrice * item.Quantity).ToString("C"))</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right"><strong>Genel Toplam:</strong></td>
+            <td><strong>@Model.TotalAmount.ToString("C")</strong></td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="mt-3">
+    <form asp-action="UpdateStatus" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <div class="form-group">
+            <label for="status">Durumu Güncelle:</label>
+            <select name="status" class="form-control w-25 d-inline">
+                <option value="Pending" selected="@(Model.Status == "Pending")">Beklemede</option>
+                <option value="Completed" selected="@(Model.Status == "Completed")">Tamamlandı</option>
+                <option value="Cancelled" selected="@(Model.Status == "Cancelled")">İptal Edildi</option>
+            </select>
+            <button type="submit" class="btn btn-primary ml-2">Güncelle</button>
+        </div>
+    </form>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Listeye Geri Dön</a>

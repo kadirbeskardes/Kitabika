@@ -1,0 +1,184 @@
+﻿@model BookStore.Service.DTOs.CreateOrderDto
+@{
+    ViewData["Title"] = "Ödeme";
+}
+
+<style>
+    :root {
+        --primary-color: #FF8C00;
+        --primary-dark: #E67E00;
+        --primary-light: #FFA726;
+        --light-bg: #FFF3E0;
+    }
+
+    body {
+        background-color: #f9f9f9;
+    }
+
+    h2 {
+        color: var(--primary-dark);
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+    h4 {
+        color: var(--primary-dark);
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #FFE0B2;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        border: 1px solid #FFE0B2;
+        border-radius: 5px;
+        padding: 12px 15px;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(255, 140, 0, 0.15);
+        }
+
+    label {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 12px 30px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        transition: all 0.3s;
+        display: block;
+        margin: 40px auto 0;
+        width: fit-content;
+        box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2);
+    }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 140, 0, 0.3);
+        }
+
+    .payment-section {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+    }
+
+        .payment-section:hover {
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.1);
+        }
+
+    .card-icon {
+        color: var(--primary-color);
+        margin-right: 10px;
+    }
+
+    .input-group-text {
+        background-color: var(--light-bg);
+        border-color: #FFE0B2;
+        color: var(--primary-dark);
+    }
+
+    .secure-payment {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+        .secure-payment i {
+            color: #28a745;
+            margin-right: 5px;
+        }
+</style>
+
+<div class="container py-5">
+    <h2><i class="fas fa-credit-card mr-2"></i>Ödeme İşlemi</h2>
+
+    <form asp-action="Checkout" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="payment-section">
+                    <h4><i class="fas fa-truck card-icon"></i>Kargo Bilgileri</h4>
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user mr-2"></i>Ad Soyad</label>
+                        <input type="text" class="form-control" id="name" required placeholder="Ad ve soyadınızı giriniz">
+                    </div>
+                    <div class="form-group">
+                        <label for="address"><i class="fas fa-map-marker-alt mr-2"></i>Adres</label>
+                        <textarea class="form-control" id="address" rows="3" required placeholder="Tam adres bilgilerinizi giriniz"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="city"><i class="fas fa-city mr-2"></i>Şehir</label>
+                        <input type="text" class="form-control" id="city" required placeholder="Şehir adını giriniz">
+                    </div>
+                    <div class="form-group">
+                        <label for="zip"><i class="fas fa-mail-bulk mr-2"></i>Posta Kodu</label>
+                        <input type="text" class="form-control" id="zip" required placeholder="Posta kodunuzu giriniz">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="payment-section">
+                    <h4><i class="far fa-credit-card card-icon"></i>Ödeme Bilgileri</h4>
+                    <div class="form-group">
+                        <label for="cardNumber"><i class="fas fa-credit-card mr-2"></i>Kart Numarası</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fab fa-cc-visa"></i></span>
+                                <span class="input-group-text"><i class="fab fa-cc-mastercard"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expiry"><i class="far fa-calendar-alt mr-2"></i>Son Kullanma Tarihi</label>
+                        <input type="text" class="form-control" id="expiry" placeholder="AA/YY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv"><i class="fas fa-lock mr-2"></i>CVV</label>
+                        <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                    </div>
+                    <div class="secure-payment">
+                        <i class="fas fa-lock"></i> Güvenli ödeme ile korunmaktasınız
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fas fa-check-circle mr-2"></i>Siparişi Tamamla
+        </button>
+    </form>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

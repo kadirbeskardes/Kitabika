@@ -1,0 +1,174 @@
+﻿@model IEnumerable<BookStore.Service.DTOs.BookDto>
+@{
+    ViewData["Title"] = "Kitap Mağazası";
+}
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+        border: none;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.15);
+        }
+
+    .card-header {
+        background-color: #FF8C00 !important;
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .list-group-item {
+        border-left: 0;
+        border-right: 0;
+        padding: 12px 20px;
+        transition: background-color 0.2s;
+    }
+
+        .list-group-item:first-child {
+            border-top: 0;
+        }
+
+        .list-group-item:last-child {
+            border-bottom: 0;
+        }
+
+        .list-group-item:hover {
+            background-color: #FFF3E0;
+        }
+
+        .list-group-item a:hover {
+            color: #FF8C00 !important;
+        }
+
+    .badge {
+        background-color: #FF8C00 !important;
+        font-weight: 500;
+        font-size: 0.75rem;
+    }
+
+    .btn-outline-primary {
+        color: #FF8C00;
+        border-color: #FF8C00;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #FF8C00;
+            color: white;
+        }
+
+    .btn-success {
+        background-color: #FF8C00;
+        border-color: #FF8C00;
+    }
+
+        .btn-success:hover {
+            background-color: #E67E00;
+            border-color: #E67E00;
+        }
+
+    .alert-info {
+        background-color: #FFF3E0;
+        border-color: #FFE0B2;
+        color: #E67E00;
+    }
+
+    .text-primary {
+        color: #FF8C00 !important;
+    }
+
+    .card-title {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    .card-img-top {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .fa-bookmark, .fa-th-large {
+        color: #FF8C00;
+    }
+</style>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header text-white">
+                    <h5 class="mb-0"><i class="fas fa-list mr-2"></i>Kategoriler</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-action">
+                            <a asp-action="Index" class="text-decoration-none text-dark d-block">
+                                <i class="fas fa-th-large mr-2"></i>Tüm Kategoriler
+                            </a>
+                        </li>
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <li class="list-group-item list-group-item-action">
+                                <a asp-action="Category" asp-route-id="@category.Id" class="text-decoration-none text-dark d-block">
+                                    <i class="fas fa-bookmark mr-2"></i>@category.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-8">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center py-4">
+                    <i class="fas fa-info-circle fa-2x mb-3" style="color: #FF8C00;"></i>
+                    <h4>Bu kategoride kitap bulunamadı</h4>
+                    <p class="mb-0">Diğer kategorilerimizi inceleyebilirsiniz.</p>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    @foreach (var book in Model)
+                    {
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="position-relative">
+                                    <img src="@book.CoverImageUrl" class="card-img-top" alt="@book.Title" style="height: 250px; object-fit: cover;">
+                                    <span class="badge position-absolute top-0 end-0 m-2">@book.CategoryName</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-truncate" title="@book.Title">@book.Title</h5>
+                                    <p class="card-text text-muted"><i class="fas fa-user-edit mr-2"></i>@book.Author</p>
+                                    <h5 class="text-primary">@book.Price.ToString("C")</h5>
+                                </div>
+                                <div class="card-footer bg-white border-0 d-flex justify-content-between">
+                                    <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye mr-1"></i>Detaylar
+                                    </a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline">
+                                            <input type="hidden" name="bookId" value="@book.Id" />
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                <i class="fas fa-cart-plus mr-1"></i>Sepete Ekle
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

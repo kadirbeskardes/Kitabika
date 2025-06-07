@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BookStore.Service.DTOs.BookDto>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Stokta az kitap bulunmamaktadır.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Kitap</th>
+                    <th>Stok</th>
+                    <th>Fiyat</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr class="@(book.Stock < 5 ? "table-danger" : "table-warning")">
+                        <td>@book.Title</td>
+                        <td>@book.Stock</td>
+                        <td>@book.Price.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

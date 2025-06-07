@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BookStore.Service.DTOs.OrderDto>
+@{
+    ViewData["Title"] = "Siparişler";
+}
+
+<h2>Siparişler</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sipariş #</th>
+            <th>Müşteri</th>
+            <th>Tarih</th>
+            <th>Toplam</th>
+            <th>Durum</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Username</td>
+                <td>@item.OrderDate.ToString("g")</td>
+                <td>@item.TotalAmount.ToString("C")</td>
+                <td>@item.Status</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Detaylar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,114 @@
+﻿@model IEnumerable<BookStore.Service.DTOs.BookDto>
+@{
+    ViewData["Title"] = ViewBag.CategoryName ?? "Kategori";
+}
+
+<style>
+    .card {
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        background-color: #fff;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+        }
+
+    .card-img-top {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .card-title {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-text {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-footer {
+        background-color: #fff;
+        border-top: 1px solid #f0f0f0;
+        padding: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #FF8C00;
+        border-color: #FF8C00;
+    }
+
+        .btn-primary:hover {
+            background-color: #E67E00;
+            border-color: #E67E00;
+        }
+
+    .btn-success {
+        background-color: #FFA726;
+        border-color: #FFA726;
+    }
+
+        .btn-success:hover {
+            background-color: #FB8C00;
+            border-color: #FB8C00;
+        }
+
+    h2 {
+        color: #FF8C00;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #FFE0B2;
+    }
+
+    .row {
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+
+    .col-md-4 {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+</style>
+
+<div class="container">
+    <h2><i class="fas fa-bookmark mr-2"></i>@ViewBag.CategoryName</h2>
+
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="@book.CoverImageUrl" class="card-img-top" alt="@book.Title" style="height: 250px; object-fit: cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@book.Title</h5>
+                        <p class="card-text"><i class="fas fa-user-edit mr-2" style="color: #FF8C00;"></i>@book.Author</p>
+                        <p class="card-text font-weight-bold" style="color: #FF8C00; font-size: 1.1rem;">@book.Price.ToString("C")</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary">
+                            <i class="fas fa-eye mr-1"></i>Detaylar
+                        </a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline">
+                                <input type="hidden" name="bookId" value="@book.Id" />
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-cart-plus mr-1"></i>Sepete Ekle
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

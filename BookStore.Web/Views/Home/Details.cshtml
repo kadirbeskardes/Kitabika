@@ -1,0 +1,147 @@
+﻿@model BookStore.Service.DTOs.BookDto
+@{
+    ViewData["Title"] = "Kitap Detayları";
+}
+
+<style>
+    .book-detail-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 30px;
+        margin-top: 20px;
+    }
+
+    .img-fluid {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border: 1px solid #f0f0f0;
+        transition: transform 0.3s ease;
+    }
+
+        .img-fluid:hover {
+            transform: scale(1.02);
+        }
+
+    h2 {
+        color: #FF8C00;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #FFE0B2;
+    }
+
+    p {
+        margin-bottom: 15px;
+        font-size: 1.05rem;
+        color: #555;
+    }
+
+    strong {
+        color: #FF8C00;
+        font-weight: 600;
+        min-width: 100px;
+        display: inline-block;
+    }
+
+    .btn-success {
+        background-color: #FF8C00;
+        border-color: #FF8C00;
+        padding: 10px 25px;
+        font-weight: 600;
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+
+        .btn-success:hover {
+            background-color: #E67E00;
+            border-color: #E67E00;
+            transform: translateY(-2px);
+        }
+
+    .form-control {
+        border: 1px solid #FFE0B2;
+        border-radius: 5px;
+        padding: 8px 12px;
+    }
+
+        .form-control:focus {
+            border-color: #FF8C00;
+            box-shadow: 0 0 0 0.2rem rgba(255, 140, 0, 0.25);
+        }
+
+    .text-danger a {
+        color: #E67E00;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+        .text-danger a:hover {
+            text-decoration: underline;
+            color: #FF8C00;
+        }
+
+    .book-description {
+        background-color: #FFF9F2;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 25px 0;
+        line-height: 1.7;
+    }
+</style>
+
+<div class="container book-detail-container">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="@Model.CoverImageUrl" class="img-fluid" alt="@Model.Title" />
+        </div>
+        <div class="col-md-7">
+            <h2><i class="fas fa-book-open mr-2"></i>@Model.Title</h2>
+
+            <p><strong><i class="fas fa-user-edit mr-2"></i>Yazar:</strong> @Model.Author</p>
+            <p><strong><i class="fas fa-barcode mr-2"></i>ISBN:</strong> @Model.ISBN</p>
+            <p><strong><i class="fas fa-tag mr-2"></i>Fiyat:</strong> <span style="color: #FF8C00; font-weight: 700;">@Model.Price.ToString("C")</span></p>
+            <p>
+                <strong><i class="fas fa-boxes mr-2"></i>Stok:</strong>
+                @if (Model.Stock > 0)
+                {
+                    <span class="text-success">@Model.Stock Adet</span>
+                }
+                else
+                {
+                    <span class="text-danger">Tükendi</span>
+                }
+            </p>
+            <p><strong><i class="fas fa-bookmark mr-2"></i>Kategori:</strong> @Model.CategoryName</p>
+
+            <div class="book-description">
+                <h5><i class="fas fa-align-left mr-2" style="color: #FF8C00;"></i>Kitap Açıklaması</h5>
+                <p class="mt-3">@Model.Description</p>
+            </div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                    <input type="hidden" name="bookId" value="@Model.Id" />
+                    <div class="form-group row align-items-center">
+                        <label for="quantity" class="col-sm-2 col-form-label" style="color: #FF8C00; font-weight: 600;">Adet:</label>
+                        <div class="col-sm-3">
+                            <input type="number" name="quantity" id="quantity" value="1" min="1" max="@Model.Stock" class="form-control" />
+                        </div>
+                        <div class="col-sm-7">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-cart-plus mr-2"></i>Sepete Ekle
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-warning mt-4" style="background-color: #FFF3E0; border-color: #FFE0B2; color: #E67E00;">
+                    <i class="fas fa-exclamation-circle mr-2"></i>Lütfen <a asp-controller="Account" asp-action="Login" style="color: #E67E00; font-weight: 600;">giriş yapın</a> ve sepete ürün ekleyin.
+                </div>
+            }
+        </div>
+    </div>
+</div>

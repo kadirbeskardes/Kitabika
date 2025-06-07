@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Sipariş Onayı";
+}
+
+<style>
+    :root {
+        --primary-color: #FF8C00;
+        --primary-dark: #E67E00;
+        --primary-light: #FFA726;
+        --light-bg: #FFF3E0;
+    }
+
+    body {
+        background-color: #f9f9f9;
+    }
+
+    .confirmation-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(255, 140, 0, 0.1);
+        text-align: center;
+    }
+
+    h2 {
+        color: var(--primary-dark);
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: var(--primary-color);
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .order-number {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--primary-dark);
+        margin: 25px 0;
+        padding: 15px;
+        background-color: var(--light-bg);
+        border-radius: 8px;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 12px 25px;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s;
+        margin: 10px;
+        box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(255, 140, 0, 0.3);
+    }
+
+    .btn-secondary {
+        background-color: #95a5a6;
+        border-color: #95a5a6;
+        padding: 12px 25px;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s;
+        margin: 10px;
+    }
+
+    .btn-secondary:hover {
+        background-color: #7f8c8d;
+        border-color: #7f8c8d;
+        transform: translateY(-2px);
+    }
+
+    .confirmation-icon {
+        font-size: 4rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        animation: bounce 1s ease infinite alternate;
+    }
+
+    @@keyframes bounce {
+        from { transform: translateY(0); }
+        to { transform: translateY(-10px); }
+    }
+</style>
+
+<div class="confirmation-container">
+    <div class="confirmation-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <h2>Siparişiniz için Teşekkürler!</h2>
+    <p>Siparişiniz başarıyla alındı ve işleme alındı.</p>
+    <div class="order-number">
+        <i class="fas fa-receipt mr-2"></i>Sipariş Numarası: #@ViewBag.OrderId
+    </div>
+    <div class="action-buttons">
+        <a asp-controller="Cart" asp-action="OrderHistory" class="btn btn-primary">
+            <i class="fas fa-history mr-2"></i>Sipariş Geçmişini Görüntüle
+        </a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-shopping-bag mr-2"></i>Alışverişe Devam Et
+        </a>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

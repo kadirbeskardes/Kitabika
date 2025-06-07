@@ -1,0 +1,155 @@
+﻿@model IEnumerable<BookStore.Service.DTOs.OrderDto>
+@{
+    ViewData["Title"] = "Sipariş Geçmişi";
+}
+
+<style>
+    :root {
+        --primary-color: #FF8C00;
+        --primary-dark: #E67E00;
+        --primary-light: #FFA726;
+        --light-bg: #FFF3E0;
+    }
+    
+    h2 {
+        color: var(--primary-dark);
+        font-weight: 700;
+        margin-bottom: 30px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--light-bg);
+    }
+    
+    .alert-info {
+        background-color: var(--light-bg);
+        border-color: #FFE0B2;
+        color: var(--primary-dark);
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    
+    .table thead {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .table th {
+        border: none;
+        font-weight: 600;
+        padding: 15px;
+    }
+    
+    .table td {
+        vertical-align: middle;
+        padding: 15px;
+        border-color: #f0f0f0;
+    }
+    
+    .btn-info {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+    
+    .btn-info:hover {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        min-width: 100px;
+        text-align: center;
+    }
+    
+    .status-processing {
+        background-color: #FFF3E0;
+        color: var(--primary-dark);
+    }
+    
+    .status-completed {
+        background-color: #E8F5E9;
+        color: #2E7D32;
+    }
+    
+    .status-cancelled {
+        background-color: #FFEBEE;
+        color: #C62828;
+    }
+    
+    .order-id {
+        font-weight: 600;
+        color: var(--primary-dark);
+    }
+    
+    .order-total {
+        font-weight: 600;
+        color: var(--primary-dark);
+    }
+    
+    .order-date {
+        color: #666;
+    }
+</style>
+
+<div class="container">
+    <h2><i class="fas fa-history mr-2"></i>Sipariş Geçmişi</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle mr-2"></i>Henüz bir sipariş vermediniz.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-hashtag mr-2"></i>Sipariş #</th>
+                        <th><i class="far fa-calendar-alt mr-2"></i>Tarih</th>
+                        <th><i class="fas fa-money-bill-wave mr-2"></i>Toplam</th>
+                        <th><i class="fas fa-tag mr-2"></i>Durum</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td class="order-id">#@order.Id</td>
+                            <td class="order-date">@order.OrderDate.ToString("g")</td>
+                            <td class="order-total">@order.TotalAmount.ToString("C")</td>
+                            <td>
+                                <span class="status-badge status-@order.Status.ToLower()">@order.Status</span>
+                            </td>
+                            <td>
+                                <a asp-action="OrderDetails" asp-route-id="@order.Id" class="btn btn-info">
+                                    <i class="fas fa-eye mr-1"></i>Detaylar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
