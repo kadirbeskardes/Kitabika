@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using BookStore.Core.Entities;
 
 namespace BookStore.Web.Controllers
 {
@@ -78,6 +79,13 @@ namespace BookStore.Web.Controllers
                 ModelState.AddModelError("", "Kayýt baþarýsýz. Kullanýcý adý veya e-posta zaten kullanýlýyor olabilir.");
                 return View(createUserDto);
             }
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            UserDto user=await _userService.GetUserByIdAsync(userId);
+            return View(user);
         }
 
         [Authorize]

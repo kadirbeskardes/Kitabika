@@ -1,0 +1,110 @@
+﻿@model BookStore.Service.DTOs.UserDto
+
+@{
+    ViewData["Title"] = "Profilim";
+}
+
+<style>
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        color: white;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        padding: 1.5rem;
+    }
+
+        .card-header h3 {
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+    .card-body {
+        background-color: #fffaf5;
+        padding: 2rem;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    dt {
+        font-weight: 600;
+        color: #ff6f3c;
+    }
+
+    .badge-primary {
+        background-color: #ff9248;
+    }
+
+    .badge-danger {
+        background-color: #e94e1b;
+    }
+
+    .btn-primary {
+        background-color: #ff6f3c;
+        border: none;
+        border-radius: 25px;
+        padding: 0.5rem 1.5rem;
+    }
+
+        .btn-primary:hover {
+            background-color: #e85c2c;
+        }
+
+    .alert-success {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        color: #856404;
+        border-radius: 10px;
+    }
+
+    dl.row {
+        margin-top: 1rem;
+    }
+
+    .text-right {
+        margin-top: 2rem;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h3>@ViewData["Title"]</h3>
+            </div>
+            <div class="card-body">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                <dl class="row">
+                    <dt class="col-sm-3">Kullanıcı Adı</dt>
+                    <dd class="col-sm-9">@Model.Username</dd>
+
+                    <dt class="col-sm-3">E-posta</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+
+                    <dt class="col-sm-3">Rol</dt>
+                    <dd class="col-sm-9">
+                        <span class="badge @(Model.Role == "Admin" ? "badge-danger" : "badge-primary")">
+                            @Model.Role
+                        </span>
+                    </dd>
+                </dl>
+
+                <div class="text-right">
+                    <a asp-action="Edit" class="btn btn-primary">Profili Düzenle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

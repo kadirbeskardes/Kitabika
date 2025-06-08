@@ -58,11 +58,14 @@ namespace BookStore.Service.Services
             var user = await _unitOfWork.Users.GetByIdAsync(id);
             if (user == null) throw new Exception("Kullanıcı bulunamadı.");
 
-            _mapper.Map(updateUserDto, user);
             if (!string.IsNullOrEmpty(updateUserDto.Password))
+            {
                 user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(updateUserDto.Password);
+            }
 
+            _mapper.Map(updateUserDto, user);
             user.UpdatedDate = DateTime.Now;
+
             _unitOfWork.Users.Update(user);
             await _unitOfWork.CommitAsync();
         }

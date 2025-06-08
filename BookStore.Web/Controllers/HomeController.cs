@@ -1,7 +1,9 @@
 using BookStore.Service.DTOs;
 using BookStore.Service.Interfaces;
+using BookStore.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BookStore.Web.Controllers
@@ -58,6 +60,7 @@ namespace BookStore.Web.Controllers
             return View(book);
         }
 
+        
         [Authorize]
         public IActionResult Privacy()
         {
