@@ -197,6 +197,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                                     <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index"><i class="bi bi-person me-2"></i>Profilim</a></li>
                                     <li><a class="dropdown-item" asp-controller="Cart" asp-action="OrderHistory"><i class="bi bi-bag me-2"></i>Siparişlerim</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Reviews" asp-action="MyReviews"><i class="bi bi-chat-square-text me-2"></i>İncelemelerim</a></li>
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <li><hr class="dropdown-divider" /></li>
@@ -234,7 +235,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

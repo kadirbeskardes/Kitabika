@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.Core.Entities;
+using BookStore.Core.Enums;
 using BookStore.Core.Interfaces;
 using BookStore.Service.DTOs;
 using BookStore.Service.Interfaces;
@@ -9,12 +10,14 @@ namespace BookStore.Service.Services
     public class OrderService : IOrderService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICouponService _couponService;
         private readonly IMapper _mapper;
 
-        public OrderService(IUnitOfWork unitOfWork, IMapper mapper)
+        public OrderService(IUnitOfWork unitOfWork, IMapper mapper, ICouponService couponService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _couponService = couponService;
         }
 
         public async Task<OrderDto> GetOrderByIdAsync(int id)
@@ -90,14 +93,7 @@ namespace BookStore.Service.Services
         public async Task<OrderDto> CreateOrderAsync(CreateOrderDto createOrderDto)
         {
             var user = await _unitOfWork.Users.GetByIdAsync(createOrderDto.UserId);
-            if (user == null) throw new Exception("User not found");
-
-            var order = new Order
-            {
-                UserId = createOrderDto.UserId,
-                Status = "Pending",
-                OrderDate = DateTime.Now
-            };
+            if (user == null) throw new Exception("Kullanıcı bulunamadı.");
 
             decimal totalAmount = 0;
             var orderItems = new List<OrderItem>();
@@ -106,7 +102,6 @@ namespace BookStore.Service.Services
             {
                 var book = await _unitOfWork.Books.GetByIdAsync(item.BookId);
                 if (book == null) throw new Exception($"ID'si {item.BookId} olan kitap bulunamadı.");
-
                 if (book.Stock < item.Quantity) throw new Exception($"'{book.Title}' kitabı için yeterli stok yok.");
 
 
@@ -124,7 +119,46 @@ namespace BookStore.Service.Services
                 _unitOfWork.Books.Update(book);
             }
 
-            order.TotalAmount = totalAmount;
+            decimal discountAmount = 0;
+            int? couponId = null;
+
+            if (!string.IsNullOrEmpty(createOrderDto.CouponCode))
+            {
+                var couponResult = await _couponService.ValidateCouponAsync(createOrderDto.CouponCode);
+                if (couponResult.IsValid)
+                {
+                    var coupon = await _unitOfWork.Coupons.GetByCodeAsync(createOrderDto.CouponCode);
+
+                    if (coupon.DiscountPercentage.HasValue)
+                    {
+                        discountAmount = totalAmount * coupon.DiscountPercentage.Value / 100;
+                    }
+                    else
+                    {
+                        discountAmount = coupon.DiscountAmount;
+                    }
+
+                    coupon.UsedCount++;
+                    _unitOfWork.Coupons.Update(coupon);
+
+                    couponId = coupon.Id;
+                }
+                else
+                {
+                    throw new Exception($"Kupon hatası: {couponResult.ErrorMessage}");
+                }
+            }
+
+            var order = new Order
+            {
+                UserId = createOrderDto.UserId,
+                Status = OrderStatus.Pending,
+                OrderDate = DateTime.Now,
+                TotalAmount = totalAmount - discountAmount,
+                DiscountAmount = discountAmount,
+                CouponId = couponId 
+            };
+
             await _unitOfWork.Orders.AddAsync(order);
             await _unitOfWork.CommitAsync();
 
@@ -139,7 +173,7 @@ namespace BookStore.Service.Services
             return await GetOrderByIdAsync(order.Id);
         }
 
-        public async Task UpdateOrderStatusAsync(int id, string status)
+        public async Task UpdateOrderStatusAsync(int id, OrderStatus status)
         {
             var order = await _unitOfWork.Orders.GetByIdAsync(id);
             if (order == null) throw new Exception("Spiariş bulunamadı");

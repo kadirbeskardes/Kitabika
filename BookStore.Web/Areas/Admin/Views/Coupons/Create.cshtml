@@ -1,0 +1,81 @@
+﻿@model BookStore.Service.DTOs.CreateCouponDto
+
+@{
+    ViewData["Title"] = "Kupon Oluştur";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Code" class="control-label">Kupon Kodu</label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Açıklama</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="DiscountAmount" class="control-label">İndirim Tutarı</label>
+                <input asp-for="DiscountAmount" class="form-control" />
+                <span asp-validation-for="DiscountAmount" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="DiscountPercentage" class="control-label">İndirim Yüzdesi</label>
+                <input asp-for="DiscountPercentage" class="form-control" />
+                <span asp-validation-for="DiscountPercentage" class="text-danger"></span>
+                <small class="form-text text-muted">Sadece tutar veya yüzde girin (ikisini birden değil)</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="ValidFrom" class="control-label">Başlangıç Tarihi</label>
+                <input asp-for="ValidFrom" class="form-control" />
+                <span asp-validation-for="ValidFrom" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="ValidTo" class="control-label">Bitiş Tarihi</label>
+                <input asp-for="ValidTo" class="form-control" />
+                <span asp-validation-for="ValidTo" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UsageLimit" class="control-label">Kullanım Limiti</label>
+        <input asp-for="UsageLimit" class="form-control" />
+        <span asp-validation-for="UsageLimit" class="text-danger"></span>
+        <small class="form-text text-muted">Sınırsız kullanım için boş bırakın</small>
+    </div>
+
+    <div class="form-group form-check">
+        <input class="form-check-input" asp-for="IsActive" />
+        <label class="form-check-label" asp-for="IsActive">Aktif mi?</label>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Oluştur" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">İptal</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

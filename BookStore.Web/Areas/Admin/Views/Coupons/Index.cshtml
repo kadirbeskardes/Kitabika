@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BookStore.Service.DTOs.CouponDto>
+
+@{
+    ViewData["Title"] = "Kuponlar";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Kupon Oluştur</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Kod</th>
+            <th>Açıklama</th>
+            <th>İndirim</th>
+            <th>Geçerli Tarih (Başlangıç)</th>
+            <th>Geçerli Tarih (Bitiş)</th>
+            <th>Kullanım</th>
+            <th>Durum</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.Description</td>
+                <td>
+                    @if (item.DiscountPercentage.HasValue)
+                    {
+                        @($"{item.DiscountPercentage}%")
+                    }
+                    else
+                    {
+                        @(item.DiscountAmount.HasValue ? item.DiscountAmount.Value.ToString("C") : "")
+                    }
+                </td>
+                <td>@item.ValidFrom.ToString("d")</td>
+                <td>@item.ValidTo.ToString("d")</td>
+                <td>
+                    @if (item.UsageLimit.HasValue)
+                    {
+                        @($"{item.UsedCount}/{item.UsageLimit}")
+                    }
+                    else
+                    {
+                        @($"{item.UsedCount} (Sınırsız)")
+                    }
+                </td>
+                <td>
+                    @if (item.IsActive && DateTime.Now >= item.ValidFrom && DateTime.Now <= item.ValidTo &&
+                   (!item.UsageLimit.HasValue || item.UsedCount < item.UsageLimit))
+                    {
+                        <span class="badge badge-success">Aktif</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-secondary">Pasif</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,9 +1,9 @@
+using System.Security.Claims;
 using BookStore.Service.DTOs;
 using BookStore.Service.Interfaces;
 using BookStore.Web.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace BookStore.Web.Controllers
 {
@@ -12,11 +12,13 @@ namespace BookStore.Web.Controllers
     {
         private readonly IBookService _bookService;
         private readonly IOrderService _orderService;
+        private readonly ICouponService _couponService;
 
-        public CartController(IBookService bookService, IOrderService orderService)
+        public CartController(IBookService bookService, IOrderService orderService, ICouponService couponService)
         {
             _bookService = bookService;
             _orderService = orderService;
+            _couponService = couponService;
         }
 
         public IActionResult Index()
@@ -46,7 +48,7 @@ namespace BookStore.Web.Controllers
             }
 
             var cart = GetCart();
-            var existingItem = cart.FirstOrDefault(item => item.BookId == bookId);
+            var existingItem = cart.Items.FirstOrDefault(item => item.BookId == bookId);
 
             if (existingItem != null)
             {
@@ -54,7 +56,7 @@ namespace BookStore.Web.Controllers
             }
             else
             {
-                cart.Add(new CartItemDto
+                cart.Items.Add(new CartItemDto
                 {
                     BookId = bookId,
                     BookTitle = book.Title,
@@ -72,11 +74,11 @@ namespace BookStore.Web.Controllers
         public IActionResult RemoveFromCart(int bookId)
         {
             var cart = GetCart();
-            var itemToRemove = cart.FirstOrDefault(item => item.BookId == bookId);
+            var itemToRemove = cart.Items.FirstOrDefault(item => item.BookId == bookId);
 
             if (itemToRemove != null)
             {
-                cart.Remove(itemToRemove);
+                cart.Items.Remove(itemToRemove);
                 SaveCart(cart);
                 TempData["SuccessMessage"] = "Ürün sepetten kaldýrýldý.";
             }
@@ -93,7 +95,7 @@ namespace BookStore.Web.Controllers
             }
 
             var cart = GetCart();
-            var itemToUpdate = cart.FirstOrDefault(item => item.BookId == bookId);
+            var itemToUpdate = cart.Items.FirstOrDefault(item => item.BookId == bookId);
 
             if (itemToUpdate != null)
             {
@@ -103,12 +105,47 @@ namespace BookStore.Web.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> ApplyCoupon(ApplyCouponDto applyCouponDto)
+        {
+            var result = await _couponService.ValidateCouponAsync(applyCouponDto.Code);
 
+            if (result.IsValid)
+            {
+                var cart = GetCart();
+                cart.CouponCode = applyCouponDto.Code;
+                cart.CouponDiscount = result.Coupon.DiscountPercentage.HasValue
+    ? cart.Items.Sum(i => i.TotalPrice) * result.Coupon.DiscountPercentage.Value / 100
+    : result.Coupon.DiscountAmount ?? 0m;
+
+
+                SaveCart(cart);
+                TempData["SuccessMessage"] = "Kupon baþarýyla uygulandý";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = result.ErrorMessage;
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult RemoveCoupon()
+        {
+            var cart = GetCart();
+            cart.CouponCode = null;
+            cart.CouponDiscount = 0;
+            SaveCart(cart);
+
+            TempData["SuccessMessage"] = "Kupon baþarýyla kaldýrýldý";
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         public IActionResult Checkout()
         {
             var cart = GetCart();
-            if (!cart.Any())
+            if (!cart.Items.Any())
             {
                 TempData["ErrorMessage"] = "Sepetiniz boþ.";
                 return RedirectToAction("Index");
@@ -117,6 +154,7 @@ namespace BookStore.Web.Controllers
             return View(new CreateOrderDto());
         }
 
+        // Controllers/CartController.cs
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(CreateOrderDto createOrderDto)
@@ -124,24 +162,15 @@ namespace BookStore.Web.Controllers
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var cart = GetCart();
 
-            if (!cart.Any())
+            if (!cart.Items.Any())
             {
-                ModelState.AddModelError("", "Sepetiniz boþ.");
+                ModelState.AddModelError("", "Sepet boþ");
                 return View(createOrderDto);
             }
 
-            foreach (var item in cart)
-            {
-                var book = await _bookService.GetBookByIdAsync(item.BookId);
-                if (book == null || book.Stock < item.Quantity)
-                {
-                    ModelState.AddModelError("", $"{book?.Title ?? "Bir kitap"}, istenen adette mevcut deðil.");
-                    return View(createOrderDto);
-                }
-            }
-
+            createOrderDto.CouponCode = cart.CouponCode?.Trim();
             createOrderDto.UserId = userId;
-            createOrderDto.OrderItems = cart.Select(item => new CreateOrderItemDto
+            createOrderDto.OrderItems = cart.Items.Select(item => new CreateOrderItemDto
             {
                 BookId = item.BookId,
                 Quantity = item.Quantity
@@ -151,11 +180,12 @@ namespace BookStore.Web.Controllers
             {
                 var order = await _orderService.CreateOrderAsync(createOrderDto);
                 ClearCart();
+                HttpContext.Response.Cookies.Delete("AppliedCoupon");
                 return RedirectToAction("OrderConfirmation", new { orderId = order.Id });
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", $"Sipariþiniz iþlenirken bir hata oluþtu: {ex.Message}");
+                ModelState.AddModelError("", $"Sipariþiniz iþlenirken hata oluþtu: {ex.Message}");
                 return View(createOrderDto);
             }
         }
@@ -186,12 +216,12 @@ namespace BookStore.Web.Controllers
             return View(order);
         }
 
-        private List<CartItemDto> GetCart()
+        private Cart GetCart()
         {
-            return HttpContext.Session.GetObject<List<CartItemDto>>("Cart") ?? new List<CartItemDto>();
+            return HttpContext.Session.GetObject<Cart>("Cart") ?? new Cart();
         }
 
-        private void SaveCart(List<CartItemDto> cart)
+        private void SaveCart(Cart cart)
         {
             HttpContext.Session.SetObject("Cart", cart);
         }

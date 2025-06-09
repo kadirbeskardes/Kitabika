@@ -1,4 +1,5 @@
-﻿using BookStore.Service.Interfaces;
+﻿using BookStore.Core.Enums;
+using BookStore.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace BookStore.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateStatus(int id, string status)
+        public async Task<IActionResult> UpdateStatus(int id, OrderStatus status)
         {
             await _orderService.UpdateOrderStatusAsync(id, status);
             return RedirectToAction(nameof(Details), new { id });

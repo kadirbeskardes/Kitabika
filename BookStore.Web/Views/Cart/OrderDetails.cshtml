@@ -131,7 +131,7 @@
                 <p><strong><i class="far fa-calendar-alt mr-2"></i>Sipariş Tarihi:</strong> @Model.OrderDate.ToString("g")</p>
                 <p>
                     <strong><i class="fas fa-tag mr-2"></i>Durum:</strong>
-                    <span class="status-badge status-@Model.Status.ToLower()">@Model.Status</span>
+                    <span class="status-badge status-@Model.Status.ToString().ToLower()">@Model.Status.ToString()</span>
                 </p>
                 <p>
                     <strong><i class="fas fa-money-bill-wave mr-2"></i>Toplam Tutar:</strong>

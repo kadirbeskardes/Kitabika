@@ -21,6 +21,8 @@ namespace BookStore.Data
             Users = new Repository<User>(_context);
             Orders = new Repository<Order>(_context);
             OrderItems = new Repository<OrderItem>(_context);
+            Reviews = new ReviewRepository(_context);
+            Coupons= new CouponRepository(_context);
         }
 
         public IRepository<Book> Books { get; private set; }
@@ -28,6 +30,8 @@ namespace BookStore.Data
         public IRepository<User> Users { get; private set; }
         public IRepository<Order> Orders { get; private set; }
         public IRepository<OrderItem> OrderItems { get; private set; }
+        public IReviewRepository Reviews { get; private set; }
+        public ICouponRepository Coupons { get; private set; }
 
         public async Task<int> CommitAsync()
         {

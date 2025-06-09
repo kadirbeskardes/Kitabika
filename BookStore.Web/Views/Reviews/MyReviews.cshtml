@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BookStore.Service.DTOs.ReviewDto>
+@{
+    ViewData["Title"] = "Yorumlarım";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Henüz herhangi bir yorum yazmadınız.</div>
+}
+else
+{
+    <div class="reviews-container">
+        @foreach (var review in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">@review.Title</h5>
+                        <div class="rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <i class="bi @(i <= review.Rating ? "bi-star-fill text-warning" : "bi-star text-secondary")"></i>
+                            }
+                        </div>
+                    </div>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <a asp-controller="Home" asp-action="Details" asp-route-id="@review.BookId">@review.BookTitle</a> için @review.ReviewDate.ToString("d") tarihinde
+                    </h6>
+                    <p class="card-text">@review.Content</p>
+
+                    <div class="review-actions">
+                        <a asp-action="Edit" asp-route-id="@review.Id" class="btn btn-sm btn-outline-primary">Düzenle</a>
+                        <form asp-action="Delete" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@review.Id" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Sil</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

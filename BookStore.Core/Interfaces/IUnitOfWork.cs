@@ -9,6 +9,8 @@ namespace BookStore.Core.Interfaces
         IRepository<User> Users { get; }
         IRepository<Order> Orders { get; }
         IRepository<OrderItem> OrderItems { get; }
+        IReviewRepository Reviews { get; }
+        ICouponRepository Coupons { get; }
         Task<int> CommitAsync();
     }
 }

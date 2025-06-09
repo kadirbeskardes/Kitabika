@@ -1,0 +1,65 @@
+﻿@using System.Security.Claims
+@model IEnumerable<BookStore.Service.DTOs.ReviewDto>
+@{
+    ViewData["Title"] = $"{ViewBag.BookTitle} için Yorumlar";
+}
+
+<h2><i class="bi bi-chat-square-text"></i> @ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle-fill"></i> Henüz yorum yok. İlk yorumu yapan siz olun!
+    </div>
+}
+else
+{
+    <div class="reviews-container">
+        @foreach (var review in Model)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">@review.Title</h5>
+                        <div class="rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <i class="bi @(i <= review.Rating ? "bi-star-fill" : "bi-star")"></i>
+                            }
+                        </div>
+                    </div>
+                    <h6 class="card-subtitle mb-2">
+                        <span class="user-info">
+                            <i class="bi bi-person-circle user-icon"></i> @review.UserDisplayName
+                        </span>
+                        <span class="user-info">
+                            <i class="bi bi-calendar user-icon"></i> @review.ReviewDate.ToString("d")
+                        </span>
+                    </h6>
+                    <p class="card-text">@review.Content</p>
+
+                    @if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.NameIdentifier).Value == review.UserId.ToString())
+                    {
+                        <div class="review-actions">
+                            <a asp-action="Edit" asp-route-id="@review.Id" class="btn btn-outline-primary">
+                                <i class="bi bi-pencil-square"></i> Düzenle
+                            </a>
+                            <form asp-action="Delete" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@review.Id" />
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash"></i> Sil
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div class="mt-4">
+    <a asp-controller="Home" asp-action="Details" asp-route-id="@Model.FirstOrDefault()?.BookId" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Kitap Sayfasına Dön
+    </a>
+</div>

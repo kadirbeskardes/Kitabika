@@ -1,4 +1,4 @@
-﻿@model List<BookStore.Web.Helpers.CartItemDto>
+﻿@model BookStore.Web.Helpers.Cart
 @{
     ViewData["Title"] = "Alışveriş Sepeti";
 }
@@ -117,12 +117,28 @@
             padding: 5px 10px;
             margin-left: 10px;
         }
+
+    .coupon-section {
+        margin-bottom: 20px;
+    }
+
+    .coupon-applied {
+        color: #28a745;
+        font-weight: 600;
+    }
+
+    .summary-section {
+        background-color: var(--light-bg);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
 </style>
 
 <div class="container">
     <h2><i class="fas fa-shopping-cart mr-2"></i>Alışveriş Sepeti</h2>
 
-    @if (!Model.Any())
+    @if (!Model.Items.Any())
     {
         <div class="alert alert-info">
             <i class="fas fa-info-circle mr-2"></i>Sepetiniz boş. <a asp-controller="Home" asp-action="Index">Alışverişe devam et</a>
@@ -142,7 +158,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Items)
                     {
                         <tr>
                             <td><i class="fas fa-book mr-2" style="color: var(--primary-color);"></i>@item.BookTitle</td>
@@ -166,14 +182,41 @@
                         </tr>
                     }
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-right"><strong>Genel Toplam:</strong></td>
-                        <td><strong>@Model.Sum(i => i.TotalPrice).ToString("C")</strong></td>
-                        <td></td>
-                    </tr>
-                </tfoot>
             </table>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 coupon-section">
+                <form asp-action="ApplyCoupon" method="post" class="form-inline">
+                    <div class="input-group w-100">
+                        <input type="text" name="Code" class="form-control" placeholder="Kupon kodu girin" />
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Kupon Uygula</button>
+                        </div>
+                    </div>
+                </form>
+
+                @if (!string.IsNullOrEmpty(Model.CouponCode))
+                {
+                    <div class="mt-2">
+                        <span class="coupon-applied">"@Model.CouponCode" kuponu uygulandı</span>
+                        <form asp-action="RemoveCoupon" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-link text-danger">Kaldır</button>
+                        </form>
+                    </div>
+                }
+            </div>
+
+            <div class="col-md-6 summary-section">
+                <div class="text-right">
+                    <h5>Ara Toplam: @Model.Items.Sum(i => i.TotalPrice).ToString("C")</h5>
+                    @if (Model.CouponDiscount > 0)
+                    {
+                        <h5 class="text-danger">İndirim: -@Model.CouponDiscount.ToString("C")</h5>
+                    }
+                    <h4>Genel Toplam: @Model.TotalPrice.ToString("C")</h4>
+                </div>
+            </div>
         </div>
 
         <div class="text-right cart-actions">

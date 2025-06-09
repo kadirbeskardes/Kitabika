@@ -137,7 +137,7 @@
                             <td class="order-date">@order.OrderDate.ToString("g")</td>
                             <td class="order-total">@order.TotalAmount.ToString("C")</td>
                             <td>
-                                <span class="status-badge status-@order.Status.ToLower()">@order.Status</span>
+                                <span class="status-badge status-@order.Status.ToString().ToLower()">@order.Status.ToString()</span>
                             </td>
                             <td>
                                 <a asp-action="OrderDetails" asp-route-id="@order.Id" class="btn btn-info">
