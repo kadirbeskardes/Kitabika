@@ -1,0 +1,77 @@
+﻿@model BookStore.Service.DTOs.ReturnLoanDto
+@{
+    ViewData["Title"] = "Kitap İade Et";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3>@ViewData["Title"]</h3>
+        <h5 class="mb-0">@ViewBag.LoanInfo</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Return" method="post">
+            <input type="hidden" name="id" value="@ViewContext.RouteData.Values["id"]" />
+
+            <div class="form-group">
+                <label asp-for="Condition" class="control-label">Kitap Durumu</label>
+                <select asp-for="Condition" class="form-control" required>
+                    <option value="">-- Durum Seç --</option>
+                    <option value="Good">İyi - Sorun yok</option>
+                    <option value="Damaged">Hasarlı - Küçük sorunlar (₺10 ceza)</option>
+                    <option value="Lost">Kayıp - İade edilemez (Kitap fiyatının %120'si)</option>
+                </select>
+                <span asp-validation-for="Condition" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label">Notlar</label>
+                <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>Ceza Bilgisi:</strong><br>
+                - İyi durumda: Ceza yok<br>
+                - Hasarlı: ₺10 sabit ceza<br>
+                - Kayıp: Kitap fiyatının %120'si<br>
+                - Geç iade: Gün başına ₺0.50
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">İade Onayla</button>
+                <a asp-action="Index" class="btn btn-secondary">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            $('#Condition').change(function() {
+                var condition = $(this).val();
+                var infoText = "";
+
+                switch(condition) {
+                    case "Good":
+                        infoText = "Ceza uygulanmayacak";
+                        break;
+                    case "Damaged":
+                        infoText = "₺10 sabit ceza uygulanacak";
+                        break;
+                    case "Lost":
+                        infoText = "Ceza, kitap fiyatının %120'si olacak";
+                        break;
+                    default:
+                        infoText = "";
+                }
+
+                $('#condition-info').text(infoText);
+            });
+        });
+    </script>
+}

@@ -11,6 +11,7 @@ namespace BookStore.Core.Interfaces
         IRepository<OrderItem> OrderItems { get; }
         IReviewRepository Reviews { get; }
         ICouponRepository Coupons { get; }
+        ILoanRepository Loans { get; }
         Task<int> CommitAsync();
     }
 }

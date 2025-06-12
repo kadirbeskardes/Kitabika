@@ -142,6 +142,33 @@
                     <i class="fas fa-exclamation-circle mr-2"></i>Lütfen <a asp-controller="Account" asp-action="Login" style="color: #E67E00; font-weight: 600;">giriş yapın</a> ve sepete ürün ekleyin.
                 </div>
             }
+            <div class="mt-5">
+                <h3>Yorumlar</h3>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="mb-3">
+                        <a asp-controller="Reviews" asp-action="Create" asp-route-bookId="@Model.Id" class="btn btn-primary">Bir Yorum Yaz</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        Lütfen bir yorum yazabilmek için <a asp-controller="Account" asp-action="Login">giriş yapın</a>.
+                    </div>
+                }
+
+                @{
+                    var reviews = await Component.InvokeAsync("BookReviews", new { bookId = Model.Id });
+                }
+                @reviews
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="mt-4">
+                    @await Component.InvokeAsync("BookAvailability", new { bookId = Model.Id })
+                </div>
+            }
         </div>
     </div>
 </div>

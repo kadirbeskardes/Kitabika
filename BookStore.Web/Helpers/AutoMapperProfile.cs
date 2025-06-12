@@ -20,6 +20,22 @@ namespace BookStore.Web.Helpers
             CreateMap<UpdateUserDto, User>();
             CreateMap<User, UserDto>();
 
+            CreateMap<Loan, LoanDto>()
+                .ForMember(dest => dest.BookTitle, opt => opt.MapFrom(src => src.Book.Title))
+                .ForMember(dest => dest.BookCoverImage, opt => opt.MapFrom(src => src.Book.CoverImageUrl))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Username));
+
+            CreateMap<CreateLoanDto, Loan>()
+                .ForMember(dest => dest.DueDate, opt => opt.MapFrom(src => DateTime.Now.AddDays(src.LoanDays)))
+                .ForMember(dest => dest.LoanDate, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => "Active"))
+                .ForMember(dest => dest.FineAmount, opt => opt.Ignore()) 
+                .ForMember(dest => dest.ReturnDate, opt => opt.Ignore());
+
+            CreateMap<ReturnLoanDto, Loan>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Condition == "Lost" ? "Overdue" : "Returned"))
+                .ForMember(dest => dest.ReturnDate, opt => opt.MapFrom(src => DateTime.Now));
+
             CreateMap<Coupon, CouponDto>();
 
             CreateMap<CreateCouponDto, Coupon>()

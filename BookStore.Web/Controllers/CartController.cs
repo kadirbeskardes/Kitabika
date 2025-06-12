@@ -154,7 +154,6 @@ namespace BookStore.Web.Controllers
             return View(new CreateOrderDto());
         }
 
-        // Controllers/CartController.cs
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(CreateOrderDto createOrderDto)

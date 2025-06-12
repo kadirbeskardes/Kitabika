@@ -198,6 +198,8 @@
                                     <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index"><i class="bi bi-person me-2"></i>Profilim</a></li>
                                     <li><a class="dropdown-item" asp-controller="Cart" asp-action="OrderHistory"><i class="bi bi-bag me-2"></i>Siparişlerim</a></li>
                                     <li><a class="dropdown-item" asp-controller="Reviews" asp-action="MyReviews"><i class="bi bi-chat-square-text me-2"></i>İncelemelerim</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Loan" asp-action="MyLoans"><i class="bi bi-arrow-left-right"></i> Ödünçler</a></li>
+
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <li><hr class="dropdown-divider" /></li>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BookStore.Service.DTOs.LoanDto>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Kapak</th>
+            <th>Kitap</th>
+            <th>Kullanıcı</th>
+            <th>Ödünç Verilme Tarihi</th>
+            <th>Son Geri Verme Tarihi</th>
+            <th>Geri Verme Tarihi</th>
+            <th>Durum</th>
+            <th>Para Cezası</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(loan.BookCoverImage))
+                    {
+                        <img src="@loan.BookCoverImage" alt="@loan.BookTitle"
+                             style="width: 50px; height: 70px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="no-cover" style="width:50px; height:70px; background:#eee; display:inline-block;"></div>
+                    }
+                </td>
+                <td>
+                    @if (loan.BookId > 0)
+                    {
+                        <a asp-controller="Books" asp-action="Details" asp-route-id="@loan.BookId">
+                            @(loan.BookTitle ?? "Bilinmeyen Kitap")
+                        </a>
+                    }
+                    else
+                    {
+                        @:Bilinmeyen Kitap
+                    }
+                </td>
+                <td>
+                    @if (loan.UserId > 0)
+                    {
+                        <a asp-controller="Users" asp-action="Details" asp-route-id="@loan.UserId">
+                            @(loan.UserName ?? "Bilinmeyen Kullanıcı")
+                        </a>
+                    }
+                    else
+                    {
+                        @:Bilinmeyen Kullanıcı
+                    }
+                </td>
+                <td>@loan.LoanDate.ToString("d")</td>
+                <td>@loan.DueDate.ToString("d")</td>
+                <td>@(loan.ReturnDate?.ToString("d") ?? "-")</td>
+                <td>
+                    @switch (loan.Status)
+                    {
+                        case "Active":
+                            <span class="badge badge-success">Aktif</span>
+                            break;
+                        case "Overdue":
+                            <span class="badge badge-danger">Gecikmiş</span>
+                            break;
+                        case "Returned":
+                            <span class="badge badge-secondary">İade Edildi</span>
+                            break;
+                        default:
+                            <span class="badge badge-warning">@loan.Status</span>
+                            break;
+                    }
+                </td>
+                <td>@(loan.FineAmount?.ToString("C") ?? "-")</td>
+                <td>
+                    @if (loan.Status == "Active")
+                    {
+                        <a asp-action="Return" asp-route-id="@loan.Id"
+                           class="btn btn-sm btn-primary">İade Et</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

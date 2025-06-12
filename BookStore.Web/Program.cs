@@ -8,6 +8,7 @@ using BookStore.Core.Interfaces;
 using BookStore.Data;
 using System.Globalization;
 using BookStore.Data.Repositories;
+using BookStore.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,10 @@ builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<ILoanService, LoanService>();
+
+builder.Services.AddHostedService<OverdueLoanCheckerService>();
 
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
