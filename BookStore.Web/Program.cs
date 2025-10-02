@@ -45,6 +45,7 @@ builder.Services.AddScoped<ILoanService, LoanService>();
 builder.Services.AddHostedService<OverdueLoanCheckerService>();
 
 
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
