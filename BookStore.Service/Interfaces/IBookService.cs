@@ -16,5 +16,8 @@ namespace BookStore.Service.Interfaces
         Task DeleteBookAsync(int id);
         Task<IEnumerable<BookDto>> GetBooksByCategoryAsync(int categoryId);
         Task<IEnumerable<BookDto>> SearchBooksAsync(string searchTerm);
+        Task<PagedResult<BookDto>> SearchBooksAdvancedAsync(BookSearchDto searchDto);
+        Task<IEnumerable<string>> GetAllAuthorsAsync();
+        Task<IEnumerable<int>> GetPublicationYearsAsync();
     }
 }

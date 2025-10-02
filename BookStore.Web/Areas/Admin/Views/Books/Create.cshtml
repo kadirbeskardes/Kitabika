@@ -49,6 +49,11 @@
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="PublicationYear" class="control-label">Yayın Yılı</label>
+                <input asp-for="PublicationYear" class="form-control" type="number" min="1000" max="2100" />
+                <span asp-validation-for="PublicationYear" class="text-danger"></span>
+            </div>
             <div class="form-group mt-3">
                 <input type="submit" value="Oluştur" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-secondary">Listeye Dön</a>

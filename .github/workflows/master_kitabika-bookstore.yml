@@ -1,0 +1,64 @@
+# Deploy ASP.NET Core app to Azure Web App
+name: Deploy Kitabika BookStore to Azure
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: 'kitabika-bookstore'
+  DOTNET_VERSION: '9.0.x'
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore NuGet packages
+      run: dotnet restore BookStore.sln
+
+    - name: Build solution
+      run: dotnet build BookStore.sln --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test BookStore.sln --configuration Release --no-build --verbosity normal
+
+    - name: Publish application
+      run: dotnet publish BookStore.Web/BookStore.Web.csproj --configuration Release --no-build --output ./publish
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: webapp-artifacts
+        path: ./publish
+
+  deploy:
+    name: Deploy to Azure
+    runs-on: windows-latest
+    needs: build
+    environment: production
+    
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: webapp-artifacts
+        path: ./publish
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        slot-name: 'Production'
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3EFDACBCD4A54D1FA71736435D8AD724 }}
+        package: ./publish

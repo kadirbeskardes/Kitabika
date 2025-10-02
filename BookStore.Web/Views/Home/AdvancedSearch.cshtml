@@ -1,0 +1,287 @@
+@model BookStore.Service.DTOs.PagedResult<BookStore.Service.DTOs.BookDto>
+@{
+    ViewData["Title"] = "Gelişmiş Arama";
+    var searchDto = ViewBag.SearchDto as BookStore.Service.DTOs.BookSearchDto;
+    var categories = ViewBag.Categories as IEnumerable<BookStore.Service.DTOs.CategoryDto>;
+    var authors = ViewBag.Authors as IEnumerable<string>;
+    var years = ViewBag.Years as IEnumerable<int>;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Filtreleme Paneli -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-funnel"></i> Filtreler</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AdvancedSearch" method="get">
+                        <!-- Genel Arama -->
+                        <div class="mb-3">
+                            <label class="form-label">Arama Terimi</label>
+                            <input type="text" class="form-control" name="SearchTerm" value="@searchDto?.SearchTerm" placeholder="Kitap adı, ISBN...">
+                        </div>
+
+                        <!-- Yazar Filtresi -->
+                        <div class="mb-3">
+                            <label class="form-label">Yazar</label>
+                            <select class="form-select" name="Author">
+                                <option value="">Tüm Yazarlar</option>
+                                @if (authors != null)
+                                {
+                                    @foreach (var author in authors)
+                                    {
+                                        <option value="@author" selected="@(searchDto?.Author == author)">@author</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Fiyat Aralığı -->
+                        <div class="mb-3">
+                            <label class="form-label">Fiyat Aralığı</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="number" class="form-control" name="MinPrice" value="@searchDto?.MinPrice" placeholder="Min" min="0" step="0.01">
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" name="MaxPrice" value="@searchDto?.MaxPrice" placeholder="Max" min="0" step="0.01">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Yayın Yılı -->
+                        <div class="mb-3">
+                            <label class="form-label">Yayın Yılı</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="form-select" name="MinYear">
+                                        <option value="">Min Yıl</option>
+                                        @if (years != null)
+                                        {
+                                            @foreach (var year in years.OrderBy(y => y))
+                                            {
+                                                <option value="@year" selected="@(searchDto?.MinYear == year)">@year</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <select class="form-select" name="MaxYear">
+                                        <option value="">Max Yıl</option>
+                                        @if (years != null)
+                                        {
+                                            @foreach (var year in years.OrderByDescending(y => y))
+                                            {
+                                                <option value="@year" selected="@(searchDto?.MaxYear == year)">@year</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kategori -->
+                        <div class="mb-3">
+                            <label class="form-label">Kategori</label>
+                            <select class="form-select" name="CategoryId">
+                                <option value="">Tüm Kategoriler</option>
+                                @if (categories != null)
+                                {
+                                    @foreach (var category in categories)
+                                    {
+                                        <option value="@category.Id" selected="@(searchDto?.CategoryId == category.Id)">@category.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Stok Durumu -->
+                        <div class="mb-3">
+                            <label class="form-label">Stok Durumu</label>
+                            <select class="form-select" name="InStock">
+                                <option value="">Tümü</option>
+                                <option value="true" selected="@(searchDto?.InStock == true)">Stokta Var</option>
+                                <option value="false" selected="@(searchDto?.InStock == false)">Stokta Yok</option>
+                            </select>
+                        </div>
+
+                        <!-- Sıralama -->
+                        <div class="mb-3">
+                            <label class="form-label">Sıralama</label>
+                            <select class="form-select" name="SortBy">
+                                <option value="title" selected="@(searchDto?.SortBy == "title")">Kitap Adı</option>
+                                <option value="author" selected="@(searchDto?.SortBy == "author")">Yazar</option>
+                                <option value="price" selected="@(searchDto?.SortBy == "price")">Fiyat</option>
+                                <option value="year" selected="@(searchDto?.SortBy == "year")">Yayın Yılı</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="SortDescending" value="true" @(searchDto?.SortDescending == true ? "checked" : "")>
+                                <label class="form-check-label">Azalan Sıralama</label>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="PageNumber" value="1">
+                        <input type="hidden" name="PageSize" value="@(searchDto?.PageSize ?? 12)">
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-search"></i> Ara
+                            </button>
+                            <a href="@Url.Action("AdvancedSearch")" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-clockwise"></i> Temizle
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sonuçlar -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Arama Sonuçları</h2>
+                <span class="badge bg-secondary">@Model.TotalCount sonuç bulundu</span>
+            </div>
+
+            @if (Model.Items.Any())
+            {
+                <div class="row">
+                    @foreach (var book in Model.Items)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100 book-card">
+                                <div class="position-relative">
+                                    <img src="@(!string.IsNullOrEmpty(book.CoverImageUrl) ? book.CoverImageUrl : "/images/default-book.jpg")" 
+                                         class="card-img-top" alt="@book.Title" style="height: 250px; object-fit: cover;">
+                                    @if (book.Stock <= 0)
+                                    {
+                                        <span class="badge bg-danger position-absolute top-0 end-0 m-2">Stokta Yok</span>
+                                    }
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@book.Title</h5>
+                                    <p class="card-text text-muted">@book.Author</p>
+                                    <p class="card-text"><small class="text-muted">@book.PublicationYear</small></p>
+                                    <p class="card-text"><span class="badge bg-secondary">@book.CategoryName</span></p>
+                                    <p class="card-text">
+                                        <strong class="text-primary">@book.Price.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</strong>
+                                    </p>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <a href="@Url.Action("Details", new { id = book.Id })" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-eye"></i> Detaylar
+                                    </a>
+                                    @if (book.Stock > 0)
+                                    {
+                                        <span class="text-success small">
+                                            <i class="bi bi-check-circle"></i> @book.Stock adet stokta
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Sayfalama -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Sayfa navigasyonu">
+                        <ul class="pagination justify-content-center">
+                            @if (Model.HasPreviousPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("AdvancedSearch", new { 
+                                        SearchTerm = searchDto?.SearchTerm,
+                                        Author = searchDto?.Author,
+                                        MinPrice = searchDto?.MinPrice,
+                                        MaxPrice = searchDto?.MaxPrice,
+                                        MinYear = searchDto?.MinYear,
+                                        MaxYear = searchDto?.MaxYear,
+                                        CategoryId = searchDto?.CategoryId,
+                                        InStock = searchDto?.InStock,
+                                        SortBy = searchDto?.SortBy,
+                                        SortDescending = searchDto?.SortDescending,
+                                        PageNumber = Model.PageNumber - 1,
+                                        PageSize = Model.PageSize
+                                    })">Önceki</a>
+                                </li>
+                            }
+
+                            @for (int i = Math.Max(1, Model.PageNumber - 2); i <= Math.Min(Model.TotalPages, Model.PageNumber + 2); i++)
+                            {
+                                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("AdvancedSearch", new { 
+                                        SearchTerm = searchDto?.SearchTerm,
+                                        Author = searchDto?.Author,
+                                        MinPrice = searchDto?.MinPrice,
+                                        MaxPrice = searchDto?.MaxPrice,
+                                        MinYear = searchDto?.MinYear,
+                                        MaxYear = searchDto?.MaxYear,
+                                        CategoryId = searchDto?.CategoryId,
+                                        InStock = searchDto?.InStock,
+                                        SortBy = searchDto?.SortBy,
+                                        SortDescending = searchDto?.SortDescending,
+                                        PageNumber = i,
+                                        PageSize = Model.PageSize
+                                    })">@i</a>
+                                </li>
+                            }
+
+                            @if (Model.HasNextPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("AdvancedSearch", new { 
+                                        SearchTerm = searchDto?.SearchTerm,
+                                        Author = searchDto?.Author,
+                                        MinPrice = searchDto?.MinPrice,
+                                        MaxPrice = searchDto?.MaxPrice,
+                                        MinYear = searchDto?.MinYear,
+                                        MaxYear = searchDto?.MaxYear,
+                                        CategoryId = searchDto?.CategoryId,
+                                        InStock = searchDto?.InStock,
+                                        SortBy = searchDto?.SortBy,
+                                        SortDescending = searchDto?.SortDescending,
+                                        PageNumber = Model.PageNumber + 1,
+                                        PageSize = Model.PageSize
+                                    })">Sonraki</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-search display-1 text-muted"></i>
+                    <h3 class="text-muted">Sonuç bulunamadı</h3>
+                    <p class="text-muted">Arama kriterlerinizi değiştirip tekrar deneyin.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .book-card {
+        transition: transform 0.2s;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .card-img-top {
+        transition: transform 0.2s;
+    }
+    .book-card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+</style>

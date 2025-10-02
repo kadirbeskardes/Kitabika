@@ -10,5 +10,6 @@
         public string Description { get; set; }
         public string CoverImageUrl { get; set; }
         public int CategoryId { get; set; }
+        public int PublicationYear { get; set; }
     }
 }

@@ -60,6 +60,21 @@ namespace BookStore.Web.Controllers
             return View(book);
         }
 
+        public async Task<IActionResult> AdvancedSearch(BookSearchDto searchDto)
+        {
+            var result = await _bookService.SearchBooksAdvancedAsync(searchDto);
+            var categories = await _categoryService.GetAllCategoriesAsync();
+            var authors = await _bookService.GetAllAuthorsAsync();
+            var years = await _bookService.GetPublicationYearsAsync();
+
+            ViewBag.Categories = categories;
+            ViewBag.Authors = authors;
+            ViewBag.Years = years;
+            ViewBag.SearchDto = searchDto;
+
+            return View(result);
+        }
+
         
         [Authorize]
         public IActionResult Privacy()
