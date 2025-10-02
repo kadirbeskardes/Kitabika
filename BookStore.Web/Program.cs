@@ -136,4 +136,35 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Azure'da migration'ları otomatik çalıştır
+try 
+{
+    Console.WriteLine("🔍 Checking database migrations...");
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<BookStoreContext>();
+        
+        // Pending migration'ları kontrol et
+        var pendingMigrations = context.Database.GetPendingMigrations();
+        Console.WriteLine($"🔍 Pending migrations count: {pendingMigrations.Count()}");
+        
+        if (pendingMigrations.Any())
+        {
+            Console.WriteLine("🚀 Applying database migrations...");
+            context.Database.Migrate();
+            Console.WriteLine("✅ Database migrations applied successfully!");
+        }
+        else
+        {
+            Console.WriteLine("✅ Database is up to date!");
+        }
+    }
+}
+catch (Exception migrationEx)
+{
+    Console.WriteLine($"❌ Migration error: {migrationEx.Message}");
+    Console.WriteLine($"❌ Stack trace: {migrationEx.StackTrace}");
+    // Migration hatası uygulama çalışmasını engellemez
+}
+
 app.Run();
