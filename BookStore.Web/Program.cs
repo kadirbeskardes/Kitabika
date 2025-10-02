@@ -1,25 +1,88 @@
+using BookStore.Service.Services;
+using BookStore.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using BookStore.Web.Helpers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using BookStore.Core.Interfaces;
+using BookStore.Data;
+using System.Globalization;
+using BookStore.Data.Repositories;
+using BookStore.Web.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// En minimal logging
+// Logging'i basit tutuyoruz
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Information);
 
-// Sadece temel servisleri ekliyoruz
+builder.Services.AddDbContext<BookStoreContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+var cultureInfo = new CultureInfo("tr-TR");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<ILoanService, LoanService>();
+
+builder.Services.AddHostedService<OverdueLoanCheckerService>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); 
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Minimal middleware pipeline
+// Migration'ı şimdilik devre dışı bırakıyoruz
+// TODO: Database migration'ı manuel olarak yapın
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("Application starting without automatic database migration");
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSession();
+
 app.UseRouting();
 
-// Basit bir health check endpoint
-app.MapGet("/health", () => "OK");
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
