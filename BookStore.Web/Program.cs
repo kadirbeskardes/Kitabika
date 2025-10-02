@@ -17,8 +17,19 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Information);
 
+// Connection string debug
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine($"🔍 Connection String Found: {!string.IsNullOrEmpty(connectionString)}");
+Console.WriteLine($"🔍 Connection String Length: {connectionString?.Length ?? 0}");
+if (!string.IsNullOrEmpty(connectionString))
+{
+    // Sadece server kısmını göster (güvenlik için)
+    var serverPart = connectionString.Split(';')[0];
+    Console.WriteLine($"🔍 Server: {serverPart}");
+}
+
 builder.Services.AddDbContext<BookStoreContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 var cultureInfo = new CultureInfo("tr-TR");
