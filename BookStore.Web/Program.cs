@@ -65,24 +65,10 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Production'da database migration'ı otomatik çalıştır
-if (app.Environment.IsProduction())
-{
-    try
-    {
-        using (var scope = app.Services.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<BookStoreContext>();
-            context.Database.Migrate();
-        }
-    }
-    catch (Exception ex)
-    {
-        var logger = app.Services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Database migration failed");
-        throw;
-    }
-}
+// Migration'ı şimdilik devre dışı bırakıyoruz
+// TODO: Database migration'ı manuel olarak yapın
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("Application starting without automatic database migration");
 
 if (!app.Environment.IsDevelopment())
 {
