@@ -12,13 +12,9 @@ using BookStore.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Application Insights ekliyoruz
-builder.Services.AddApplicationInsightsTelemetry();
-
-// Detailed logging ekleyelim
+// Logging'i basit tutuyoruz
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
-builder.Logging.AddDebug();
 builder.Logging.SetMinimumLevel(LogLevel.Information);
 
 builder.Services.AddDbContext<BookStoreContext>(options =>
