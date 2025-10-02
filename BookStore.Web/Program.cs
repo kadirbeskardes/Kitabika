@@ -12,6 +12,15 @@ using BookStore.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Application Insights ekliyoruz
+builder.Services.AddApplicationInsightsTelemetry();
+
+// Detailed logging ekleyelim
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+builder.Logging.SetMinimumLevel(LogLevel.Information);
+
 builder.Services.AddDbContext<BookStoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -55,6 +64,24 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// Production'da database migration'ı otomatik çalıştır
+if (app.Environment.IsProduction())
+{
+    try
+    {
+        using (var scope = app.Services.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<BookStoreContext>();
+            context.Database.Migrate();
+        }
+    }
+    catch (Exception ex)
+    {
+        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Database migration failed");
+        throw;
+    }
+}
 
 if (!app.Environment.IsDevelopment())
 {
