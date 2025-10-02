@@ -17,19 +17,26 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Information);
 
-// Connection string debug
+// Connection string debug - her iki ismi de deneyelim
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-Console.WriteLine($"🔍 Connection String Found: {!string.IsNullOrEmpty(connectionString)}");
-Console.WriteLine($"🔍 Connection String Length: {connectionString?.Length ?? 0}");
-if (!string.IsNullOrEmpty(connectionString))
+var sqlConnectionString = builder.Configuration.GetConnectionString("SQL_CONNECTION_STRING");
+
+Console.WriteLine($"🔍 DefaultConnection Found: {!string.IsNullOrEmpty(connectionString)}");
+Console.WriteLine($"🔍 SQL_CONNECTION_STRING Found: {!string.IsNullOrEmpty(sqlConnectionString)}");
+
+// Hangisi varsa onu kullan
+var finalConnectionString = connectionString ?? sqlConnectionString;
+
+Console.WriteLine($"🔍 Final Connection String Found: {!string.IsNullOrEmpty(finalConnectionString)}");
+if (!string.IsNullOrEmpty(finalConnectionString))
 {
     // Sadece server kısmını göster (güvenlik için)
-    var serverPart = connectionString.Split(';')[0];
+    var serverPart = finalConnectionString.Split(';')[0];
     Console.WriteLine($"🔍 Server: {serverPart}");
 }
 
 builder.Services.AddDbContext<BookStoreContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(finalConnectionString));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 var cultureInfo = new CultureInfo("tr-TR");
