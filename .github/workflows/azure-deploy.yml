@@ -67,18 +67,3 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3EFDACBCD4A54D1FA71736435D8AD724 }}
           package: .
 
-      - name: Set Connection String in Azure
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3EFDACBCD4A54D1FA71736435D8AD724 }}
-          connection-strings-json: |
-            [
-              {
-                "name": "DefaultConnection",
-                "value": "${{ secrets.SQL_CONNECTION_STRING }}",
-                "type": "SQLServer",
-                "slotSetting": false
-              }
-            ]
