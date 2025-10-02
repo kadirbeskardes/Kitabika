@@ -59,15 +59,45 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Migration'ı şimdilik devre dışı bırakıyoruz
-// TODO: Database migration'ı manuel olarak yapın
-var logger = app.Services.GetRequiredService<ILogger<Program>>();
-logger.LogInformation("Application starting without automatic database migration");
+// Detaylı hata yakalama
+try
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogInformation("Application starting - services built successfully");
+    
+    // Database connection test (migration olmadan)
+    try
+    {
+        using (var scope = app.Services.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<BookStoreContext>();
+            var canConnect = context.Database.CanConnect();
+            logger.LogInformation($"Database connection test: {(canConnect ? "SUCCESS" : "FAILED")}");
+        }
+    }
+    catch (Exception dbEx)
+    {
+        var logger2 = app.Services.GetRequiredService<ILogger<Program>>();
+        logger2.LogError(dbEx, "Database connection failed, but application will continue");
+    }
+}
+catch (Exception ex)
+{
+    // Bu durumda logger bile çalışmayabilir, console'a yazdır
+    Console.WriteLine($"CRITICAL ERROR during app initialization: {ex.Message}");
+    Console.WriteLine($"Stack trace: {ex.StackTrace}");
+    throw;
+}
 
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
+}
+else
+{
+    // Development'ta detaylı hata göster (Azure'da da development mode'da çalıştırmak için)
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
