@@ -67,3 +67,9 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3EFDACBCD4A54D1FA71736435D8AD724 }}
           package: .
 
+      - name: Database Migration Setup Complete
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "🔍 Database migrations will run automatically on first app startup"
+          echo "🌐 App URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
+
