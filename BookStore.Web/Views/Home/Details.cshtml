@@ -130,9 +130,17 @@
                             <input type="number" name="quantity" id="quantity" value="1" min="1" max="@Model.Stock" class="form-control" />
                         </div>
                         <div class="col-sm-7">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-cart-plus mr-2"></i>Sepete Ekle
-                            </button>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-cart-plus mr-2"></i>Sepete Ekle
+                                </button>
+                                <button type="button" class="btn btn-outline-warning toggle-favorite" data-book-id="@Model.Id">
+                                    <i class="bi bi-star"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger toggle-wishlist" data-book-id="@Model.Id">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -173,3 +181,97 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <text>
+                var bookId = @Model.Id;
+                
+                // Favori durumunu kontrol et
+                $.get('@Url.Action("CheckFavoriteStatus", "Favorites")', { bookId: bookId })
+                    .done(function(response) {
+                        if (response.isInFavorites) {
+                            $('.toggle-favorite').removeClass('btn-outline-warning').addClass('btn-warning');
+                            $('.toggle-favorite i').removeClass('bi-star').addClass('bi-star-fill');
+                        }
+                    });
+
+                // İstek listesi durumunu kontrol et
+                $.get('@Url.Action("CheckWishlistStatus", "Wishlist")', { bookId: bookId })
+                    .done(function(response) {
+                        if (response.isInWishlist) {
+                            $('.toggle-wishlist').removeClass('btn-outline-danger').addClass('btn-danger');
+                            $('.toggle-wishlist i').removeClass('bi-heart').addClass('bi-heart-fill');
+                        }
+                    });
+
+                // Favori toggle
+                $('.toggle-favorite').click(function() {
+                    var button = $(this);
+                    
+                    $.post('@Url.Action("ToggleFavorite", "Favorites")', { bookId: bookId })
+                        .done(function(response) {
+                            if (response.success) {
+                                if (response.isInFavorites) {
+                                    button.removeClass('btn-outline-warning').addClass('btn-warning');
+                                    button.find('i').removeClass('bi-star').addClass('bi-star-fill');
+                                } else {
+                                    button.removeClass('btn-warning').addClass('btn-outline-warning');
+                                    button.find('i').removeClass('bi-star-fill').addClass('bi-star');
+                                }
+                                showNotification(response.message, 'success');
+                            } else {
+                                showNotification(response.message, 'error');
+                            }
+                        })
+                        .fail(function() {
+                            showNotification('Bir hata oluştu', 'error');
+                        });
+                });
+
+                // İstek listesi toggle
+                $('.toggle-wishlist').click(function() {
+                    var button = $(this);
+                    
+                    $.post('@Url.Action("ToggleWishlist", "Wishlist")', { bookId: bookId })
+                        .done(function(response) {
+                            if (response.success) {
+                                if (response.isInWishlist) {
+                                    button.removeClass('btn-outline-danger').addClass('btn-danger');
+                                    button.find('i').removeClass('bi-heart').addClass('bi-heart-fill');
+                                } else {
+                                    button.removeClass('btn-danger').addClass('btn-outline-danger');
+                                    button.find('i').removeClass('bi-heart-fill').addClass('bi-heart');
+                                }
+                                showNotification(response.message, 'success');
+                            } else {
+                                showNotification(response.message, 'error');
+                            }
+                        })
+                        .fail(function() {
+                            showNotification('Bir hata oluştu', 'error');
+                        });
+                });
+                </text>
+            }
+        });
+
+        function showNotification(message, type) {
+            var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            var notification = `
+                <div class="alert ${alertClass} alert-dismissible fade show position-fixed" 
+                     style="top: 20px; right: 20px; z-index: 9999; max-width: 300px;" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            $('body').append(notification);
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 3000);
+        }
+    </script>
+}

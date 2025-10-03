@@ -171,6 +171,9 @@
                             <a class="nav-link" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" asp-controller="Favorites" asp-action="MostFavorited">En Popüler</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="Privacy">Gizlilik Politikası</a>
                         </li>
                     </ul>
@@ -201,6 +204,10 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                                     <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index"><i class="bi bi-person me-2"></i>Profilim</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" asp-controller="Favorites" asp-action="Index"><i class="bi bi-star me-2"></i>Favorilerim</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Wishlist" asp-action="Index"><i class="bi bi-heart me-2"></i>İstek Listem</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
                                     <li><a class="dropdown-item" asp-controller="Cart" asp-action="OrderHistory"><i class="bi bi-bag me-2"></i>Siparişlerim</a></li>
                                     <li><a class="dropdown-item" asp-controller="Reviews" asp-action="MyReviews"><i class="bi bi-chat-square-text me-2"></i>İncelemelerim</a></li>
                                     <li><a class="dropdown-item" asp-controller="Loan" asp-action="MyLoans"><i class="bi bi-arrow-left-right"></i> Ödünçler</a></li>

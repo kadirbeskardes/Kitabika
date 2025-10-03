@@ -57,6 +57,18 @@ namespace BookStore.Web.Helpers
                     opt => opt.MapFrom(src => src.User != null ? src.User.Username : "Deleted User"))
                 .ForMember(dest => dest.BookTitle,
                     opt => opt.MapFrom(src => src.Book != null ? src.Book.Title : "Unknown Book"));
+
+            // Wishlist mappings
+            CreateMap<Wishlist, WishlistDto>()
+                .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book));
+            CreateMap<AddToWishlistDto, Wishlist>()
+                .ForMember(dest => dest.AddedDate, opt => opt.MapFrom(src => DateTime.Now));
+
+            // Favorite mappings
+            CreateMap<Favorite, FavoriteDto>()
+                .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book));
+            CreateMap<AddToFavoritesDto, Favorite>()
+                .ForMember(dest => dest.AddedDate, opt => opt.MapFrom(src => DateTime.Now));
         }
     }
 

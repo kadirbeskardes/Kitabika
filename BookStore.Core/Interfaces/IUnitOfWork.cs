@@ -12,6 +12,8 @@ namespace BookStore.Core.Interfaces
         IReviewRepository Reviews { get; }
         ICouponRepository Coupons { get; }
         ILoanRepository Loans { get; }
+        IWishlistRepository Wishlists { get; }
+        IFavoriteRepository Favorites { get; }
         Task<int> CommitAsync();
     }
 }

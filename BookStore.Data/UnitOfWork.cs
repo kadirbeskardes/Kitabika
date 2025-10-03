@@ -24,6 +24,8 @@ namespace BookStore.Data
             Reviews = new ReviewRepository(_context);
             Coupons= new CouponRepository(_context);
             Loans= new LoanRepository(_context);
+            Wishlists = new WishlistRepository(_context);
+            Favorites = new FavoriteRepository(_context);
         }
 
         public IRepository<Book> Books { get; private set; }
@@ -34,6 +36,8 @@ namespace BookStore.Data
         public IReviewRepository Reviews { get; private set; }
         public ICouponRepository Coupons { get; private set; }
         public ILoanRepository Loans { get; private set; }
+        public IWishlistRepository Wishlists { get; private set; }
+        public IFavoriteRepository Favorites { get; private set; }
 
         public async Task<int> CommitAsync()
         {

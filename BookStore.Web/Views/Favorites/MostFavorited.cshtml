@@ -1,0 +1,182 @@
+@model IEnumerable<BookStore.Service.DTOs.BookDto>
+@{
+    ViewData["Title"] = "En Çok Favorilenen Kitaplar";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-award text-warning"></i> En Çok Favorilenen Kitaplar</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active">En Popüler</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model.Any())
+        {
+            @foreach (var book in Model.Select((book, index) => new { Book = book, Index = index }))
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm position-relative">
+                        <!-- Sıralama Badge'i -->
+                        <div class="position-absolute top-0 start-0 m-2" style="z-index: 1;">
+                            @{
+                                var badgeClass = book.Index < 3 ? "bg-warning" : "bg-secondary";
+                                var icon = book.Index == 0 ? "bi-trophy-fill" : 
+                                          book.Index == 1 ? "bi-award-fill" : 
+                                          book.Index == 2 ? "bi-star-fill" : "bi-hash";
+                            }
+                            <span class="badge @badgeClass">
+                                <i class="@icon"></i> #@(book.Index + 1)
+                            </span>
+                        </div>
+                        
+                        <div class="card-img-top-container" style="height: 300px; overflow: hidden;">
+                            <img src="@book.Book.CoverImageUrl" 
+                                 alt="@book.Book.Title" 
+                                 class="card-img-top img-fluid" 
+                                 style="height: 100%; width: 100%; object-fit: cover;">
+                        </div>
+                        
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@book.Book.Title</h5>
+                            <p class="card-text text-muted">@book.Book.Author</p>
+                            <p class="card-text text-muted">@book.Book.CategoryName</p>
+                            
+                            <div class="price-section mb-2">
+                                <span class="h5 text-primary">₺@book.Book.Price.ToString("N2")</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <small class="text-muted">
+                                    <i class="bi bi-people"></i> Çok Favori Eklenen
+                                </small>
+                            </div>
+
+                            <div class="mt-auto">
+                                <div class="btn-group w-100" role="group">
+                                    <a href="@Url.Action("Details", "Home", new { id = book.Book.Id })" 
+                                       class="btn btn-primary">
+                                        <i class="bi bi-eye"></i> İncele
+                                    </a>
+                                    @if (User.Identity!.IsAuthenticated)
+                                    {
+                                        <button type="button" 
+                                                class="btn btn-outline-warning toggle-favorite"
+                                                data-book-id="@book.Book.Id">
+                                            <i class="bi bi-star"></i> Favori
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="bi bi-award display-1 text-muted"></i>
+                    <h3 class="mt-3">Henüz popüler kitap bulunmuyor</h3>
+                    <p class="text-muted">Kullanıcılar kitapları favorilerine eklemeye başladığında burada gösterilecek.</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Favori durumlarını kontrol et
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <text>
+                $('.toggle-favorite').each(function() {
+                    var bookId = $(this).data('book-id');
+                    var button = $(this);
+                    
+                    $.get('@Url.Action("CheckFavoriteStatus", "Favorites")', { bookId: bookId })
+                        .done(function(response) {
+                            if (response.isInFavorites) {
+                                button.removeClass('btn-outline-warning').addClass('btn-warning');
+                                button.find('i').removeClass('bi-star').addClass('bi-star-fill');
+                                button.html('<i class="bi bi-star-fill"></i> Favoride');
+                            }
+                        });
+                });
+
+                // Favori toggle
+                $('.toggle-favorite').click(function() {
+                    var bookId = $(this).data('book-id');
+                    var button = $(this);
+                    
+                    $.post('@Url.Action("ToggleFavorite", "Favorites")', { bookId: bookId })
+                        .done(function(response) {
+                            if (response.success) {
+                                if (response.isInFavorites) {
+                                    button.removeClass('btn-outline-warning').addClass('btn-warning');
+                                    button.find('i').removeClass('bi-star').addClass('bi-star-fill');
+                                    button.html('<i class="bi bi-star-fill"></i> Favoride');
+                                } else {
+                                    button.removeClass('btn-warning').addClass('btn-outline-warning');
+                                    button.find('i').removeClass('bi-star-fill').addClass('bi-star');
+                                    button.html('<i class="bi bi-star"></i> Favori');
+                                }
+                                showNotification(response.message, 'success');
+                            } else {
+                                showNotification(response.message, 'error');
+                            }
+                        })
+                        .fail(function() {
+                            showNotification('Bir hata oluştu', 'error');
+                        });
+                });
+                </text>
+            }
+        });
+
+        function showNotification(message, type) {
+            var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            var notification = `
+                <div class="alert ${alertClass} alert-dismissible fade show position-fixed" 
+                     style="top: 20px; right: 20px; z-index: 9999;" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            $('body').append(notification);
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 3000);
+        }
+    </script>
+}
+
+<style>
+    .card-img-top-container img {
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover .card-img-top-container img {
+        transform: scale(1.05);
+    }
+    
+    /* Özel badge renkleri */
+    .bg-warning {
+        background-color: #ffc107 !important;
+    }
+    
+    .bg-secondary {
+        background-color: #6c757d !important;
+    }
+</style>
