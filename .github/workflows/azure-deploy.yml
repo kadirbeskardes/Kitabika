@@ -39,6 +39,10 @@ jobs:
       - name: dotnet publish
         run: dotnet publish BookStore.Web/BookStore.Web.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
+      - name: Generate Migration Scripts
+        run: |
+          dotnet ef migrations script --project BookStore.Data --startup-project BookStore.Web --output "${{env.DOTNET_ROOT}}/myapp/migration.sql" --idempotent
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:

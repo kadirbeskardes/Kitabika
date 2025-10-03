@@ -37,9 +37,22 @@ app.MapControllerRoute(
 // Auto-migrate database on startup (for Azure deployment)
 if (app.Environment.IsProduction())
 {
-    using var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider.GetRequiredService<BookStoreContext>();
-    context.Database.Migrate();
+    try
+    {
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<BookStoreContext>();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        
+        logger.LogInformation("Starting database migration...");
+        context.Database.Migrate();
+        logger.LogInformation("Database migration completed successfully.");
+    }
+    catch (Exception ex)
+    {
+        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+        // Production'da uygulama çalışmaya devam etsin
+    }
 }
 
 app.Run();
