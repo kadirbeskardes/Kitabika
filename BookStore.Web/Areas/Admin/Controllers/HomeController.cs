@@ -8,36 +8,24 @@ namespace BookStore.Web.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
-        private readonly IBookService _bookService;
-        private readonly ICategoryService _categoryService;
-        private readonly IUserService _userService;
-        private readonly IOrderService _orderService;
+        private readonly IDashboardService _dashboardService;
 
-        public HomeController(
-            IBookService bookService,
-            ICategoryService categoryService,
-            IUserService userService,
-            IOrderService orderService)
+        public HomeController(IDashboardService dashboardService)
         {
-            _bookService = bookService;
-            _categoryService = categoryService;
-            _userService = userService;
-            _orderService = orderService;
+            _dashboardService = dashboardService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var bookCount = (await _bookService.GetAllBooksAsync()).Count();
-            var categoryCount = (await _categoryService.GetAllCategoriesAsync()).Count();
-            var userCount = (await _userService.GetAllUsersAsync()).Count();
-            var orderCount = (await _orderService.GetAllOrdersAsync()).Count();
+            var dashboardStats = await _dashboardService.GetDashboardStatsAsync();
+            return View(dashboardStats);
+        }
 
-            ViewBag.BookCount = bookCount;
-            ViewBag.CategoryCount = categoryCount;
-            ViewBag.UserCount = userCount;
-            ViewBag.OrderCount = orderCount;
-
-            return View();
+        [HttpGet]
+        public async Task<IActionResult> GetDashboardData(DateTime? startDate, DateTime? endDate)
+        {
+            var dashboardStats = await _dashboardService.GetDashboardStatsAsync(startDate, endDate);
+            return Json(dashboardStats);
         }
     }
 }

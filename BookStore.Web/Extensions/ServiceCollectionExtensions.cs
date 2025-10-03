@@ -41,6 +41,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IReviewService, ReviewService>();
         services.AddScoped<ICouponService, CouponService>();
         services.AddScoped<ILoanService, LoanService>();
+        services.AddScoped<IDashboardService, DashboardService>();
 
         // Repositories
         services.AddScoped<IReviewRepository, ReviewRepository>();
