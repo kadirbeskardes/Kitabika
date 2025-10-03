@@ -6,7 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container using extension method
 builder.Services.AddBookStoreServices(builder.Configuration);
-builder.Services.AddControllersWithViews();
+builder.Services.AddLocalizationServices();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
 var app = builder.Build();
 
@@ -20,6 +23,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
+
+// Add localization middleware
+app.UseRequestLocalization();
+
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

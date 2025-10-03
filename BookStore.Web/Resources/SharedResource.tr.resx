@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Navigation -->
+  <data name="Home" xml:space="preserve">
+    <value>Ana Sayfa</value>
+  </data>
+  <data name="Books" xml:space="preserve">
+    <value>Kitaplar</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Sepet</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Kayıt Ol</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Çıkış Yap</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>İstek Listem</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorilerim</value>
+  </data>
+  <data name="MostFavorited" xml:space="preserve">
+    <value>En Popüler</value>
+  </data>
+
+  <!-- Common Actions -->
+  <data name="AddToCart" xml:space="preserve">
+    <value>Sepete Ekle</value>
+  </data>
+  <data name="AddToWishlist" xml:space="preserve">
+    <value>İstek Listesine Ekle</value>
+  </data>
+  <data name="AddToFavorites" xml:space="preserve">
+    <value>Favorilere Ekle</value>
+  </data>
+  <data name="RemoveFromWishlist" xml:space="preserve">
+    <value>İstek Listesinden Kaldır</value>
+  </data>
+  <data name="RemoveFromFavorites" xml:space="preserve">
+    <value>Favorilerden Kaldır</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>Detayları Görüntüle</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Kitap, yazar ara...</value>
+  </data>
+
+  <!-- Book Details -->
+  <data name="Author" xml:space="preserve">
+    <value>Yazar</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Fiyat</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Stok</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="PublicationYear" xml:space="preserve">
+    <value>Yayın Yılı</value>
+  </data>
+  <data name="ISBN" xml:space="preserve">
+    <value>ISBN</value>
+  </data>
+
+  <!-- Wishlist -->
+  <data name="MyWishlist" xml:space="preserve">
+    <value>İstek Listem</value>
+  </data>
+  <data name="TotalBooks" xml:space="preserve">
+    <value>Toplam Kitap</value>
+  </data>
+  <data name="PriceDropped" xml:space="preserve">
+    <value>Fiyat Düşen</value>
+  </data>
+  <data name="TotalSavings" xml:space="preserve">
+    <value>Toplam Tasarruf</value>
+  </data>
+  <data name="LastAdded" xml:space="preserve">
+    <value>Son Eklenen</value>
+  </data>
+  <data name="PriceDropNotification" xml:space="preserve">
+    <value>Fiyat düşüşü bildirimi</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Kaldır</value>
+  </data>
+  <data name="EmptyWishlist" xml:space="preserve">
+    <value>İstek listeniz boş</value>
+  </data>
+  <data name="EmptyWishlistMessage" xml:space="preserve">
+    <value>Beğendiğiniz kitapları istek listenize ekleyerek daha sonra kolayca bulabilirsiniz.</value>
+  </data>
+  <data name="DiscoverBooks" xml:space="preserve">
+    <value>Kitap Keşfet</value>
+  </data>
+
+  <!-- Favorites -->
+  <data name="MyFavorites" xml:space="preserve">
+    <value>Favorilerim</value>
+  </data>
+  <data name="EmptyFavorites" xml:space="preserve">
+    <value>Henüz favori kitabınız yok</value>
+  </data>
+  <data name="EmptyFavoritesMessage" xml:space="preserve">
+    <value>Beğendiğiniz kitapları favorilerinize ekleyerek kolayca erişebilirsiniz.</value>
+  </data>
+  <data name="MostFavoritedBooks" xml:space="preserve">
+    <value>En Çok Favorilenen Kitaplar</value>
+  </data>
+  <data name="MostFavoritedBooksMessage" xml:space="preserve">
+    <value>Kullanıcılarımızın en çok favorilediği kitapları keşfedin.</value>
+  </data>
+
+  <!-- Messages -->
+  <data name="Success" xml:space="preserve">
+    <value>Başarılı</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="BookAddedToCart" xml:space="preserve">
+    <value>Kitap sepete eklendi!</value>
+  </data>
+  <data name="BookAddedToWishlist" xml:space="preserve">
+    <value>Kitap istek listenize eklendi!</value>
+  </data>
+  <data name="BookAddedToFavorites" xml:space="preserve">
+    <value>Kitap favorilerinize eklendi!</value>
+  </data>
+  <data name="BookRemovedFromWishlist" xml:space="preserve">
+    <value>Kitap istek listenizden kaldırıldı!</value>
+  </data>
+  <data name="BookRemovedFromFavorites" xml:space="preserve">
+    <value>Kitap favorilerinizden kaldırıldı!</value>
+  </data>
+
+  <!-- Footer -->
+  <data name="AboutUs" xml:space="preserve">
+    <value>Hakkımızda</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Gizlilik Politikası</value>
+  </data>
+  <data name="TermsOfService" xml:space="preserve">
+    <value>Kullanım Şartları</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Tüm hakları saklıdır.</value>
+  </data>
+
+  <!-- Admin -->
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Admin Paneli</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>İstatistikler</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Kullanıcılar</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Siparişler</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>İncelemeler</value>
+  </data>
+  <data name="Coupons" xml:space="preserve">
+    <value>Kuponlar</value>
+  </data>
+  <data name="Loans" xml:space="preserve">
+    <value>Ödünç Kitaplar</value>
+  </data>
+</root>

@@ -1,0 +1,61 @@
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Localization
+@using BookStore.Web.Resources
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var currentCulture = requestCulture?.RequestCulture?.Culture?.Name ?? "tr-TR";
+}
+
+<div class="dropdown">
+    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        @if (currentCulture == "tr-TR")
+        {
+            <span class="flag-icon flag-icon-tr"></span> @("TR")
+        }
+        else
+        {
+            <span class="flag-icon flag-icon-us"></span> @("EN")
+        }
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+        <li>
+            <form asp-controller="Culture" asp-action="SetLanguage" method="post" class="d-inline">
+                <input name="culture" value="tr-TR" type="hidden" />
+                <input name="returnUrl" value="@Context.Request.Path" type="hidden" />
+                <button type="submit" class="dropdown-item @(currentCulture == "tr-TR" ? "active" : "")">
+                    <i class="flag-icon flag-icon-tr me-2"></i> Türkçe
+                </button>
+            </form>
+        </li>
+        <li>
+            <form asp-controller="Culture" asp-action="SetLanguage" method="post" class="d-inline">
+                <input name="culture" value="en-US" type="hidden" />
+                <input name="returnUrl" value="@Context.Request.Path" type="hidden" />
+                <button type="submit" class="dropdown-item @(currentCulture == "en-US" ? "active" : "")">
+                    <i class="flag-icon flag-icon-us me-2"></i> English
+                </button>
+            </form>
+        </li>
+    </ul>
+</div>
+
+<style>
+    .flag-icon {
+        width: 16px;
+        height: 12px;
+        display: inline-block;
+        border-radius: 2px;
+        background-size: cover;
+    }
+    
+    .flag-icon-tr {
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iODAwIiBmaWxsPSIjRTMwQTEzIi8+CjxjaXJjbGUgY3g9IjQyNSIgY3k9IjQwMCIgcj0iMTIwIiBmaWxsPSIjZmZmIi8+CjxjaXJjbGUgY3g9IjQ2MCIgY3k9IjQwMCIgcj0iMTAwIiBmaWxsPSIjRTMwQTEzIi8+Cjxwb2x5Z29uIHBvaW50cz0iNjEwIDMwMCA2NjcuNCwzMzguNSA2NTIuOSw0MDYuNCA2OTQuOCwzNTkuNiA3MzkuMSw0MDYuNCA3MjQuNiwzMzguNSA3ODIsIDMwMCA3MTQsIDMwMCA2OTQuOCwyNDAuNCA2NzUuNiwzMDAgNjEwLDMwMCIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4=');
+    }
+    
+    .flag-icon-us {
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGRlZnM+CjxzdHlsZT4uYXtiYWNrZ3JvdW5kOiMwMDIzNjh9PC9zdHlsZT4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIGZpbGw9IiNmZmYiLz4KPGcgZmlsbD0iI2JmMGEzMCI+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjYyIiB5PSI2MiIvPgo8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MiIgeT0iMTg1Ii8+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjYyIiB5PSIzMDgiLz4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjIiIHk9IjQzMSIvPgo8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MiIgeT0iNTU0Ii8+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjYyIiB5PSI2NzciLz4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjIiIHk9IjgwMCIvPgo8L2c+CjxyZWN0IHdpZHRoPSI0ODAiIGhlaWdodD0iMzA4IiBmaWxsPSIjMDAyMzY4Ii8+Cjwvc3ZnPg==');
+    }
+</style>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Navigation -->
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Books" xml:space="preserve">
+    <value>Books</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>My Wishlist</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>My Favorites</value>
+  </data>
+  <data name="MostFavorited" xml:space="preserve">
+    <value>Most Popular</value>
+  </data>
+
+  <!-- Common Actions -->
+  <data name="AddToCart" xml:space="preserve">
+    <value>Add to Cart</value>
+  </data>
+  <data name="AddToWishlist" xml:space="preserve">
+    <value>Add to Wishlist</value>
+  </data>
+  <data name="AddToFavorites" xml:space="preserve">
+    <value>Add to Favorites</value>
+  </data>
+  <data name="RemoveFromWishlist" xml:space="preserve">
+    <value>Remove from Wishlist</value>
+  </data>
+  <data name="RemoveFromFavorites" xml:space="preserve">
+    <value>Remove from Favorites</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search books, authors...</value>
+  </data>
+
+  <!-- Book Details -->
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Stock</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="PublicationYear" xml:space="preserve">
+    <value>Publication Year</value>
+  </data>
+  <data name="ISBN" xml:space="preserve">
+    <value>ISBN</value>
+  </data>
+
+  <!-- Wishlist -->
+  <data name="MyWishlist" xml:space="preserve">
+    <value>My Wishlist</value>
+  </data>
+  <data name="TotalBooks" xml:space="preserve">
+    <value>Total Books</value>
+  </data>
+  <data name="PriceDropped" xml:space="preserve">
+    <value>Price Dropped</value>
+  </data>
+  <data name="TotalSavings" xml:space="preserve">
+    <value>Total Savings</value>
+  </data>
+  <data name="LastAdded" xml:space="preserve">
+    <value>Last Added</value>
+  </data>
+  <data name="PriceDropNotification" xml:space="preserve">
+    <value>Price drop notification</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="EmptyWishlist" xml:space="preserve">
+    <value>Your wishlist is empty</value>
+  </data>
+  <data name="EmptyWishlistMessage" xml:space="preserve">
+    <value>Add books you like to your wishlist to easily find them later.</value>
+  </data>
+  <data name="DiscoverBooks" xml:space="preserve">
+    <value>Discover Books</value>
+  </data>
+
+  <!-- Favorites -->
+  <data name="MyFavorites" xml:space="preserve">
+    <value>My Favorites</value>
+  </data>
+  <data name="EmptyFavorites" xml:space="preserve">
+    <value>You don't have any favorite books yet</value>
+  </data>
+  <data name="EmptyFavoritesMessage" xml:space="preserve">
+    <value>Add books you like to your favorites for easy access.</value>
+  </data>
+  <data name="MostFavoritedBooks" xml:space="preserve">
+    <value>Most Favorited Books</value>
+  </data>
+  <data name="MostFavoritedBooksMessage" xml:space="preserve">
+    <value>Discover the books most favorited by our users.</value>
+  </data>
+
+  <!-- Messages -->
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="BookAddedToCart" xml:space="preserve">
+    <value>Book added to cart!</value>
+  </data>
+  <data name="BookAddedToWishlist" xml:space="preserve">
+    <value>Book added to your wishlist!</value>
+  </data>
+  <data name="BookAddedToFavorites" xml:space="preserve">
+    <value>Book added to your favorites!</value>
+  </data>
+  <data name="BookRemovedFromWishlist" xml:space="preserve">
+    <value>Book removed from your wishlist!</value>
+  </data>
+  <data name="BookRemovedFromFavorites" xml:space="preserve">
+    <value>Book removed from your favorites!</value>
+  </data>
+
+  <!-- Footer -->
+  <data name="AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="TermsOfService" xml:space="preserve">
+    <value>Terms of Service</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>All rights reserved.</value>
+  </data>
+
+  <!-- Admin -->
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Admin Panel</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="Coupons" xml:space="preserve">
+    <value>Coupons</value>
+  </data>
+  <data name="Loans" xml:space="preserve">
+    <value>Loans</value>
+  </data>
+</root>
