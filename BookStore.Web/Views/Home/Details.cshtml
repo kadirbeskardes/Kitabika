@@ -1,6 +1,11 @@
-﻿@model BookStore.Service.DTOs.BookDto
-@{
-    ViewData["Title"] = "Kitap Detayları";
+@model BookStore.Service.DTOs.BookDto
+@using Microsoft.Extensions.Localization
+@using BookStore.Web.Resources
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+{
+    ViewData["Title"] = Localizer["BookDetails"];
 }
 
 <style>
@@ -98,25 +103,25 @@
         <div class="col-md-7">
             <h2><i class="fas fa-book-open mr-2"></i>@Model.Title</h2>
 
-            <p><strong><i class="fas fa-user-edit mr-2"></i>Yazar:</strong> @Model.Author</p>
-            <p><strong><i class="fas fa-barcode mr-2"></i>ISBN:</strong> @Model.ISBN</p>
-            <p><strong><i class="fas fa-tag mr-2"></i>Fiyat:</strong> <span style="color: #FF8C00; font-weight: 700;">@Model.Price.ToString("C")</span></p>
+            <p><strong><i class="fas fa-user-edit mr-2"></i>@Localizer["Author"]:</strong> @Model.Author</p>
+            <p><strong><i class="fas fa-barcode mr-2"></i>@Localizer["ISBN"]:</strong> @Model.ISBN</p>
+            <p><strong><i class="fas fa-tag mr-2"></i>@Localizer["Price"]:</strong> <span style="color: #FF8C00; font-weight: 700;">@Model.Price.ToString("C")</span></p>
             <p>
-                <strong><i class="fas fa-boxes mr-2"></i>Stok:</strong>
+                <strong><i class="fas fa-boxes mr-2"></i>@Localizer["Stock"]:</strong>
                 @if (Model.Stock > 0)
                 {
-                    <span class="text-success">@Model.Stock Adet</span>
+                    <span class="text-success">@Localizer["InStock", Model.Stock]</span>
                 }
                 else
                 {
-                    <span class="text-danger">Tükendi</span>
+                    <span class="text-danger">@Localizer["OutOfStock"]</span>
                 }
             </p>
-            <p><strong><i class="fas fa-bookmark mr-2"></i>Kategori:</strong> @Model.CategoryName</p>
-            <p><strong><i class="fas fa-calendar mr-2"></i>Yayın Yılı:</strong> @Model.PublicationYear</p>
+            <p><strong><i class="fas fa-bookmark mr-2"></i>@Localizer["Category"]:</strong> @Model.CategoryName</p>
+            <p><strong><i class="fas fa-calendar mr-2"></i>@Localizer["PublicationYear"]:</strong> @Model.PublicationYear</p>
 
             <div class="book-description">
-                <h5><i class="fas fa-align-left mr-2" style="color: #FF8C00;"></i>Kitap Açıklaması</h5>
+                <h5><i class="fas fa-align-left mr-2" style="color: #FF8C00;"></i>@Localizer["Description"]</h5>
                 <p class="mt-3">@Model.Description</p>
             </div>
 
@@ -125,14 +130,14 @@
                 <form asp-controller="Cart" asp-action="AddToCart" method="post">
                     <input type="hidden" name="bookId" value="@Model.Id" />
                     <div class="form-group row align-items-center">
-                        <label for="quantity" class="col-sm-2 col-form-label" style="color: #FF8C00; font-weight: 600;">Adet:</label>
+                        <label for="quantity" class="col-sm-2 col-form-label" style="color: #FF8C00; font-weight: 600;">@Localizer["Quantity"]:</label>
                         <div class="col-sm-3">
                             <input type="number" name="quantity" id="quantity" value="1" min="1" max="@Model.Stock" class="form-control" />
                         </div>
                         <div class="col-sm-7">
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn btn-success">
-                                    <i class="fas fa-cart-plus mr-2"></i>Sepete Ekle
+                                    <i class="fas fa-cart-plus mr-2"></i>@Localizer["AddToCart"]
                                 </button>
                                 <button type="button" class="btn btn-outline-warning toggle-favorite" data-book-id="@Model.Id">
                                     <i class="bi bi-star"></i>
@@ -148,22 +153,22 @@
             else
             {
                 <div class="alert alert-warning mt-4" style="background-color: #FFF3E0; border-color: #FFE0B2; color: #E67E00;">
-                    <i class="fas fa-exclamation-circle mr-2"></i>Lütfen <a asp-controller="Account" asp-action="Login" style="color: #E67E00; font-weight: 600;">giriş yapın</a> ve sepete ürün ekleyin.
+                    <i class="fas fa-exclamation-circle mr-2"></i>@Html.Raw(Localizer["LoginToAdd", Url.Action("Login", "Account")])
                 </div>
             }
             <div class="mt-5">
-                <h3>Yorumlar</h3>
+                <h3>@Localizer["Reviews"]</h3>
 
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="mb-3">
-                        <a asp-controller="Reviews" asp-action="Create" asp-route-bookId="@Model.Id" class="btn btn-primary">Bir Yorum Yaz</a>
+                        <a asp-controller="Reviews" asp-action="Create" asp-route-bookId="@Model.Id" class="btn btn-primary">@Localizer["WriteReview"]</a>
                     </div>
                 }
                 else
                 {
                     <div class="alert alert-info">
-                        Lütfen bir yorum yazabilmek için <a asp-controller="Account" asp-action="Login">giriş yapın</a>.
+                        @Html.Raw(Localizer["LoginToWriteReview", Url.Action("Login", "Account")])
                     </div>
                 }
 

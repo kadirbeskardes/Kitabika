@@ -52,13 +52,16 @@
     <value>Favorilerden Kaldır</value>
   </data>
   <data name="ViewDetails" xml:space="preserve">
-    <value>Detayları Görüntüle</value>
+    <value>Detayları Gör</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Ara</value>
   </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Kitap, yazar ara...</value>
+  </data>
+    <data name="AdvancedSearch" xml:space="preserve">
+    <value>Gelişmiş Arama</value>
   </data>
 
   <!-- Book Details -->
@@ -83,6 +86,30 @@
   <data name="ISBN" xml:space="preserve">
     <value>ISBN</value>
   </data>
+    <data name="BookDetails" xml:space="preserve">
+    <value>Kitap Detayları</value>
+  </data>
+    <data name="Quantity" xml:space="preserve">
+    <value>Adet</value>
+  </data>
+    <data name="InStock" xml:space="preserve">
+    <value>{0} Adet</value>
+  </data>
+    <data name="OutOfStock" xml:space="preserve">
+    <value>Tükendi</value>
+  </data>
+    <data name="LoginToAdd" xml:space="preserve">
+    <value>Lütfen <a href="{0}">giriş yapın</a> ve sepete ürün ekleyin.</value>
+  </data>
+    <data name="Reviews" xml:space="preserve">
+    <value>Yorumlar</value>
+  </data>
+    <data name="WriteReview" xml:space="preserve">
+    <value>Bir Yorum Yaz</value>
+  </data>
+    <data name="LoginToWriteReview" xml:space="preserve">
+    <value>Lütfen bir yorum yazabilmek için <a href="{0}">giriş yapın</a>.</value>
+  </data>
 
   <!-- Wishlist -->
   <data name="MyWishlist" xml:space="preserve">
@@ -92,16 +119,16 @@
     <value>Toplam Kitap</value>
   </data>
   <data name="PriceDropped" xml:space="preserve">
-    <value>Fiyat Düşen</value>
+    <value>Fiyatı Düşenler</value>
   </data>
   <data name="TotalSavings" xml:space="preserve">
-    <value>Toplam Tasarruf</value>
+    <value>Toplam Kazanç</value>
   </data>
   <data name="LastAdded" xml:space="preserve">
     <value>Son Eklenen</value>
   </data>
   <data name="PriceDropNotification" xml:space="preserve">
-    <value>Fiyat düşüşü bildirimi</value>
+    <value>Fiyat düşünce haber ver</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Kaldır</value>
@@ -113,7 +140,10 @@
     <value>Beğendiğiniz kitapları istek listenize ekleyerek daha sonra kolayca bulabilirsiniz.</value>
   </data>
   <data name="DiscoverBooks" xml:space="preserve">
-    <value>Kitap Keşfet</value>
+    <value>Diğer kategorilerimizi inceleyebilirsiniz</value>
+  </data>
+  <data name="NoBookFoundInCategory" xml:space="preserve">
+    <value>Bu kategoride kitap bulunamadı</value>
   </data>
 
   <!-- Favorites -->
@@ -167,7 +197,7 @@
     <value>Gizlilik Politikası</value>
   </data>
   <data name="TermsOfService" xml:space="preserve">
-    <value>Kullanım Şartları</value>
+    <value>Hizmet Şartları</value>
   </data>
   <data name="Copyright" xml:space="preserve">
     <value>Tüm hakları saklıdır.</value>
@@ -175,10 +205,10 @@
 
   <!-- Admin -->
   <data name="AdminPanel" xml:space="preserve">
-    <value>Admin Paneli</value>
+    <value>Yönetici Paneli</value>
   </data>
   <data name="Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>Gösterge Paneli</value>
   </data>
   <data name="Statistics" xml:space="preserve">
     <value>İstatistikler</value>
@@ -189,13 +219,19 @@
   <data name="Orders" xml:space="preserve">
     <value>Siparişler</value>
   </data>
-  <data name="Reviews" xml:space="preserve">
-    <value>İncelemeler</value>
-  </data>
   <data name="Coupons" xml:space="preserve">
     <value>Kuponlar</value>
   </data>
   <data name="Loans" xml:space="preserve">
     <value>Ödünç Kitaplar</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>Tüm Kategoriler</value>
+  </data>
+  <data name="Turkish" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>İngilizce</value>
   </data>
 </root>

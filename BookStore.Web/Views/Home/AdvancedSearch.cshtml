@@ -1,4 +1,8 @@
 @model BookStore.Service.DTOs.PagedResult<BookStore.Service.DTOs.BookDto>
+@using Microsoft.Extensions.Localization
+@using BookStore.Web.Resources
+@inject IStringLocalizer<SharedResource> Localizer
+
 @{
     ViewData["Title"] = "Gelişmiş Arama";
     var searchDto = ViewBag.SearchDto as BookStore.Service.DTOs.BookSearchDto;
@@ -86,7 +90,7 @@
                         <div class="mb-3">
                             <label class="form-label">Kategori</label>
                             <select class="form-select" name="CategoryId">
-                                <option value="">Tüm Kategoriler</option>
+                                <option value="">@Localizer["AllCategories"]</option>
                                 @if (categories != null)
                                 {
                                     @foreach (var category in categories)

@@ -7,7 +7,7 @@ namespace BookStore.Web.Extensions
     {
         public static IServiceCollection AddLocalizationServices(this IServiceCollection services)
         {
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddLocalization();
             
             services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -21,9 +21,11 @@ namespace BookStore.Web.Extensions
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
 
-                options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
-                options.RequestCultureProviders.Insert(1, new CookieRequestCultureProvider());
-                options.RequestCultureProviders.Insert(2, new AcceptLanguageHeaderRequestCultureProvider());
+                // Clear default providers and add in specific order
+                options.RequestCultureProviders.Clear();
+                options.RequestCultureProviders.Add(new QueryStringRequestCultureProvider());
+                options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
+                options.RequestCultureProviders.Add(new AcceptLanguageHeaderRequestCultureProvider());
             });
 
             return services;

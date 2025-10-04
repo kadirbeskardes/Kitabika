@@ -113,7 +113,10 @@
     <value>Add books you like to your wishlist to easily find them later.</value>
   </data>
   <data name="DiscoverBooks" xml:space="preserve">
-    <value>Discover Books</value>
+    <value>You can explore our other categories</value>
+  </data>
+  <data name="NoBookFoundInCategory" xml:space="preserve">
+    <value>No books found in this category</value>
   </data>
 
   <!-- Favorites -->
@@ -197,5 +200,14 @@
   </data>
   <data name="Loans" xml:space="preserve">
     <value>Loans</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="Turkish" xml:space="preserve">
+    <value>Turkish</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
   </data>
 </root>

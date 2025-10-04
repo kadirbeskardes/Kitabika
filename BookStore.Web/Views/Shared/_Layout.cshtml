@@ -167,16 +167,16 @@
                             <a class="nav-link" asp-controller="Favorites" asp-action="MostFavorited">@Localizer["MostFavorited"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Gizlilik Politikası</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">@Localizer["PrivacyPolicy"]</a>
                         </li>
                     </ul>
 
                     <div class="d-flex mx-3">
                         <form class="d-flex me-2" asp-controller="Home" asp-action="Search" method="get">
-                            <input class="form-control me-2" type="search" name="searchTerm" placeholder="Kitap ara..." />
+                            <input class="form-control me-2" type="search" name="searchTerm" placeholder="@Localizer["SearchPlaceholder"]" />
                             <button class="btn btn-outline-warning" type="submit"><i class="bi bi-search"></i></button>
                         </form>
-                        <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="AdvancedSearch" title="Gelişmiş Arama">
+                        <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="AdvancedSearch" title="@Localizer["AdvancedSearch"]">
                             <i class="bi bi-funnel"></i>
                         </a>
                     </div>
@@ -241,7 +241,7 @@
 
     <footer>
         <div class="container">
-            &copy; 2025 - Kitabika - <a asp-controller="Home" asp-action="Privacy">Gizlilik Politikası</a>
+            &copy; 2025 - Kitabika - <a asp-controller="Home" asp-action="Privacy">@Localizer["PrivacyPolicy"]</a>
         </div>
     </footer>
 
