@@ -87,11 +87,11 @@
         {
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="@book.CoverImageUrl" class="card-img-top" alt="@book.Title" style="height: 250px; object-fit: cover;" />
+                    <img src="@book.CoverImageUrl" class="card-img-top cover-img cover-250" alt="@book.Title" />
                     <div class="card-body">
                         <h5 class="card-title">@book.Title</h5>
-                        <p class="card-text"><i class="fas fa-user-edit mr-2" style="color: #FF8C00;"></i>@book.Author</p>
-                        <p class="card-text font-weight-bold" style="color: #FF8C00; font-size: 1.1rem;">@book.Price.ToString("C")</p>
+                        <p class="card-text"><i class="fas fa-user-edit mr-2 icon-brand"></i>@book.Author</p>
+                        <p class="card-text font-weight-bold text-brand-strong" style="font-size: 1.1rem;">@book.Price.ToString("C")</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
                         <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary">

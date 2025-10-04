@@ -161,7 +161,7 @@
                     @foreach (var item in Model.Items)
                     {
                         <tr>
-                            <td><i class="fas fa-book mr-2" style="color: var(--primary-color);"></i>@item.BookTitle</td>
+                            <td><i class="fas fa-book mr-2 icon-brand"></i>@item.BookTitle</td>
                             <td>@item.UnitPrice.ToString("C")</td>
                             <td>
                                 <form asp-action="UpdateCart" method="post" class="quantity-form">

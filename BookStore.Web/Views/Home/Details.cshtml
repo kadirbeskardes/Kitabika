@@ -18,7 +18,7 @@
 
             <p><strong><i class="fas fa-user-edit mr-2"></i>@Localizer["Author"]:</strong> @Model.Author</p>
             <p><strong><i class="fas fa-barcode mr-2"></i>@Localizer["ISBN"]:</strong> @Model.ISBN</p>
-            <p><strong><i class="fas fa-tag mr-2"></i>@Localizer["Price"]:</strong> <span style="color: #FF8C00; font-weight: 700;">@Model.Price.ToString("C")</span></p>
+            <p><strong><i class="fas fa-tag mr-2 icon-brand"></i>@Localizer["Price"]:</strong> <span class="text-brand-strong">@Model.Price.ToString("C")</span></p>
             <p>
                 <strong><i class="fas fa-boxes mr-2"></i>@Localizer["Stock"]:</strong>
                 @if (Model.Stock > 0)
@@ -34,7 +34,7 @@
             <p><strong><i class="fas fa-calendar mr-2"></i>@Localizer["PublicationYear"]:</strong> @Model.PublicationYear</p>
 
             <div class="book-description">
-                <h5><i class="fas fa-align-left mr-2" style="color: #FF8C00;"></i>@Localizer["Description"]</h5>
+                <h5><i class="fas fa-align-left mr-2 icon-brand"></i>@Localizer["Description"]</h5>
                 <p class="mt-3">@Model.Description</p>
             </div>
 
@@ -43,7 +43,7 @@
                 <form asp-controller="Cart" asp-action="AddToCart" method="post">
                     <input type="hidden" name="bookId" value="@Model.Id" />
                     <div class="form-group row align-items-center">
-                        <label for="quantity" class="col-sm-2 col-form-label" style="color: #FF8C00; font-weight: 600;">@Localizer["Quantity"]:</label>
+                        <label for="quantity" class="col-sm-2 col-form-label text-brand-strong">@Localizer["Quantity"]:</label>
                         <div class="col-sm-3">
                             <input type="number" name="quantity" id="quantity" value="1" min="1" max="@Model.Stock" class="form-control" />
                         </div>
@@ -65,7 +65,7 @@
             }
             else
             {
-                <div class="alert alert-warning mt-4" style="background-color: #FFF3E0; border-color: #FFE0B2; color: #E67E00;">
+                <div class="alert alert-warning mt-4" style="background-color: var(--accent); border-color: var(--light-border); color: var(--primary-hover);">
                     <i class="fas fa-exclamation-circle mr-2"></i>@Html.Raw(Localizer["LoginToAdd", Url.Action("Login", "Account")])
                 </div>
             }

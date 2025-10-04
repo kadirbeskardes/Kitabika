@@ -263,7 +263,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Son Aktiviteler</h6>
             </div>
             <div class="card-body">
-                <div style="max-height: 300px; overflow-y: auto;" id="recentActivities">
+                <div class="max-h-300" id="recentActivities">
                     @foreach (var activity in Model.RecentActivities.Take(8))
                     {
                         <div class="d-flex align-items-center mb-3">

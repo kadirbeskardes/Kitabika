@@ -26,7 +26,7 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100 shadow-sm position-relative">
                         <!-- Sıralama Badge'i -->
-                        <div class="position-absolute top-0 start-0 m-2" style="z-index: 1;">
+                        <div class="position-absolute pos-top-right">
                             @{
                                 var badgeClass = book.Index < 3 ? "bg-warning" : "bg-secondary";
                                 var icon = book.Index == 0 ? "bi-trophy-fill" : 
@@ -38,11 +38,11 @@
                             </span>
                         </div>
                         
-                        <div class="card-img-top-container" style="height: 300px; overflow: hidden;">
+                        <div class="card-img-top-container cover-300" style="overflow: hidden;">
                             <img src="@book.Book.CoverImageUrl" 
                                  alt="@book.Book.Title" 
                                  class="card-img-top img-fluid" 
-                                 style="height: 100%; width: 100%; object-fit: cover;">
+                                 class="cover-img" />
                         </div>
                         
                         <div class="card-body d-flex flex-column">
@@ -149,7 +149,7 @@
             var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
             var notification = `
                 <div class="alert ${alertClass} alert-dismissible fade show position-fixed" 
-                     style="top: 20px; right: 20px; z-index: 9999;" role="alert">
+                     class="alert-floating" role="alert">
                     ${message}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
@@ -173,10 +173,10 @@
     
     /* Özel badge renkleri */
     .bg-warning {
-        background-color: #ffc107 !important;
+    background-color: var(--warning) !important;
     }
     
     .bg-secondary {
-        background-color: #6c757d !important;
+    background-color: var(--muted) !important;
     }
 </style>

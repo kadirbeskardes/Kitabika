@@ -24,7 +24,7 @@
         font-weight: 600;
         margin-bottom: 20px;
         padding-bottom: 8px;
-        border-bottom: 1px solid #FFE0B2;
+        border-bottom: 1px solid var(--light-border);
     }
 
     .info-card {
@@ -68,29 +68,25 @@
         .table td {
             vertical-align: middle;
             padding: 15px;
-            border-color: #f0f0f0;
+            border-color: var(--border-color);
         }
 
     tfoot td {
         font-size: 1.1rem;
         color: var(--primary-dark);
-        background-color: var(--light-bg);
+        background-color: var(--light-bg-alt);
     }
 
     .btn-secondary {
-        background-color: #95a5a6;
-        border-color: #95a5a6;
+        background-color: var(--muted);
+        border-color: var(--muted);
         padding: 10px 25px;
         font-weight: 600;
         border-radius: 5px;
         transition: all 0.3s;
     }
 
-        .btn-secondary:hover {
-            background-color: #7f8c8d;
-            border-color: #7f8c8d;
-            transform: translateY(-2px);
-        }
+        .btn-secondary:hover { transform: translateY(-2px); }
 
     .status-badge {
         display: inline-block;
@@ -100,20 +96,9 @@
         font-size: 0.9rem;
     }
 
-    .status-processing {
-        background-color: #FFF3E0;
-        color: var(--primary-dark);
-    }
-
-    .status-completed {
-        background-color: #E8F5E9;
-        color: #2E7D32;
-    }
-
-    .status-cancelled {
-        background-color: #FFEBEE;
-        color: #C62828;
-    }
+    .status-processing { background-color: var(--warning-bg); color: var(--primary-dark); }
+    .status-completed { background-color: var(--success-bg); color: var(--success-dark); }
+    .status-cancelled { background-color: var(--danger-bg); color: var(--danger-dark); }
 
     .book-icon {
         color: var(--primary-color);
@@ -135,7 +120,7 @@
                 </p>
                 <p>
                     <strong><i class="fas fa-money-bill-wave mr-2"></i>Toplam Tutar:</strong>
-                    <span style="color: var(--primary-dark); font-weight: 700;">@Model.TotalAmount.ToString("C")</span>
+                    <span class="text-brand-strong">@Model.TotalAmount.ToString("C")</span>
                 </p>
             </div>
         </div>

@@ -26,11 +26,11 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="position-relative">
-                            <div class="card-img-top-container" style="height: 300px; overflow: hidden;">
+                            <div class="card-img-top-container cover-300" style="overflow: hidden;">
                                 <img src="@item.Book?.CoverImageUrl" 
                                      alt="@item.Book?.Title" 
                                      class="card-img-top img-fluid" 
-                                     style="height: 100%; width: 100%; object-fit: cover;">
+                                     class="cover-img" />
                             </div>
                             <div class="position-absolute top-0 start-0 m-2">
                                 <span class="badge bg-warning">
@@ -121,7 +121,7 @@
             var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
             var notification = `
                 <div class="alert ${alertClass} alert-dismissible fade show position-fixed" 
-                     style="top: 20px; right: 20px; z-index: 9999;" role="alert">
+                     class="alert-floating" role="alert">
                     ${message}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
