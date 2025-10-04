@@ -36,12 +36,16 @@ jobs:
       - name: Run tests
         run: dotnet test BookStore.sln --configuration Release --no-build --verbosity normal
 
+      - name: Install EF Core Tools
+        run: dotnet tool install --global dotnet-ef
+
+      - name: Run Database Migrations
+        run: dotnet ef database update --project BookStore.Data/BookStore.Data.csproj --startup-project BookStore.Web/BookStore.Web.csproj
+        env:
+          ConnectionStrings__DefaultConnection: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+
       - name: dotnet publish
         run: dotnet publish BookStore.Web/BookStore.Web.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
-
-      - name: Generate Migration Scripts
-        run: |
-          dotnet ef migrations script --project BookStore.Data --startup-project BookStore.Web --output "${{env.DOTNET_ROOT}}/myapp/migration.sql" --idempotent
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -71,9 +75,11 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3EFDACBCD4A54D1FA71736435D8AD724 }}
           package: .
 
-      - name: Database Migration Setup Complete
+      - name: Deployment Complete
         run: |
           echo "✅ Deployment completed successfully!"
-          echo "🔍 Database migrations will run automatically on first app startup"
+          echo "�️ Database migrations configured for automatic execution"
+          echo "🌍 Multi-language support (TR/EN) enabled"
+          echo "🎨 Theme system (Light/Dark) ready"
           echo "🌐 App URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
 
