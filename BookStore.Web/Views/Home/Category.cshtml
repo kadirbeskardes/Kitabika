@@ -1,6 +1,8 @@
-﻿@model IEnumerable<BookStore.Service.DTOs.BookDto>
+@model IEnumerable<BookStore.Service.DTOs.BookDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = ViewBag.CategoryName ?? "Kategori";
+    ViewData["Title"] = ViewBag.CategoryName ?? Localizer["Category"];
 }
 
 <style>
@@ -95,14 +97,14 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between">
                         <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary">
-                            <i class="fas fa-eye mr-1"></i>Detaylar
+                            <i class="fas fa-eye mr-1"></i>@Localizer["Details"]
                         </a>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline">
                                 <input type="hidden" name="bookId" value="@book.Id" />
                                 <button type="submit" class="btn btn-success">
-                                    <i class="fas fa-cart-plus mr-1"></i>Sepete Ekle
+                                    <i class="fas fa-cart-plus mr-1"></i>@Localizer["AddToCart"]
                                 </button>
                             </form>
                         }

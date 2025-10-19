@@ -99,7 +99,7 @@
     <value>Tükendi</value>
   </data>
     <data name="LoginToAdd" xml:space="preserve">
-    <value>Lütfen <a href="{0}">giriş yapın</a> ve sepete ürün ekleyin.</value>
+    <value>Lütfen &lt;a href="{0}"&gt;giriş yapın&lt;/a&gt; ve sepete ürün ekleyin.</value>
   </data>
     <data name="Reviews" xml:space="preserve">
     <value>Yorumlar</value>
@@ -108,7 +108,7 @@
     <value>Bir Yorum Yaz</value>
   </data>
     <data name="LoginToWriteReview" xml:space="preserve">
-    <value>Lütfen bir yorum yazabilmek için <a href="{0}">giriş yapın</a>.</value>
+    <value>Lütfen bir yorum yazabilmek için &lt;a href="{0}"&gt;giriş yapın&lt;/a&gt;.</value>
   </data>
 
   <!-- Wishlist -->
@@ -233,5 +233,201 @@
   </data>
   <data name="English" xml:space="preserve">
     <value>İngilizce</value>
+  </data>
+  <!-- Auto-added missing keys (TR) -->
+  <data name="7 days" xml:space="preserve"><value>7 gün</value></data>
+  <data name="14 days" xml:space="preserve"><value>14 gün</value></data>
+  <data name="21 days" xml:space="preserve"><value>21 gün</value></data>
+  <data name="30 days" xml:space="preserve"><value>30 gün</value></data>
+  <data name="AccessDenied" xml:space="preserve"><value>Erişim reddedildi</value></data>
+  <data name="Actions" xml:space="preserve"><value>İşlemler</value></data>
+  <data name="Active" xml:space="preserve"><value>Aktif</value></data>
+  <data name="Added:" xml:space="preserve"><value>Eklenme:</value></data>
+  <data name="Address" xml:space="preserve"><value>Adres</value></data>
+  <data name="Admin" xml:space="preserve"><value>Yönetici</value></data>
+  <data name="AdvancedSearch" xml:space="preserve"><value>Gelişmiş Arama</value></data>
+  <data name="All" xml:space="preserve"><value>Tümü</value></data>
+  <data name="AllAuthors" xml:space="preserve"><value>Tüm Yazarlar</value></data>
+  <data name="Already have an account?" xml:space="preserve"><value>Zaten hesabınız var mı?</value></data>
+  <data name="An error occurred" xml:space="preserve"><value>Bir hata oluştu</value></data>
+  <data name="An error occurred while processing your request." xml:space="preserve"><value>İsteğiniz işlenirken bir hata oluştu.</value></data>
+  <data name="and restarting the app." xml:space="preserve"><value>ve uygulamayı yeniden başlatın.</value></data>
+  <data name="ApplyCoupon" xml:space="preserve"><value>Kuponu Uygula</value></data>
+  <data name="Are you sure you want to remove this book from your favorites?" xml:space="preserve"><value>Bu kitabı favorilerinizden kaldırmak istediğinize emin misiniz?</value></data>
+  <data name="Are you sure you want to remove this book from your wishlist?" xml:space="preserve"><value>Bu kitabı istek listenizden kaldırmak istediğinize emin misiniz?</value></data>
+  <data name="Back to Book Page" xml:space="preserve"><value>Kitap Sayfasına Geri</value></data>
+  <data name="BacktoHome" xml:space="preserve"><value>Geri</value></data>
+  <data name="BackToOrderHistory" xml:space="preserve"><value>Sipariş Geçmişine Geri</value></data>
+  <data name="Book" xml:space="preserve"><value>Kitap</value></data>
+  <data name="Book title, ISBN..." xml:space="preserve"><value>Kitap başlığı, ISBN...</value></data>
+  <data name="BookCondition" xml:space="preserve"><value>Kitap Durumu</value></data>
+  <data name="BookDetails" xml:space="preserve"><value>Kitap Detayları</value></data>
+  <data name="BookTitle" xml:space="preserve"><value>Kitap Başlığı</value></data>
+  <data name="Borrow This Book" xml:space="preserve"><value>Bu kitabı ödünç al</value></data>
+  <data name="Cancel" xml:space="preserve"><value>İptal</value></data>
+  <data name="CardNumber" xml:space="preserve"><value>Kart Numarası</value></data>
+  <data name="Change your search criteria and try again." xml:space="preserve"><value>Arama kriterlerinizi değiştirip tekrar deneyin.</value></data>
+  <data name="ChangePassword" xml:space="preserve"><value>Şifre Değiştir</value></data>
+  <data name="Checkout" xml:space="preserve"><value>Ödeme</value></data>
+  <data name="CheckoutProcess" xml:space="preserve"><value>Ödeme İşlemi</value></data>
+  <data name="City" xml:space="preserve"><value>Şehir</value></data>
+  <data name="Clear" xml:space="preserve"><value>Temizle</value></data>
+  <data name="CompleteOrder" xml:space="preserve"><value>Siparişi Tamamla</value></data>
+  <data name="ConfirmReturn" xml:space="preserve"><value>İade Onayla</value></data>
+  <data name="Content" xml:space="preserve"><value>İçerik</value></data>
+  <data name="Continue shopping" xml:space="preserve"><value>Alışverişe devam et</value></data>
+  <data name="ContinueShopping" xml:space="preserve"><value>Alışverişe Devam Et</value></data>
+  <data name="coupon applied" xml:space="preserve"><value>kupon uygulandı</value></data>
+  <data name="CurrentPassword" xml:space="preserve"><value>Mevcut Şifre</value></data>
+  <data name="Customer:" xml:space="preserve"><value>Müşteri:</value></data>
+  <data name="CustomerInformation" xml:space="preserve"><value>Müşteri Bilgileri</value></data>
+  <data name="CVV" xml:space="preserve"><value>CVV</value></data>
+  <data name="Damaged - Minor issues" xml:space="preserve"><value>Hasarlı - Küçük sorunlar</value></data>
+  <data name="Date" xml:space="preserve"><value>Tarih</value></data>
+  <data name="Delete" xml:space="preserve"><value>Sil</value></data>
+  <data name="Details" xml:space="preserve"><value>Detaylar</value></data>
+  <data name="Development Mode" xml:space="preserve"><value>Geliştirme Modu</value></data>
+  <data name="Discount:" xml:space="preserve"><value>İndirim:</value></data>
+  <data name="Don't have an account?" xml:space="preserve"><value>Hesabınız yok mu?</value></data>
+  <data name="DueDate" xml:space="preserve"><value>Son Teslim Tarihi</value></data>
+  <data name="Edit" xml:space="preserve"><value>Düzenle</value></data>
+  <data name="EditProfile" xml:space="preserve"><value>Profili Düzenle</value></data>
+  <data name="EditReview" xml:space="preserve"><value>Yorumu Düzenle</value></data>
+  <data name="Email" xml:space="preserve"><value>E-posta</value></data>
+  <data name="Enter coupon code" xml:space="preserve"><value>Kupon kodunu girin</value></data>
+  <data name="Enter your city" xml:space="preserve"><value>Şehrinizi girin</value></data>
+  <data name="Enter your email address" xml:space="preserve"><value>E-posta adresinizi girin</value></data>
+  <data name="Enter your full address" xml:space="preserve"><value>Tam adresinizi girin</value></data>
+  <data name="Enter your full name" xml:space="preserve"><value>Tam adınızı girin</value></data>
+  <data name="Enter your password" xml:space="preserve"><value>Şifrenizi girin</value></data>
+  <data name="Enter your username" xml:space="preserve"><value>Kullanıcı adınızı girin</value></data>
+  <data name="Enter your zip code" xml:space="preserve"><value>Posta kodunuzu girin</value></data>
+  <data name="ExpiryDate" xml:space="preserve"><value>Son Kullanma Tarihi</value></data>
+  <data name="Favorite" xml:space="preserve"><value>Favori</value></data>
+  <data name="Filters" xml:space="preserve"><value>Filtreler</value></data>
+  <data name="for" xml:space="preserve"><value>için</value></data>
+  <data name="For local debugging, enable the &lt;strong&gt;Development&lt;/strong&gt; environment by setting the &lt;strong&gt;ASPNETCORE_ENVIRONMENT&lt;/strong&gt; environment variable to &lt;strong&gt;Development&lt;/strong&gt;" xml:space="preserve"><value>Yerel hata ayıklama için &lt;strong&gt;Development&lt;/strong&gt; ortamını etkinleştirin...</value></data>
+  <data name="FullName" xml:space="preserve"><value>Ad Soyad</value></data>
+  <data name="GeneralInformation" xml:space="preserve"><value>Genel Bilgiler</value></data>
+  <data name="Good - No issues" xml:space="preserve"><value>İyi - Sorun yok</value></data>
+  <data name="GrandTotal:" xml:space="preserve"><value>Genel Toplam:</value></data>
+  <data name="in stock" xml:space="preserve"><value>stokta</value></data>
+  <data name="InFavorites" xml:space="preserve"><value>Favorilerde</value></data>
+  <data name="InStock" xml:space="preserve"><value>{0} adet</value></data>
+  <data name="It can result in displaying sensitive information from exceptions to end users." xml:space="preserve"><value>Bu, istisnalardan hassas bilgilerin son kullanıcılara gösterilmesine neden olabilir.</value></data>
+  <data name="Leave blank to keep your current password" xml:space="preserve"><value>Mevcut şifrenizi korumak için boş bırakın</value></data>
+  <data name="Loan Period (days):" xml:space="preserve"><value>Ödünç Süresi (gün):</value></data>
+  <data name="LoanDate" xml:space="preserve"><value>Ödünç Tarihi</value></data>
+  <data name="Login here" xml:space="preserve"><value>Buradan giriş yapın</value></data>
+  <data name="Lost - Cannot be returned" xml:space="preserve"><value>Kayıp - İade edilemez</value></data>
+  <data name="Max" xml:space="preserve"><value>Maks</value></data>
+  <data name="MaxYear" xml:space="preserve"><value>Maks Yıl</value></data>
+  <data name="Min" xml:space="preserve"><value>Min</value></data>
+  <data name="MinYear" xml:space="preserve"><value>Min Yıl</value></data>
+  <data name="MM/YY" xml:space="preserve"><value>AA/YY</value></data>
+  <data name="MostPopular" xml:space="preserve"><value>En Popüler</value></data>
+  <data name="MyLoans" xml:space="preserve"><value>Ödünçlerim</value></data>
+  <data name="MyProfile" xml:space="preserve"><value>Profilim</value></data>
+  <data name="MyReviews" xml:space="preserve"><value>Yorumlarım</value></data>
+  <data name="NewPassword" xml:space="preserve"><value>Yeni Şifre</value></data>
+  <data name="NewPassword (Again)" xml:space="preserve"><value>Yeni Şifre (Tekrar)</value></data>
+  <data name="Next" xml:space="preserve"><value>İleri</value></data>
+  <data name="No books found matching your search criteria." xml:space="preserve"><value>Arama kriterlerinize uygun kitap bulunamadı.</value></data>
+  <data name="No popular books yet" xml:space="preserve"><value>Henüz popüler kitap yok</value></data>
+  <data name="No results found" xml:space="preserve"><value>Sonuç bulunamadı</value></data>
+  <data name="No reviews yet. Be the first to write a review!" xml:space="preserve"><value>Henüz yorum yok. İlk yorumu siz yazın!</value></data>
+  <data name="None" xml:space="preserve"><value>Yok</value></data>
+  <data name="Notes" xml:space="preserve"><value>Notlar</value></data>
+  <data name="on" xml:space="preserve"><value>üzerinde</value></data>
+  <data name="Order #" xml:space="preserve"><value>Sipariş #</value></data>
+  <data name="OrderConfirmation" xml:space="preserve"><value>Sipariş Teşekkür Sayfası</value></data>
+  <data name="OrderDate:" xml:space="preserve"><value>Sipariş Tarihi:</value></data>
+  <data name="OrderDetails" xml:space="preserve"><value>Sipariş Detayları</value></data>
+  <data name="OrderHistory" xml:space="preserve"><value>Sipariş Geçmişi</value></data>
+  <data name="OrderInformation" xml:space="preserve"><value>Sipariş Bilgileri</value></data>
+  <data name="OrderItems" xml:space="preserve"><value>Sipariş Kalemleri</value></data>
+  <data name="OrderNumber:" xml:space="preserve"><value>Sipariş Numarası:</value></data>
+  <data name="OutOfStock" xml:space="preserve"><value>Stokta Yok</value></data>
+  <data name="Overdue" xml:space="preserve"><value>Gecikmiş</value></data>
+  <data name="Page navigation" xml:space="preserve"><value>Sayfa gezinimi</value></data>
+  <data name="Password" xml:space="preserve"><value>Şifre</value></data>
+  <data name="PaymentInformation" xml:space="preserve"><value>Ödeme Bilgileri</value></data>
+  <data name="Previous" xml:space="preserve"><value>Önceki</value></data>
+  <data name="Price drop notification" xml:space="preserve"><value>Fiyat düşüş bildirimi</value></data>
+  <data name="Price drop notifications have been disabled" xml:space="preserve"><value>Fiyat düşüşü bildirimleri devre dışı bırakıldı</value></data>
+  <data name="Price drop notifications have been enabled" xml:space="preserve"><value>Fiyat düşüşü bildirimleri etkinleştirildi</value></data>
+  <data name="Price Drop!" xml:space="preserve"><value>Fiyat Düştü!</value></data>
+  <data name="PriceDrops" xml:space="preserve"><value>Fiyat Düşüşleri</value></data>
+  <data name="PriceRange" xml:space="preserve"><value>Fiyat Aralığı</value></data>
+  <data name="ProceedToCheckout" xml:space="preserve"><value>Ödemeye Geç</value></data>
+  <data name="Quantity" xml:space="preserve"><value>Adet</value></data>
+  <data name="Rating" xml:space="preserve"><value>Puan</value></data>
+  <data name="Register here" xml:space="preserve"><value>Buradan kaydolun</value></data>
+  <data name="Request ID:" xml:space="preserve"><value>İstek ID:</value></data>
+  <data name="results found" xml:space="preserve"><value>sonuç bulundu</value></data>
+  <data name="Return" xml:space="preserve"><value>İade</value></data>
+  <data name="ReturnBook" xml:space="preserve"><value>Kitabı İade Et</value></data>
+  <data name="Reviews for" xml:space="preserve"><value>... için yorumlar</value></data>
+  <data name="Role" xml:space="preserve"><value>Rol</value></data>
+  <data name="SaveChanges" xml:space="preserve"><value>Değişiklikleri Kaydet</value></data>
+  <data name="Search results for" xml:space="preserve"><value>Arama sonuçları:</value></data>
+  <data name="SearchResults" xml:space="preserve"><value>Arama Sonuçları</value></data>
+  <data name="SearchTerm" xml:space="preserve"><value>Ara</value></data>
+  <data name="ShippingInformation" xml:space="preserve"><value>Gönderim Bilgileri</value></data>
+  <data name="ShoppingCart" xml:space="preserve"><value>Alışveriş Sepeti</value></data>
+  <data name="SortBy" xml:space="preserve"><value>Sırala</value></data>
+  <data name="SortDescending" xml:space="preserve"><value>Azalan</value></data>
+  <data name="Status" xml:space="preserve"><value>Durum</value></data>
+  <data name="Status:" xml:space="preserve"><value>Durum:</value></data>
+  <data name="StockStatus" xml:space="preserve"><value>Stok Durumu</value></data>
+  <data name="SubmitReview" xml:space="preserve"><value>Yorumu Gönder</value></data>
+  <data name="Subtotal:" xml:space="preserve"><value>Ara Toplam:</value></data>
+  <data name="Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred." xml:space="preserve"><value>&lt;strong&gt;Development&lt;/strong&gt; ortamına geçildiğinde oluşan hata hakkında daha ayrıntılı bilgi gösterilecektir.</value></data>
+  <data name="Thank you for your order!" xml:space="preserve"><value>Siparişiniz için teşekkürler!</value></data>
+  <data name="The book has been removed from your favorites" xml:space="preserve"><value>Kitap favorilerinizden kaldırıldı</value></data>
+  <data name="The book has been removed from your wishlist" xml:space="preserve"><value>Kitap istek listenizden kaldırıldı</value></data>
+  <data name="The Development environment shouldn't be enabled for deployed applications." xml:space="preserve"><value>Geliştirme ortamı dağıtılan uygulamalarda etkin olmamalıdır.</value></data>
+  <data name="This book is currently on loan. Please try again later." xml:space="preserve"><value>Bu kitap şu anda ödünçte. Lütfen daha sonra tekrar deneyin.</value></data>
+  <data name="Title" xml:space="preserve"><value>Başlık</value></data>
+  <data name="Total" xml:space="preserve"><value>Toplam</value></data>
+  <data name="Total:" xml:space="preserve"><value>Toplam:</value></data>
+  <data name="TotalAmount:" xml:space="preserve"><value>Toplam Tutar:</value></data>
+  <data name="Update" xml:space="preserve"><value>Güncelle</value></data>
+  <data name="UpdateReview" xml:space="preserve"><value>Yorumu Güncelle</value></data>
+  <data name="Use this page to detail your site's privacy policy." xml:space="preserve"><value>Gizlilik politikanızı detaylandırmak için bu sayfayı kullanın.</value></data>
+  <data name="User" xml:space="preserve"><value>Kullanıcı</value></data>
+  <data name="Username" xml:space="preserve"><value>Kullanıcı Adı</value></data>
+  <data name="UserProfile" xml:space="preserve"><value>Kullanıcı Profili</value></data>
+  <data name="View All Reviews" xml:space="preserve"><value>Tüm Yorumları Gör</value></data>
+  <data name="ViewOrderHistory" xml:space="preserve"><value>Sipariş Geçmişini Gör</value></data>
+  <data name="When users start adding books to their favorites, they will be displayed here." xml:space="preserve"><value>Kullanıcılar kitapları favorilerine eklemeye başladığında buraya gösterilecektir.</value></data>
+  <data name="Write a Review for" xml:space="preserve"><value>İçin bir yorum yazın</value></data>
+  <data name="WriteReview" xml:space="preserve"><value>Yorum Yaz</value></data>
+  <data name="You are protected by secure payment" xml:space="preserve"><value>Güvenli ödeme ile korunuyorsunuz</value></data>
+  <data name="You can easily find the books you like later by adding them to your favorites." xml:space="preserve"><value>Beğendiğiniz kitapları favorilerinize ekleyerek daha sonra kolayca bulabilirsiniz.</value></data>
+  <data name="You can easily find the books you like later by adding them to your wishlist." xml:space="preserve"><value>Beğendiğiniz kitapları istek listenize ekleyerek daha sonra kolayca bulabilirsiniz.</value></data>
+  <data name="You do not have permission to access this page." xml:space="preserve"><value>Bu sayfaya erişim izniniz yok.</value></data>
+  <data name="You have no active loans." xml:space="preserve"><value>Aktif ödüncünüz yok.</value></data>
+  <data name="You have not placed any orders yet." xml:space="preserve"><value>Henüz sipariş vermediniz.</value></data>
+  <data name="You haven't written any reviews yet." xml:space="preserve"><value>Henüz yorum yazmadınız.</value></data>
+  <data name="Your cart is empty." xml:space="preserve"><value>Sepetiniz boş.</value></data>
+  <data name="Your favorites list is empty" xml:space="preserve"><value>Favori listeniz boş</value></data>
+  <data name="Your order has been successfully received and is being processed." xml:space="preserve"><value>Siparişiniz başarıyla alındı ve işleniyor.</value></data>
+  <data name="Your wishlist is empty" xml:space="preserve"><value>İstek listeniz boş</value></data>
+  <data name="ZipCode" xml:space="preserve"><value>Posta Kodu</value></data>
+  <data name="AppName" xml:space="preserve">
+    <value>Kitabika</value>
+  </data>
+  <data name="AdminSuffix" xml:space="preserve">
+    <value>Yönetim</value>
+  </data>
+  <data name="AdminPanelName" xml:space="preserve">
+    <value>Kitabika Yönetim Paneli</value>
+  </data>
+  <data name="ViewSite" xml:space="preserve">
+    <value>Siteyi Görüntüle</value>
+  </data>
+  <data name="AdminUser" xml:space="preserve">
+    <value>Admin</value>
   </data>
 </root>

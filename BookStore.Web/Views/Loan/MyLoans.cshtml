@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<BookStore.Service.DTOs.LoanDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Benim Ödünçlerim";
+    ViewData["Title"] = Localizer["MyLoans"];
 }
 
 <h2>@ViewData["Title"]</h2>
 
 @if (!Model.Any())
 {
-    <div class="alert alert-info">Aktif ödünç almış kitabınız yok.</div>
+    <div class="alert alert-info">@Localizer["You have no active loans."]</div>
 }
 else
 {
@@ -15,11 +17,11 @@ else
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>
-                    <th>Kitap</th>
-                    <th>Ödünç Alma Tarihi</th>
-                    <th>Son Teslim Tarihi</th>
-                    <th>Durum</th>
-                    <th>İşlemler</th>
+                    <th>@Localizer["Book"]</th>
+                    <th>@Localizer["LoanDate"]</th>
+                    <th>@Localizer["DueDate"]</th>
+                    <th>@Localizer["Status"]</th>
+                    <th>@Localizer["Actions"]</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,15 +39,15 @@ else
                         <td>
                             @if (loan.IsOverdue)
                             {
-                                <span class="badge badge-danger">Gecikmiş</span>
+                                <span class="badge badge-danger">@Localizer["Overdue"]</span>
                             }
                             else
                             {
-                                <span class="badge badge-success">Aktif</span>
+                                <span class="badge badge-success">@Localizer["Active"]</span>
                             }
                         </td>
                         <td>
-                            <a asp-action="Return" asp-route-id="@loan.Id" class="btn btn-sm btn-primary">İade Et</a>
+                            <a asp-action="Return" asp-route-id="@loan.Id" class="btn btn-sm btn-primary">@Localizer["Return"]</a>
                         </td>
                     </tr>
                 }

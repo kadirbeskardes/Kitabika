@@ -1,7 +1,9 @@
-﻿@model BookStore.Service.DTOs.UpdateProfileDto
+@model BookStore.Service.DTOs.UpdateProfileDto
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Profili Düzenle";
+    ViewData["Title"] = Localizer["EditProfile"];
 }
 
 <style>
@@ -88,42 +90,42 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                     <div class="form-group">
-                        <label asp-for="Username" class="control-label">Kullanıcı Adı</label>
+                        <label asp-for="Username" class="control-label">@Localizer["Username"]</label>
                         <input asp-for="Username" class="form-control" />
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Email" class="control-label">E-posta</label>
+                        <label asp-for="Email" class="control-label">@Localizer["Email"]</label>
                         <input asp-for="Email" class="form-control" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
                     <hr />
-                    <h5 class="text-brand">Şifre Değiştir</h5>
-                    <p class="text-muted">Mevcut şifrenizi korumak için boş bırakın</p>
+                    <h5 class="text-brand">@Localizer["ChangePassword"]</h5>
+                    <p class="text-muted">@Localizer["Leave blank to keep your current password"]</p>
 
                     <div class="form-group">
-                        <label asp-for="CurrentPassword" class="control-label">Mevcut Şifre</label>
+                        <label asp-for="CurrentPassword" class="control-label">@Localizer["CurrentPassword"]</label>
                         <input asp-for="CurrentPassword" class="form-control" />
                         <span asp-validation-for="CurrentPassword" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="NewPassword" class="control-label">Yeni Şifre</label>
+                        <label asp-for="NewPassword" class="control-label">@Localizer["NewPassword"]</label>
                         <input asp-for="NewPassword" class="form-control" />
                         <span asp-validation-for="NewPassword" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="ConfirmNewPassword" class="control-label">Yeni Şifre (Tekrar)</label>
+                        <label asp-for="ConfirmNewPassword" class="control-label">@Localizer["NewPassword (Again)"]</label>
                         <input asp-for="ConfirmNewPassword" class="form-control" />
                         <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-4">
-                        <input type="submit" value="Değişiklikleri Kaydet" class="btn btn-primary" />
-                        <a asp-action="Index" class="btn btn-secondary">İptal</a>
+                        <input type="submit" value="@Localizer["SaveChanges"]" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-secondary">@Localizer["Cancel"]</a>
                     </div>
                 </form>
             </div>

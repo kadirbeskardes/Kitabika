@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Sipariş Onayı";
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["OrderConfirmation"];
 }
 
 <style>
@@ -111,17 +113,17 @@
     <div class="confirmation-icon">
         <i class="fas fa-check-circle"></i>
     </div>
-    <h2>Siparişiniz için Teşekkürler!</h2>
-    <p>Siparişiniz başarıyla alındı ve işleme alındı.</p>
+    <h2>@Localizer["Thank you for your order!"]</h2>
+    <p>@Localizer["Your order has been successfully received and is being processed."]</p>
     <div class="order-number">
-        <i class="fas fa-receipt mr-2"></i>Sipariş Numarası: #@ViewBag.OrderId
+        <i class="fas fa-receipt mr-2"></i>@Localizer["OrderNumber:"] #@ViewBag.OrderId
     </div>
     <div class="action-buttons">
         <a asp-controller="Cart" asp-action="OrderHistory" class="btn btn-primary">
-            <i class="fas fa-history mr-2"></i>Sipariş Geçmişini Görüntüle
+            <i class="fas fa-history mr-2"></i>@Localizer["ViewOrderHistory"]
         </a>
         <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
-            <i class="fas fa-shopping-bag mr-2"></i>Alışverişe Devam Et
+            <i class="fas fa-shopping-bag mr-2"></i>@Localizer["ContinueShopping"]
         </a>
     </div>
 </div>

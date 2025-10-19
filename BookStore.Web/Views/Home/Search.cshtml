@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<BookStore.Service.DTOs.BookDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Arama Sonuçları";
+    ViewData["Title"] = Localizer["SearchResults"];
 }
 
-<h2>"@ViewContext.HttpContext.Request.Query["searchTerm"]" için Arama Sonuçları</h2>
+<h2>@Localizer["Search results for"] "@ViewContext.HttpContext.Request.Query["searchTerm"]"</h2>
 
 @if (!Model.Any())
 {
-    <div class="alert alert-info">Arama kriterlerinize uygun kitap bulunamadı.</div>
+    <div class="alert alert-info">@Localizer["No books found matching your search criteria."]</div>
 }
 else
 {
@@ -24,12 +26,12 @@ else
                         <p class="card-text"><small class="text-muted">@book.CategoryName</small></p>
                     </div>
                     <div class="card-footer">
-                        <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary">Detaylar</a>
+                        <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary">@Localizer["Details"]</a>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline">
                                 <input type="hidden" name="bookId" value="@book.Id" />
-                                <button type="submit" class="btn btn-success">Sepete Ekle</button>
+                                <button type="submit" class="btn btn-success">@Localizer["AddToCart"]</button>
                             </form>
                         }
                     </div>

@@ -4,7 +4,7 @@
 @inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "Gelişmiş Arama";
+    ViewData["Title"] = Localizer["AdvancedSearch"];
     var searchDto = ViewBag.SearchDto as BookStore.Service.DTOs.BookSearchDto;
     var categories = ViewBag.Categories as IEnumerable<BookStore.Service.DTOs.CategoryDto>;
     var authors = ViewBag.Authors as IEnumerable<string>;
@@ -17,21 +17,21 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-header">
-                    <h5><i class="bi bi-funnel"></i> Filtreler</h5>
+                    <h5><i class="bi bi-funnel"></i> @Localizer["Filters"]</h5>
                 </div>
                 <div class="card-body">
                     <form asp-action="AdvancedSearch" method="get">
                         <!-- Genel Arama -->
                         <div class="mb-3">
-                            <label class="form-label">Arama Terimi</label>
-                            <input type="text" class="form-control" name="SearchTerm" value="@searchDto?.SearchTerm" placeholder="Kitap adı, ISBN...">
+                            <label class="form-label">@Localizer["SearchTerm"]</label>
+                            <input type="text" class="form-control" name="SearchTerm" value="@searchDto?.SearchTerm" placeholder="@Localizer["Book title, ISBN..."]">
                         </div>
 
                         <!-- Yazar Filtresi -->
                         <div class="mb-3">
-                            <label class="form-label">Yazar</label>
+                            <label class="form-label">@Localizer["Author"]</label>
                             <select class="form-select" name="Author">
-                                <option value="">Tüm Yazarlar</option>
+                                <option value="">@Localizer["AllAuthors"]</option>
                                 @if (authors != null)
                                 {
                                     @foreach (var author in authors)
@@ -44,24 +44,24 @@
 
                         <!-- Fiyat Aralığı -->
                         <div class="mb-3">
-                            <label class="form-label">Fiyat Aralığı</label>
+                            <label class="form-label">@Localizer["PriceRange"]</label>
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="number" class="form-control" name="MinPrice" value="@searchDto?.MinPrice" placeholder="Min" min="0" step="0.01">
+                                    <input type="number" class="form-control" name="MinPrice" value="@searchDto?.MinPrice" placeholder="@Localizer["Min"]" min="0" step="0.01">
                                 </div>
                                 <div class="col-6">
-                                    <input type="number" class="form-control" name="MaxPrice" value="@searchDto?.MaxPrice" placeholder="Max" min="0" step="0.01">
+                                    <input type="number" class="form-control" name="MaxPrice" value="@searchDto?.MaxPrice" placeholder="@Localizer["Max"]" min="0" step="0.01">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Yayın Yılı -->
                         <div class="mb-3">
-                            <label class="form-label">Yayın Yılı</label>
+                            <label class="form-label">@Localizer["PublicationYear"]</label>
                             <div class="row">
                                 <div class="col-6">
                                     <select class="form-select" name="MinYear">
-                                        <option value="">Min Yıl</option>
+                                        <option value="">@Localizer["MinYear"]</option>
                                         @if (years != null)
                                         {
                                             @foreach (var year in years.OrderBy(y => y))
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="col-6">
                                     <select class="form-select" name="MaxYear">
-                                        <option value="">Max Yıl</option>
+                                        <option value="">@Localizer["MaxYear"]</option>
                                         @if (years != null)
                                         {
                                             @foreach (var year in years.OrderByDescending(y => y))
@@ -88,7 +88,7 @@
 
                         <!-- Kategori -->
                         <div class="mb-3">
-                            <label class="form-label">Kategori</label>
+                            <label class="form-label">@Localizer["Category"]</label>
                             <select class="form-select" name="CategoryId">
                                 <option value="">@Localizer["AllCategories"]</option>
                                 @if (categories != null)
@@ -103,29 +103,29 @@
 
                         <!-- Stok Durumu -->
                         <div class="mb-3">
-                            <label class="form-label">Stok Durumu</label>
+                            <label class="form-label">@Localizer["StockStatus"]</label>
                             <select class="form-select" name="InStock">
-                                <option value="">Tümü</option>
-                                <option value="true" selected="@(searchDto?.InStock == true)">Stokta Var</option>
-                                <option value="false" selected="@(searchDto?.InStock == false)">Stokta Yok</option>
+                                <option value="">@Localizer["All"]</option>
+                                <option value="true" selected="@(searchDto?.InStock == true)">@Localizer["InStock"]</option>
+                                <option value="false" selected="@(searchDto?.InStock == false)">@Localizer["OutOfStock"]</option>
                             </select>
                         </div>
 
                         <!-- Sıralama -->
                         <div class="mb-3">
-                            <label class="form-label">Sıralama</label>
+                            <label class="form-label">@Localizer["SortBy"]</label>
                             <select class="form-select" name="SortBy">
-                                <option value="title" selected="@(searchDto?.SortBy == "title")">Kitap Adı</option>
-                                <option value="author" selected="@(searchDto?.SortBy == "author")">Yazar</option>
-                                <option value="price" selected="@(searchDto?.SortBy == "price")">Fiyat</option>
-                                <option value="year" selected="@(searchDto?.SortBy == "year")">Yayın Yılı</option>
+                                <option value="title" selected="@(searchDto?.SortBy == "title")">@Localizer["BookTitle"]</option>
+                                <option value="author" selected="@(searchDto?.SortBy == "author")">@Localizer["Author"]</option>
+                                <option value="price" selected="@(searchDto?.SortBy == "price")">@Localizer["Price"]</option>
+                                <option value="year" selected="@(searchDto?.SortBy == "year")">@Localizer["PublicationYear"]</option>
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="SortDescending" value="true" @(searchDto?.SortDescending == true ? "checked" : "")>
-                                <label class="form-check-label">Azalan Sıralama</label>
+                                <label class="form-check-label">@Localizer["SortDescending"]</label>
                             </div>
                         </div>
 
@@ -134,10 +134,10 @@
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-search"></i> Ara
+                                <i class="bi bi-search"></i> @Localizer["Search"]
                             </button>
                             <a href="@Url.Action("AdvancedSearch")" class="btn btn-outline-secondary">
-                                <i class="bi bi-arrow-clockwise"></i> Temizle
+                                <i class="bi bi-arrow-clockwise"></i> @Localizer["Clear"]
                             </a>
                         </div>
                     </form>
@@ -148,8 +148,8 @@
         <!-- Sonuçlar -->
         <div class="col-md-9">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2>Arama Sonuçları</h2>
-                <span class="badge bg-secondary">@Model.TotalCount sonuç bulundu</span>
+                <h2>@Localizer["SearchResults"]</h2>
+                <span class="badge bg-secondary">@Model.TotalCount @Localizer["results found"]</span>
             </div>
 
             @if (Model.Items.Any())
@@ -164,7 +164,7 @@
                                          class="card-img-top cover-img cover-250" alt="@book.Title">
                                     @if (book.Stock <= 0)
                                     {
-                                        <span class="badge bg-danger position-absolute top-0 end-0 m-2">Stokta Yok</span>
+                                        <span class="badge bg-danger position-absolute top-0 end-0 m-2">@Localizer["OutOfStock"]</span>
                                     }
                                 </div>
                                 <div class="card-body">
@@ -178,12 +178,12 @@
                                 </div>
                                 <div class="card-footer bg-transparent">
                                     <a href="@Url.Action("Details", new { id = book.Id })" class="btn btn-outline-primary btn-sm">
-                                        <i class="bi bi-eye"></i> Detaylar
+                                        <i class="bi bi-eye"></i> @Localizer["Details"]
                                     </a>
                                     @if (book.Stock > 0)
                                     {
                                         <span class="text-success small">
-                                            <i class="bi bi-check-circle"></i> @book.Stock adet stokta
+                                            <i class="bi bi-check-circle"></i> @book.Stock @Localizer["in stock"]
                                         </span>
                                     }
                                 </div>
@@ -195,7 +195,7 @@
                 <!-- Sayfalama -->
                 @if (Model.TotalPages > 1)
                 {
-                    <nav aria-label="Sayfa navigasyonu">
+                    <nav aria-label="@Localizer["Page navigation"]">
                         <ul class="pagination justify-content-center">
                             @if (Model.HasPreviousPage)
                             {
@@ -213,7 +213,7 @@
                                         SortDescending = searchDto?.SortDescending,
                                         PageNumber = Model.PageNumber - 1,
                                         PageSize = Model.PageSize
-                                    })">Önceki</a>
+                                    })">@Localizer["Previous"]</a>
                                 </li>
                             }
 
@@ -253,7 +253,7 @@
                                         SortDescending = searchDto?.SortDescending,
                                         PageNumber = Model.PageNumber + 1,
                                         PageSize = Model.PageSize
-                                    })">Sonraki</a>
+                                    })">@Localizer["Next"]</a>
                                 </li>
                             }
                         </ul>
@@ -264,8 +264,8 @@
             {
                 <div class="text-center py-5">
                     <i class="bi bi-search display-1 text-muted"></i>
-                    <h3 class="text-muted">Sonuç bulunamadı</h3>
-                    <p class="text-muted">Arama kriterlerinizi değiştirip tekrar deneyin.</p>
+                    <h3 class="text-muted">@Localizer["No results found"]</h3>
+                    <p class="text-muted">@Localizer["Change your search criteria and try again."]</p>
                 </div>
             }
         </div>

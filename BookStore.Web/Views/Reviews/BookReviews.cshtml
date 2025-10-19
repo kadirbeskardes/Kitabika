@@ -1,7 +1,9 @@
 ﻿@using System.Security.Claims
 @model IEnumerable<BookStore.Service.DTOs.ReviewDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = $"{ViewBag.BookTitle} için Yorumlar";
+    ViewData["Title"] = $"{ViewBag.BookTitle} {Localizer["Reviews for"]}";
 }
 
 <h2><i class="bi bi-chat-square-text"></i> @ViewData["Title"]</h2>
@@ -9,7 +11,7 @@
 @if (!Model.Any())
 {
     <div class="alert alert-info">
-        <i class="bi bi-info-circle-fill"></i> Henüz yorum yok. İlk yorumu yapan siz olun!
+        <i class="bi bi-info-circle-fill"></i> @Localizer["No reviews yet. Be the first to write a review!"]
     </div>
 }
 else
@@ -42,12 +44,12 @@ else
                     {
                         <div class="review-actions">
                             <a asp-action="Edit" asp-route-id="@review.Id" class="btn btn-outline-primary">
-                                <i class="bi bi-pencil-square"></i> Düzenle
+                                <i class="bi bi-pencil-square"></i> @Localizer["Edit"]
                             </a>
                             <form asp-action="Delete" method="post" class="d-inline">
                                 <input type="hidden" name="id" value="@review.Id" />
                                 <button type="submit" class="btn btn-outline-danger">
-                                    <i class="bi bi-trash"></i> Sil
+                                    <i class="bi bi-trash"></i> @Localizer["Delete"]
                                 </button>
                             </form>
                         </div>
@@ -60,6 +62,6 @@ else
 
 <div class="mt-4">
     <a asp-controller="Home" asp-action="Details" asp-route-id="@Model.FirstOrDefault()?.BookId" class="btn btn-secondary">
-        <i class="bi bi-arrow-left"></i> Kitap Sayfasına Dön
+        <i class="bi bi-arrow-left"></i> @Localizer["Back to Book Page"]
     </a>
 </div>

@@ -1,7 +1,9 @@
 ﻿@model BookStore.Service.DTOs.UserDto
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Profilim";
+    ViewData["Title"] = Localizer["MyProfile"];
 }
 
 <style>
@@ -87,13 +89,13 @@
                 }
 
                 <dl class="row">
-                    <dt class="col-sm-3">Kullanıcı Adı</dt>
+                    <dt class="col-sm-3">@Localizer["Username"]</dt>
                     <dd class="col-sm-9">@Model.Username</dd>
 
-                    <dt class="col-sm-3">E-posta</dt>
+                    <dt class="col-sm-3">@Localizer["Email"]</dt>
                     <dd class="col-sm-9">@Model.Email</dd>
 
-                    <dt class="col-sm-3">Rol</dt>
+                    <dt class="col-sm-3">@Localizer["Role"]</dt>
                     <dd class="col-sm-9">
                         <span class="badge @(Model.Role == "Admin" ? "badge-danger" : "badge-primary")">
                             @Model.Role
@@ -102,7 +104,7 @@
                 </dl>
 
                 <div class="text-right">
-                    <a asp-action="Edit" class="btn btn-primary">Profili Düzenle</a>
+                    <a asp-action="Edit" class="btn btn-primary">@Localizer["EditProfile"]</a>
                 </div>
             </div>
         </div>

@@ -1,6 +1,8 @@
 ﻿@model BookStore.Service.DTOs.UserDto
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Kullanıcı Profili";
+    ViewData["Title"] = Localizer["UserProfile"];
 }
 
 <style>
@@ -68,22 +70,22 @@
 </style>
 
 <div class="container">
-    <h2><i class="fas fa-user-circle icon"></i>Kullanıcı Profili</h2>
+    <h2><i class="fas fa-user-circle icon"></i>@Localizer["UserProfile"]</h2>
 
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="profile-card">
-                <h4><i class="fas fa-id-badge icon"></i>Genel Bilgiler</h4>
+                <h4><i class="fas fa-id-badge icon"></i>@Localizer["GeneralInformation"]</h4>
                 <div class="profile-info">
-                    <p><strong><i class="fas fa-user icon"></i>Kullanıcı Adı:</strong> @Model.Username</p>
-                    <p><strong><i class="fas fa-envelope icon"></i>E-posta:</strong> @Model.Email</p>
-                    <p><strong><i class="fas fa-user-shield icon"></i>Rol:</strong> @Model.Role</p>
+                    <p><strong><i class="fas fa-user icon"></i>@Localizer["Username"]:</strong> @Model.Username</p>
+                    <p><strong><i class="fas fa-envelope icon"></i>@Localizer["Email"]:</strong> @Model.Email</p>
+                    <p><strong><i class="fas fa-user-shield icon"></i>@Localizer["Role"]:</strong> @Model.Role</p>
                 </div>
             </div>
 
             <div class="text-right mt-4">
                 <a asp-action="Index" asp-controller="Home" class="btn btn-back">
-                    <i class="fas fa-arrow-left mr-2"></i>Anasayfaya Dön
+                    <i class="fas fa-arrow-left mr-2"></i>@Localizer["BacktoHome"]
                 </a>
             </div>
         </div>

@@ -210,4 +210,200 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <!-- Auto-added missing keys -->
+  <data name="7 days" xml:space="preserve"><value>7 days</value></data>
+  <data name="14 days" xml:space="preserve"><value>14 days</value></data>
+  <data name="21 days" xml:space="preserve"><value>21 days</value></data>
+  <data name="30 days" xml:space="preserve"><value>30 days</value></data>
+  <data name="AccessDenied" xml:space="preserve"><value>Access Denied</value></data>
+  <data name="Actions" xml:space="preserve"><value>Actions</value></data>
+  <data name="Active" xml:space="preserve"><value>Active</value></data>
+  <data name="Added:" xml:space="preserve"><value>Added:</value></data>
+  <data name="Address" xml:space="preserve"><value>Address</value></data>
+  <data name="Admin" xml:space="preserve"><value>Admin</value></data>
+  <data name="AdvancedSearch" xml:space="preserve"><value>Advanced Search</value></data>
+  <data name="All" xml:space="preserve"><value>All</value></data>
+  <data name="AllAuthors" xml:space="preserve"><value>All Authors</value></data>
+  <data name="Already have an account?" xml:space="preserve"><value>Already have an account?</value></data>
+  <data name="An error occurred" xml:space="preserve"><value>An error occurred</value></data>
+  <data name="An error occurred while processing your request." xml:space="preserve"><value>An error occurred while processing your request.</value></data>
+  <data name="and restarting the app." xml:space="preserve"><value>and restarting the app.</value></data>
+  <data name="ApplyCoupon" xml:space="preserve"><value>Apply Coupon</value></data>
+  <data name="Are you sure you want to remove this book from your favorites?" xml:space="preserve"><value>Are you sure you want to remove this book from your favorites?</value></data>
+  <data name="Are you sure you want to remove this book from your wishlist?" xml:space="preserve"><value>Are you sure you want to remove this book from your wishlist?</value></data>
+  <data name="Back to Book Page" xml:space="preserve"><value>Back to Book Page</value></data>
+  <data name="BacktoHome" xml:space="preserve"><value>Back</value></data>
+  <data name="BackToOrderHistory" xml:space="preserve"><value>Back to Order History</value></data>
+  <data name="Book" xml:space="preserve"><value>Book</value></data>
+  <data name="Book title, ISBN..." xml:space="preserve"><value>Book title, ISBN...</value></data>
+  <data name="BookCondition" xml:space="preserve"><value>Book Condition</value></data>
+  <data name="BookDetails" xml:space="preserve"><value>Book Details</value></data>
+  <data name="BookTitle" xml:space="preserve"><value>Book Title</value></data>
+  <data name="Borrow This Book" xml:space="preserve"><value>Borrow This Book</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="CardNumber" xml:space="preserve"><value>Card Number</value></data>
+  <data name="Change your search criteria and try again." xml:space="preserve"><value>Change your search criteria and try again.</value></data>
+  <data name="ChangePassword" xml:space="preserve"><value>Change Password</value></data>
+  <data name="Checkout" xml:space="preserve"><value>Checkout</value></data>
+  <data name="CheckoutProcess" xml:space="preserve"><value>Checkout</value></data>
+  <data name="City" xml:space="preserve"><value>City</value></data>
+  <data name="Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="CompleteOrder" xml:space="preserve"><value>Complete Order</value></data>
+  <data name="ConfirmReturn" xml:space="preserve"><value>Confirm Return</value></data>
+  <data name="Content" xml:space="preserve"><value>Content</value></data>
+  <data name="Continue shopping" xml:space="preserve"><value>Continue shopping</value></data>
+  <data name="ContinueShopping" xml:space="preserve"><value>Continue Shopping</value></data>
+  <data name="coupon applied" xml:space="preserve"><value>coupon applied</value></data>
+  <data name="CurrentPassword" xml:space="preserve"><value>Current Password</value></data>
+  <data name="Customer:" xml:space="preserve"><value>Customer:</value></data>
+  <data name="CustomerInformation" xml:space="preserve"><value>Customer Information</value></data>
+  <data name="CVV" xml:space="preserve"><value>CVV</value></data>
+  <data name="Damaged - Minor issues" xml:space="preserve"><value>Damaged - Minor issues</value></data>
+  <data name="Date" xml:space="preserve"><value>Date</value></data>
+  <data name="Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Details" xml:space="preserve"><value>Details</value></data>
+  <data name="Development Mode" xml:space="preserve"><value>Development Mode</value></data>
+  <data name="Discount:" xml:space="preserve"><value>Discount:</value></data>
+  <data name="Don't have an account?" xml:space="preserve"><value>Don't have an account?</value></data>
+  <data name="DueDate" xml:space="preserve"><value>Due Date</value></data>
+  <data name="Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="EditProfile" xml:space="preserve"><value>Edit Profile</value></data>
+  <data name="EditReview" xml:space="preserve"><value>Edit Review</value></data>
+  <data name="Email" xml:space="preserve"><value>Email</value></data>
+  <data name="Enter coupon code" xml:space="preserve"><value>Enter coupon code</value></data>
+  <data name="Enter your city" xml:space="preserve"><value>Enter your city</value></data>
+  <data name="Enter your email address" xml:space="preserve"><value>Enter your email address</value></data>
+  <data name="Enter your full address" xml:space="preserve"><value>Enter your full address</value></data>
+  <data name="Enter your full name" xml:space="preserve"><value>Enter your full name</value></data>
+  <data name="Enter your password" xml:space="preserve"><value>Enter your password</value></data>
+  <data name="Enter your username" xml:space="preserve"><value>Enter your username</value></data>
+  <data name="Enter your zip code" xml:space="preserve"><value>Enter your zip code</value></data>
+  <data name="ExpiryDate" xml:space="preserve"><value>Expiry Date</value></data>
+  <data name="Favorite" xml:space="preserve"><value>Favorite</value></data>
+  <data name="Filters" xml:space="preserve"><value>Filters</value></data>
+  <data name="for" xml:space="preserve"><value>for</value></data>
+  <data name="For local debugging, enable the &lt;strong&gt;Development&lt;/strong&gt; environment by setting the &lt;strong&gt;ASPNETCORE_ENVIRONMENT&lt;/strong&gt; environment variable to &lt;strong&gt;Development&lt;/strong&gt;" xml:space="preserve"><value>For local debugging, enable the &lt;strong&gt;Development&lt;/strong&gt; environment by setting the &lt;strong&gt;ASPNETCORE_ENVIRONMENT&lt;/strong&gt; environment variable to &lt;strong&gt;Development&lt;/strong&gt;</value></data>
+  <data name="FullName" xml:space="preserve"><value>Full Name</value></data>
+  <data name="GeneralInformation" xml:space="preserve"><value>General Information</value></data>
+  <data name="Good - No issues" xml:space="preserve"><value>Good - No issues</value></data>
+  <data name="GrandTotal:" xml:space="preserve"><value>Grand Total:</value></data>
+  <data name="in stock" xml:space="preserve"><value>in stock</value></data>
+  <data name="InFavorites" xml:space="preserve"><value>In Favorites</value></data>
+  <data name="InStock" xml:space="preserve"><value>{0} in stock</value></data>
+  <data name="It can result in displaying sensitive information from exceptions to end users." xml:space="preserve"><value>It can result in displaying sensitive information from exceptions to end users.</value></data>
+  <data name="Leave blank to keep your current password" xml:space="preserve"><value>Leave blank to keep your current password</value></data>
+  <data name="Loan Period (days):" xml:space="preserve"><value>Loan Period (days):</value></data>
+  <data name="LoanDate" xml:space="preserve"><value>Loan Date</value></data>
+  <data name="Login here" xml:space="preserve"><value>Login here</value></data>
+  <data name="Lost - Cannot be returned" xml:space="preserve"><value>Lost - Cannot be returned</value></data>
+  <data name="Max" xml:space="preserve"><value>Max</value></data>
+  <data name="MaxYear" xml:space="preserve"><value>Max Year</value></data>
+  <data name="Min" xml:space="preserve"><value>Min</value></data>
+  <data name="MinYear" xml:space="preserve"><value>Min Year</value></data>
+  <data name="MM/YY" xml:space="preserve"><value>MM/YY</value></data>
+  <data name="MostPopular" xml:space="preserve"><value>Most Popular</value></data>
+  <data name="MyLoans" xml:space="preserve"><value>My Loans</value></data>
+  <data name="MyProfile" xml:space="preserve"><value>My Profile</value></data>
+  <data name="MyReviews" xml:space="preserve"><value>My Reviews</value></data>
+  <data name="NewPassword" xml:space="preserve"><value>New Password</value></data>
+  <data name="NewPassword (Again)" xml:space="preserve"><value>New Password (Again)</value></data>
+  <data name="Next" xml:space="preserve"><value>Next</value></data>
+  <data name="No books found matching your search criteria." xml:space="preserve"><value>No books found matching your search criteria.</value></data>
+  <data name="No popular books yet" xml:space="preserve"><value>No popular books yet</value></data>
+  <data name="No results found" xml:space="preserve"><value>No results found</value></data>
+  <data name="No reviews yet. Be the first to write a review!" xml:space="preserve"><value>No reviews yet. Be the first to write a review!</value></data>
+  <data name="None" xml:space="preserve"><value>None</value></data>
+  <data name="Notes" xml:space="preserve"><value>Notes</value></data>
+  <data name="on" xml:space="preserve"><value>on</value></data>
+  <data name="Order #" xml:space="preserve"><value>Order #</value></data>
+  <data name="OrderConfirmation" xml:space="preserve"><value>Order Confirmation</value></data>
+  <data name="OrderDate:" xml:space="preserve"><value>Order Date:</value></data>
+  <data name="OrderDetails" xml:space="preserve"><value>Order Details</value></data>
+  <data name="OrderHistory" xml:space="preserve"><value>Order History</value></data>
+  <data name="OrderInformation" xml:space="preserve"><value>Order Information</value></data>
+  <data name="OrderItems" xml:space="preserve"><value>Order Items</value></data>
+  <data name="OrderNumber:" xml:space="preserve"><value>Order Number:</value></data>
+  <data name="OutOfStock" xml:space="preserve"><value>Out of Stock</value></data>
+  <data name="Overdue" xml:space="preserve"><value>Overdue</value></data>
+  <data name="Page navigation" xml:space="preserve"><value>Page navigation</value></data>
+  <data name="Password" xml:space="preserve"><value>Password</value></data>
+  <data name="PaymentInformation" xml:space="preserve"><value>Payment Information</value></data>
+  <data name="Previous" xml:space="preserve"><value>Previous</value></data>
+  <data name="Price drop notification" xml:space="preserve"><value>Price drop notification</value></data>
+  <data name="Price drop notifications have been disabled" xml:space="preserve"><value>Price drop notifications have been disabled</value></data>
+  <data name="Price drop notifications have been enabled" xml:space="preserve"><value>Price drop notifications have been enabled</value></data>
+  <data name="Price Drop!" xml:space="preserve"><value>Price Drop!</value></data>
+  <data name="PriceDrops" xml:space="preserve"><value>Price Drops</value></data>
+  <data name="PriceRange" xml:space="preserve"><value>Price Range</value></data>
+  <data name="ProceedToCheckout" xml:space="preserve"><value>Proceed to Checkout</value></data>
+  <data name="Quantity" xml:space="preserve"><value>Quantity</value></data>
+  <data name="Rating" xml:space="preserve"><value>Rating</value></data>
+  <data name="Register here" xml:space="preserve"><value>Register here</value></data>
+  <data name="Request ID:" xml:space="preserve"><value>Request ID:</value></data>
+  <data name="results found" xml:space="preserve"><value>results found</value></data>
+  <data name="Return" xml:space="preserve"><value>Return</value></data>
+  <data name="ReturnBook" xml:space="preserve"><value>Return Book</value></data>
+  <data name="Reviews for" xml:space="preserve"><value>Reviews for</value></data>
+  <data name="Role" xml:space="preserve"><value>Role</value></data>
+  <data name="SaveChanges" xml:space="preserve"><value>Save Changes</value></data>
+  <data name="Search results for" xml:space="preserve"><value>Search results for</value></data>
+  <data name="SearchResults" xml:space="preserve"><value>Search Results</value></data>
+  <data name="SearchTerm" xml:space="preserve"><value>Search Term</value></data>
+  <data name="ShippingInformation" xml:space="preserve"><value>Shipping Information</value></data>
+  <data name="ShoppingCart" xml:space="preserve"><value>Shopping Cart</value></data>
+  <data name="SortBy" xml:space="preserve"><value>Sort By</value></data>
+  <data name="SortDescending" xml:space="preserve"><value>Sort Descending</value></data>
+  <data name="Status" xml:space="preserve"><value>Status</value></data>
+  <data name="Status:" xml:space="preserve"><value>Status:</value></data>
+  <data name="StockStatus" xml:space="preserve"><value>Stock Status</value></data>
+  <data name="SubmitReview" xml:space="preserve"><value>Submit Review</value></data>
+  <data name="Subtotal:" xml:space="preserve"><value>Subtotal:</value></data>
+  <data name="Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred." xml:space="preserve"><value>Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred.</value></data>
+  <data name="Thank you for your order!" xml:space="preserve"><value>Thank you for your order!</value></data>
+  <data name="The book has been removed from your favorites" xml:space="preserve"><value>The book has been removed from your favorites</value></data>
+  <data name="The book has been removed from your wishlist" xml:space="preserve"><value>The book has been removed from your wishlist</value></data>
+  <data name="The Development environment shouldn't be enabled for deployed applications." xml:space="preserve"><value>The Development environment shouldn't be enabled for deployed applications.</value></data>
+  <data name="This book is currently on loan. Please try again later." xml:space="preserve"><value>This book is currently on loan. Please try again later.</value></data>
+  <data name="Title" xml:space="preserve"><value>Title</value></data>
+  <data name="Total" xml:space="preserve"><value>Total</value></data>
+  <data name="Total:" xml:space="preserve"><value>Total:</value></data>
+  <data name="TotalAmount:" xml:space="preserve"><value>Total Amount:</value></data>
+  <data name="Update" xml:space="preserve"><value>Update</value></data>
+  <data name="UpdateReview" xml:space="preserve"><value>Update Review</value></data>
+  <data name="Use this page to detail your site's privacy policy." xml:space="preserve"><value>Use this page to detail your site's privacy policy.</value></data>
+  <data name="User" xml:space="preserve"><value>User</value></data>
+  <data name="Username" xml:space="preserve"><value>Username</value></data>
+  <data name="UserProfile" xml:space="preserve"><value>User Profile</value></data>
+  <data name="View All Reviews" xml:space="preserve"><value>View All Reviews</value></data>
+  <data name="ViewOrderHistory" xml:space="preserve"><value>View Order History</value></data>
+  <data name="When users start adding books to their favorites, they will be displayed here." xml:space="preserve"><value>When users start adding books to their favorites, they will be displayed here.</value></data>
+  <data name="Write a Review for" xml:space="preserve"><value>Write a Review for</value></data>
+  <data name="WriteReview" xml:space="preserve"><value>Write Review</value></data>
+  <data name="You are protected by secure payment" xml:space="preserve"><value>You are protected by secure payment</value></data>
+  <data name="You can easily find the books you like later by adding them to your favorites." xml:space="preserve"><value>You can easily find the books you like later by adding them to your favorites.</value></data>
+  <data name="You can easily find the books you like later by adding them to your wishlist." xml:space="preserve"><value>You can easily find the books you like later by adding them to your wishlist.</value></data>
+  <data name="You do not have permission to access this page." xml:space="preserve"><value>You do not have permission to access this page.</value></data>
+  <data name="You have no active loans." xml:space="preserve"><value>You have no active loans.</value></data>
+  <data name="You have not placed any orders yet." xml:space="preserve"><value>You have not placed any orders yet.</value></data>
+  <data name="You haven't written any reviews yet." xml:space="preserve"><value>You haven't written any reviews yet.</value></data>
+  <data name="Your cart is empty." xml:space="preserve"><value>Your cart is empty.</value></data>
+  <data name="Your favorites list is empty" xml:space="preserve"><value>Your favorites list is empty</value></data>
+  <data name="Your order has been successfully received and is being processed." xml:space="preserve"><value>Your order has been successfully received and is being processed.</value></data>
+  <data name="Your wishlist is empty" xml:space="preserve"><value>Your wishlist is empty</value></data>
+  <data name="ZipCode" xml:space="preserve"><value>Zip Code</value></data>
+  <data name="AppName" xml:space="preserve">
+    <value>Kitabika</value>
+  </data>
+  <data name="AdminSuffix" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="AdminPanelName" xml:space="preserve">
+    <value>Kitabika Admin Panel</value>
+  </data>
+  <data name="ViewSite" xml:space="preserve">
+    <value>View Site</value>
+  </data>
+  <data name="AdminUser" xml:space="preserve">
+    <value>Admin</value>
+  </data>
 </root>

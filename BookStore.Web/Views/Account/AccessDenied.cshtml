@@ -1,7 +1,9 @@
-﻿<!-- Views/Account/AccessDenied.cshtml -->
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Erişim Reddedildi";
+    ViewData["Title"] = Localizer["AccessDenied"];
 }
 
-<h1 class="text-danger">Erişim Reddedildi</h1>
-<p>Bu sayfaya erişim izniniz yok.</p>
+<h1 class="text-danger">@Localizer["AccessDenied"]</h1>
+<p>@Localizer["You do not have permission to access this page."]</p>

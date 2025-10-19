@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<BookStore.Service.DTOs.ReviewDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 <style>
     :root {
@@ -82,7 +84,7 @@
 @if (!Model.Any())
 {
     <div class="alert alert-info">
-        <i class="bi bi-info-circle-fill mr-2"></i>Henüz inceleme yapılmamış. İlk incelemeyi yapan siz olun!
+        <i class="bi bi-info-circle-fill mr-2"></i>@Localizer["No reviews yet. Be the first to write a review!"]
     </div>
 }
 else
@@ -117,7 +119,7 @@ else
         <div class="text-center mt-3">
             <a asp-controller="Reviews" asp-action="BookReviews" asp-route-bookId="@Model.First().BookId"
                class="btn btn-outline-primary">
-                <i class="bi bi-list-ul mr-2"></i>Tüm Yorumları Görüntüle (@Model.Count())
+                <i class="bi bi-list-ul mr-2"></i>@Localizer["View All Reviews"] (@Model.Count())
             </a>
         </div>
     }

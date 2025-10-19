@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<BookStore.Service.DTOs.ReviewDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Yorumlarım";
+    ViewData["Title"] = Localizer["MyReviews"];
 }
 
 <h2>@ViewData["Title"]</h2>
 
 @if (!Model.Any())
 {
-    <div class="alert alert-info">Henüz herhangi bir yorum yazmadınız.</div>
+    <div class="alert alert-info">@Localizer["You haven't written any reviews yet."]</div>
 }
 else
 {
@@ -26,15 +28,15 @@ else
                         </div>
                     </div>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        <a asp-controller="Home" asp-action="Details" asp-route-id="@review.BookId">@review.BookTitle</a> için @review.ReviewDate.ToString("d") tarihinde
+                        <a asp-controller="Home" asp-action="Details" asp-route-id="@review.BookId">@review.BookTitle</a> @Localizer["for"] @review.ReviewDate.ToString("d") @Localizer["on"]
                     </h6>
                     <p class="card-text">@review.Content</p>
 
                     <div class="review-actions">
-                        <a asp-action="Edit" asp-route-id="@review.Id" class="btn btn-sm btn-outline-primary">Düzenle</a>
+                        <a asp-action="Edit" asp-route-id="@review.Id" class="btn btn-sm btn-outline-primary">@Localizer["Edit"]</a>
                         <form asp-action="Delete" method="post" class="d-inline">
                             <input type="hidden" name="id" value="@review.Id" />
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Sil</button>
+                            <button type="submit" class="btn btn-sm btn-outline-danger">@Localizer["Delete"]</button>
                         </form>
                     </div>
                 </div>

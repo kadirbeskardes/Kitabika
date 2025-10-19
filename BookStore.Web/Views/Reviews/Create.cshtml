@@ -1,6 +1,8 @@
 ﻿@model BookStore.Service.DTOs.CreateReviewDto
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = $"{ViewBag.BookTitle} için Yorum Yap";
+    ViewData["Title"] = $"{Localizer["Write a Review for"]} {ViewBag.BookTitle}";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -10,19 +12,19 @@
     <input type="hidden" asp-for="BookId" />
 
     <div class="form-group">
-        <label asp-for="Title" class="control-label">Başlık</label>
+        <label asp-for="Title" class="control-label">@Localizer["Title"]</label>
         <input asp-for="Title" class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Content" class="control-label">İçerik</label>
+        <label asp-for="Content" class="control-label">@Localizer["Content"]</label>
         <textarea asp-for="Content" class="form-control" rows="5"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Rating" class="control-label">Puan</label>
+        <label asp-for="Rating" class="control-label">@Localizer["Rating"]</label>
         <div class="rating-input">
             @for (int i = 1; i <= 5; i++)
             {
@@ -34,8 +36,8 @@
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Yorumu Gönder</button>
-        <a asp-controller="Home" asp-action="Details" asp-route-id="@Model.BookId" class="btn btn-secondary">İptal</a>
+        <button type="submit" class="btn btn-primary">@Localizer["SubmitReview"]</button>
+        <a asp-controller="Home" asp-action="Details" asp-route-id="@Model.BookId" class="btn btn-secondary">@Localizer["Cancel"]</a>
     </div>
 </form>
 
