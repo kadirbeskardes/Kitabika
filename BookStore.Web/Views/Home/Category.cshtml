@@ -11,63 +11,67 @@
         border: none;
         border-radius: 10px;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        background-color: #fff;
+        box-shadow: 0 4px 8px var(--shadow);
+        background-color: var(--card-bg);
     }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
-        }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px var(--shadow-lg);
+    }
 
     .card-img-top {
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid var(--border-color);
     }
 
     .card-title {
         font-weight: 600;
-        color: #333;
+        color: var(--text-primary);
         margin-bottom: 0.75rem;
     }
 
     .card-text {
-        color: #666;
+        color: var(--text-secondary);
         font-size: 0.9rem;
         margin-bottom: 0.5rem;
     }
 
     .card-footer {
-        background-color: #fff;
-        border-top: 1px solid #f0f0f0;
+        background-color: var(--card-bg);
+        border-top: 1px solid var(--border-color);
         padding: 1rem;
     }
 
     .btn-primary {
-        background-color: #FF8C00;
-        border-color: #FF8C00;
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: #fff;
     }
 
-        .btn-primary:hover {
-            background-color: #E67E00;
-            border-color: #E67E00;
-        }
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        color: #fff;
+    }
 
     .btn-success {
-        background-color: #FFA726;
-        border-color: #FFA726;
+        background-color: var(--primary-light);
+        border-color: var(--primary-light);
+        color: #fff;
     }
 
-        .btn-success:hover {
-            background-color: #FB8C00;
-            border-color: #FB8C00;
-        }
+    .btn-success:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        color: #fff;
+    }
 
     h2 {
-        color: #FF8C00;
+        color: var(--primary);
         font-weight: 600;
         margin-bottom: 2rem;
         padding-bottom: 0.5rem;
-        border-bottom: 2px solid #FFE0B2;
+        border-bottom: 2px solid var(--light-border);
     }
 
     .row {

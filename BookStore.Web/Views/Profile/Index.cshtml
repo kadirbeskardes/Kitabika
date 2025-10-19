@@ -10,25 +10,25 @@
     .card {
         border: none;
         border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 20px var(--shadow);
     }
 
     .card-header {
-        background: linear-gradient(to right, #ff7e5f, #feb47b);
-        color: white;
+        background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+        color: #fff;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
         padding: 1.5rem;
     }
 
-        .card-header h3 {
-            margin: 0;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+    .card-header h3 {
+        margin: 0;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
 
     .card-body {
-        background-color: #fffaf5;
+        background-color: var(--bg-primary);
         padding: 2rem;
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
@@ -36,32 +36,33 @@
 
     dt {
         font-weight: 600;
-        color: #ff6f3c;
+        color: var(--primary);
     }
 
     .badge-primary {
-        background-color: #ff9248;
+        background-color: var(--primary-light);
     }
 
     .badge-danger {
-        background-color: #e94e1b;
+        background-color: var(--danger);
     }
 
     .btn-primary {
-        background-color: #ff6f3c;
+        background-color: var(--primary);
         border: none;
         border-radius: 25px;
         padding: 0.5rem 1.5rem;
+        color: #fff;
     }
 
-        .btn-primary:hover {
-            background-color: var(--primary);
-        }
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+    }
 
     .alert-success {
-        background-color: #fff3cd;
-        border-color: #ffeeba;
-        color: #856404;
+        background-color: var(--warning-bg);
+        border-color: var(--warning);
+        color: var(--text-primary);
         border-radius: 10px;
     }
 

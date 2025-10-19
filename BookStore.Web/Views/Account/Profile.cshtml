@@ -6,34 +6,27 @@
 }
 
 <style>
-    :root {
-        --primary-color: #FF8C00;
-        --primary-dark: #E67E00;
-        --primary-light: #FFA726;
-        --light-bg: #FFF3E0;
-    }
-
     h2 {
-        color: var(--primary-dark);
+        color: var(--primary-hover);
         font-weight: 700;
         margin-bottom: 30px;
         padding-bottom: 10px;
-        border-bottom: 2px solid var(--light-bg);
+        border-bottom: 2px solid var(--light-border);
     }
 
     h4 {
-        color: var(--primary-dark);
+        color: var(--primary-hover);
         font-weight: 600;
         margin-bottom: 20px;
         padding-bottom: 8px;
-        border-bottom: 1px solid #FFE0B2;
+        border-bottom: 1px solid var(--light-border);
     }
 
     .profile-card {
-        background-color: white;
+        background-color: var(--card-bg);
         border-radius: 12px;
         padding: 30px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 5px 20px var(--shadow);
         margin-top: 20px;
     }
 
@@ -43,28 +36,30 @@
     }
 
     .profile-info strong {
-        color: var(--primary-dark);
+        color: var(--primary);
         min-width: 150px;
         display: inline-block;
     }
 
     .btn-back {
-        background-color: #95a5a6;
-        border-color: #95a5a6;
+        background-color: var(--muted);
+        border-color: var(--muted);
         font-weight: 600;
         padding: 10px 25px;
         border-radius: 5px;
         transition: all 0.3s;
+        color: #fff;
     }
 
-        .btn-back:hover {
-            background-color: #7f8c8d;
-            border-color: #7f8c8d;
-            transform: translateY(-2px);
-        }
+    .btn-back:hover {
+        background-color: var(--text-muted);
+        border-color: var(--text-muted);
+        transform: translateY(-2px);
+        color: #fff;
+    }
 
     .icon {
-        color: var(--primary-color);
+        color: var(--primary);
         margin-right: 8px;
     }
 </style>

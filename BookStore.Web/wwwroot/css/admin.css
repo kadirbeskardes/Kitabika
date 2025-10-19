@@ -1,38 +1,38 @@
-﻿.card {
+﻿
+.card {
     border: none;
     border-radius: 10px;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    box-shadow: 0 0.15rem 1.75rem 0 var(--shadow);
 }
 
 .card-header {
-    background-color: #f8f9fc;
-    border-bottom: 1px solid #e3e6f0;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .border-left-primary {
-    border-left: 0.25rem solid #4e73df !important;
+    border-left: 0.25rem solid var(--primary) !important;
 }
 
 .border-left-success {
-    border-left: 0.25rem solid #1cc88a !important;
+    border-left: 0.25rem solid var(--success) !important;
 }
 
 .border-left-info {
-    border-left: 0.25rem solid #36b9cc !important;
+    border-left: 0.25rem solid var(--primary-light) !important;
 }
 
 .border-left-warning {
-    border-left: 0.25rem solid #f6c23e !important;
+    border-left: 0.25rem solid var(--warning) !important;
 }
 
 .text-gray-800 {
-    color: #5a5c69 !important;
+    color: var(--text-primary) !important;
 }
 
 .shadow {
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+    box-shadow: 0 0.15rem 1.75rem 0 var(--shadow) !important;
 }
-
 
 .loan-status-badge {
     font-size: 0.9rem;
@@ -40,31 +40,31 @@
 }
 
 .badge-active {
-    background-color: #28a745;
+    background-color: var(--success);
 }
 
 .badge-overdue {
-    background-color: #dc3545;
+    background-color: var(--danger);
 }
 
 .badge-returned {
-    background-color: #6c757d;
+    background-color: var(--muted);
 }
 
 .book-cover-small {
     width: 50px;
     height: 70px;
     object-fit: cover;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px var(--shadow);
 }
 
 .no-cover {
     display: inline-block;
     width: 50px;
     height: 70px;
-    background: #f8f9fa;
-    border: 1px dashed #dee2e6;
+    background: var(--bg-tertiary);
+    border: 1px dashed var(--border-color);
     text-align: center;
     line-height: 70px;
-    color: #6c757d;
+    color: var(--text-muted);
 }
