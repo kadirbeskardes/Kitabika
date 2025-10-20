@@ -101,6 +101,29 @@
 </div>
 
 @section Scripts {
+    <style>
+        .notification-success {
+            background-color: var(--success-bg);
+            color: var(--success-dark);
+            border: 1px solid var(--success);
+        }
+
+        .notification-error {
+            background-color: var(--danger-bg);
+            color: var(--danger-dark);
+            border: 1px solid var(--danger);
+        }
+
+        .btn-filled {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-filled:hover {
+            background-color: var(--primary-hover);
+            color: white;
+        }
+    </style>
     <script>
         $(document).ready(function() {
             @if (User.Identity!.IsAuthenticated)
@@ -112,7 +135,7 @@
                 $.get('@Url.Action("CheckFavoriteStatus", "Favorites")', { bookId: bookId })
                     .done(function(response) {
                         if (response.isInFavorites) {
-                            $('.toggle-favorite').removeClass('btn-outline-warning').addClass('btn-warning');
+                            $('.toggle-favorite').addClass('btn-filled');
                             $('.toggle-favorite i').removeClass('bi-star').addClass('bi-star-fill');
                         }
                     });
@@ -121,7 +144,7 @@
                 $.get('@Url.Action("CheckWishlistStatus", "Wishlist")', { bookId: bookId })
                     .done(function(response) {
                         if (response.isInWishlist) {
-                            $('.toggle-wishlist').removeClass('btn-outline-danger').addClass('btn-danger');
+                            $('.toggle-wishlist').addClass('btn-filled');
                             $('.toggle-wishlist i').removeClass('bi-heart').addClass('bi-heart-fill');
                         }
                     });
@@ -134,10 +157,10 @@
                         .done(function(response) {
                             if (response.success) {
                                 if (response.isInFavorites) {
-                                    button.removeClass('btn-outline-warning').addClass('btn-warning');
+                                    button.addClass('btn-filled');
                                     button.find('i').removeClass('bi-star').addClass('bi-star-fill');
                                 } else {
-                                    button.removeClass('btn-warning').addClass('btn-outline-warning');
+                                    button.removeClass('btn-filled');
                                     button.find('i').removeClass('bi-star-fill').addClass('bi-star');
                                 }
                                 showNotification(response.message, 'success');
@@ -158,10 +181,10 @@
                         .done(function(response) {
                             if (response.success) {
                                 if (response.isInWishlist) {
-                                    button.removeClass('btn-outline-danger').addClass('btn-danger');
+                                    button.addClass('btn-filled');
                                     button.find('i').removeClass('bi-heart').addClass('bi-heart-fill');
                                 } else {
-                                    button.removeClass('btn-danger').addClass('btn-outline-danger');
+                                    button.removeClass('btn-filled');
                                     button.find('i').removeClass('bi-heart-fill').addClass('bi-heart');
                                 }
                                 showNotification(response.message, 'success');
@@ -178,7 +201,7 @@
         });
 
         function showNotification(message, type) {
-            var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            var alertClass = type === 'success' ? 'notification-success' : 'notification-error';
             var notification = `
                 <div class="alert ${alertClass} alert-dismissible fade show position-fixed" 
                      style="top: 20px; right: 20px; z-index: 9999; max-width: 300px;" role="alert">

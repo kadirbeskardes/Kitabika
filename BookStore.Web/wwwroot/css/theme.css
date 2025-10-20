@@ -60,6 +60,7 @@
     --input-border: #303234;
     --navbar-bg: linear-gradient(90deg, #0f1113, #141516);
     --footer-bg: #0f1113;
+    --text-on-primary: #ffffff;
     /* Compatibility aliases for dark theme */
     --primary-color: var(--primary);
     --primary-dark: var(--primary-hover);
@@ -125,7 +126,7 @@ body, .navbar, .dropdown-menu, .dropdown-item, .card, .form-control, footer, .li
 /* Page-specific styles from Index.cshtml and Details.cshtml */
 .card-header {
     background: linear-gradient(90deg, var(--primary), var(--primary-hover)) !important;
-    color: #fff;
+    color: var(--text-on-primary);
     border-radius: 10px 10px 0 0 !important;
 }
 

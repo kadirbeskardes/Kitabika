@@ -53,16 +53,16 @@
         }
 
         .form-control { border-radius: 8px; border: 1px solid var(--input-border); transition: 0.2s; background: var(--input-bg); color: var(--text-primary); }
-        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 0.25rem rgba(255, 140, 0, 0.12); }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 0.25rem var(--shadow); }
 
         .btn-outline-warning { border-radius: 8px; transition: 0.3s ease; }
-        .btn-outline-warning:hover { background-color: var(--primary-hover); color: white; }
+        .btn-outline-warning:hover { background-color: var(--primary-hover); color: var(--text-on-primary); }
 
         .user-avatar {
-            width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+            width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: var(--text-on-primary); display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1rem; box-shadow: 0 2px 5px var(--shadow);
         }
 
-        .dropdown-menu { border: none; border-radius: 10px; padding: 0.5rem; box-shadow: 0 6px 24px rgba(0,0,0,0.08); animation: fadeIn 0.3s ease-in-out; }
+        .dropdown-menu { border: none; border-radius: 10px; padding: 0.5rem; box-shadow: var(--shadow-lg); animation: fadeIn 0.3s ease-in-out; }
         .dropdown-item { border-radius:6px; padding:0.6rem 1rem; transition:0.2s; }
         .dropdown-item:hover { background-color: var(--accent); color: var(--primary-hover); }
 

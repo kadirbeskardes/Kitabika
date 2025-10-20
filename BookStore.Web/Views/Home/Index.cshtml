@@ -11,20 +11,20 @@
     <div class="row">
         <div class="col-lg-3 col-md-4 mb-4">
             <div class="card shadow-sm">
-                <div class="card-header text-white">
+                <div class="card-header">
                     <h5 class="mb-0"><i class="fas fa-list mr-2"></i>@Localizer["Categories"]</h5>
                 </div>
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-action">
-                            <a asp-action="Index" class="text-decoration-none text-dark d-block">
+                            <a asp-action="Index" class="text-decoration-none d-block">
                                 <i class="fas fa-th-large mr-2"></i>@Localizer["AllCategories"]
                             </a>
                         </li>
                         @foreach (var category in ViewBag.Categories)
                         {
                             <li class="list-group-item list-group-item-action">
-                                <a asp-action="Category" asp-route-id="@category.Id" class="text-decoration-none text-dark d-block">
+                                <a asp-action="Category" asp-route-id="@category.Id" class="text-decoration-none d-block">
                                     <i class="fas fa-bookmark mr-2"></i>@category.Name
                                 </a>
                             </li>
@@ -60,7 +60,7 @@
                                     <p class="card-text"><small class="text-muted"><i class="fas fa-calendar mr-1"></i>@book.PublicationYear</small></p>
                                     <h5 class="text-primary">@book.Price.ToString("C")</h5>
                                 </div>
-                                <div class="card-footer bg-white border-0 d-flex justify-content-between">
+                                <div class="card-footer border-0 d-flex justify-content-between">
                                     <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-eye mr-1"></i>@Localizer["ViewDetails"]
                                     </a>
