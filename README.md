@@ -1,183 +1,146 @@
-# 📚 Kitabika - Online Kitap Satış ve Yönetim Sistemi
+# 📚 Kitabika (BookStore)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/ASP.NET%20Core%20MVC-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="ASP.NET Core MVC"/>
-  <img src="https://img.shields.io/badge/Entity%20Framework-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="Entity Framework"/>
-  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap"/>
-  <img src="https://img.shields.io/badge/SQL%20Server-CC2927? style=for-the-badge&logo=microsoftsqlserver&logoColor=white" alt="SQL Server"/>
-</p>
+Kitabika is a modern, full-featured online bookstore and library management system built with **ASP.NET Core 9.0**. It follows the **Onion (Clean) Architecture** principles to ensure scalability, maintainability, and testability.
 
-**Kitabika**, katmanlı mimari ile geliştirilmiş, hem admin paneli hem de kullanıcı arayüzüne sahip tam teşekküllü bir kitap satış ve yönetim sistemidir.  Online kitap satışı ve yönetimi için tüm temel işlevselliği sağlar.
-
-## 📋 İçindekiler
-
-- [Özellikler](#-özellikler)
-- [Ekran Görüntüleri](#-ekran-görüntüleri)
-- [Mimari](#-mimari)
-- [Teknolojiler](#-teknolojiler)
-- [Kurulum](#-kurulum)
-- [Veritabanı Şeması](#-veritabanı-şeması)
-- [Katkıda Bulunma](#-katkıda-bulunma)
-
-## ✨ Özellikler
-
-### 👤 Kullanıcı Özellikleri
-- 🔐 Kullanıcı kayıt ve giriş sistemi
-- 📖 Kitap arama ve filtreleme
-- 🛒 Sepet yönetimi
-- ❤️ Favori listesi
-- 📋 İstek listesi (Wishlist)
-- 📦 Sipariş takibi
-- ⭐ Kitap değerlendirme ve yorum yapma
-- 🎟️ Kupon kodu kullanımı
-
-### 👨‍💼 Admin Özellikleri
-- 📚 Kitap ekleme, düzenleme ve silme
-- 📁 Kategori yönetimi
-- 👥 Kullanıcı yönetimi
-- 📊 Sipariş yönetimi
-- 🎫 Kupon oluşturma ve yönetimi
-- 📈 Satış raporları
-
-### 📖 Kitap Ödünç Alma
-- Kitap ödünç alma sistemi
-- İade takibi
-- Gecikme bildirimleri
-
-## 🏗 Mimari
-
-Proje **N-Tier Architecture** (Katmanlı Mimari) kullanılarak geliştirilmiştir: 
-
-```
-┌─────────────────────────────────────────┐
-│           Presentation Layer            │
-│            (BookStore.Web)              │
-│    MVC Controllers, Views, ViewModels   │
-├─────────────────────────────────────────┤
-│            Service Layer                │
-│          (BookStore.Service)            │
-│     Business Logic, Validations         │
-├─────────────────────────────────────────┤
-│             Data Layer                  │
-│           (BookStore. Data)              │
-│   DbContext, Repositories, Migrations   │
-├─────────────────────────────────────────┤
-│             Core Layer                  │
-│           (BookStore.Core)              │
-│     Entities, Interfaces, Enums         │
-└─────────────────────────────────────────┘
-```
-
-## 🛠 Teknolojiler
-
-- **ASP.NET Core MVC 8.0** - Web framework
-- **Entity Framework Core** - ORM
-- **SQL Server** - Veritabanı
-- **Bootstrap 5** - UI framework
-- **jQuery** - JavaScript kütüphanesi
-- **AutoMapper** - Object mapping
-- **Identity** - Kimlik doğrulama ve yetkilendirme
-
-## 🚀 Kurulum
-
-### Gereksinimler
-- .NET 8.0 SDK
-- SQL Server 2019+
-- Visual Studio 2022 veya VS Code
-
-### Adımlar
-
-```bash
-# Repository'yi klonlayın
-git clone https://github.com/kadirbeskardes/Kitabika.git
-cd Kitabika
-
-# Bağımlılıkları yükleyin
-dotnet restore
-
-# Veritabanı bağlantı string'ini appsettings.json'da güncelleyin
-# "ConnectionStrings":  { "DefaultConnection": "Your-Connection-String" }
-
-# Migration'ları uygulayın
-dotnet ef database update --project BookStore.Data
-
-# Uygulamayı çalıştırın
-dotnet run --project BookStore.Web
-```
-
-## 📁 Proje Yapısı
-
-```
-Kitabika/
-├── BookStore.Core/                 # Domain katmanı
-│   ├── Entities/
-│   │   ├── BaseEntity.cs          # Temel entity sınıfı
-│   │   ├── Book.cs                # Kitap entity
-│   │   ├── Category.cs            # Kategori entity
-│   │   ├── User.cs                # Kullanıcı entity
-│   │   ├── Order. cs               # Sipariş entity
-│   │   ├── OrderItem.cs           # Sipariş kalemi entity
-│   │   ├── Review.cs              # Değerlendirme entity
-│   │   ├── Favorite.cs            # Favori entity
-│   │   ├── Wishlist.cs            # İstek listesi entity
-│   │   ├── Coupon.cs              # Kupon entity
-│   │   └── Loan.cs                # Ödünç entity
-│   ├── Interfaces/                # Repository arayüzleri
-│   └── Enums/                     # Enum tanımları
-├── BookStore. Data/                # Veri erişim katmanı
-├── BookStore.Service/             # İş mantığı katmanı
-└── BookStore.Web/                 # Web uygulaması
-```
-
-## 🗄 Veritabanı Şeması
-
-```mermaid
-erDiagram
-    USER ||--o{ ORDER : places
-    USER ||--o{ REVIEW : writes
-    USER ||--o{ FAVORITE : has
-    USER ||--o{ WISHLIST : has
-    ORDER ||--|{ ORDER_ITEM : contains
-    BOOK ||--o{ ORDER_ITEM : included_in
-    BOOK ||--o{ REVIEW : has
-    BOOK }o--|| CATEGORY : belongs_to
-    ORDER ||--o| COUPON : uses
-    USER ||--o{ LOAN : borrows
-    BOOK ||--o{ LOAN : lent
-```
-
-## 🎯 Kullanım Senaryoları
-
-### Kitap Satın Alma
-1. Kullanıcı kayıt olur veya giriş yapar
-2. Kitapları arar ve inceler
-3. Sepete ekler
-4. Kupon kodu uygular (opsiyonel)
-5. Sipariş oluşturur
-6. Ödeme yapar
-
-### Kitap Ödünç Alma
-1. Kullanıcı ödünç almak istediği kitabı seçer
-2. Ödünç alma talebinde bulunur
-3. Admin onaylar
-4. Belirlenen sürede iade eder
-
-## 🤝 Katkıda Bulunma
-
-Katkılarınızı bekliyoruz!  Lütfen önce bir issue açarak değişikliğinizi tartışın.
-
-1. Fork edin
-2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
-3. Commit edin (`git commit -m 'Add some AmazingFeature'`)
-4. Push edin (`git push origin feature/AmazingFeature`)
-5. Pull Request açın
-
-## 📄 Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır. 
+The application serves a dual purpose: it functions as an **E-commerce platform** for selling books and a **Library system** for managing book loans.
 
 ---
 
-<p align="center">
-  Made with ❤️ by <a href="https://github.com/kadirbeskardes">Kadir Beskardes</a>
-</p>
+## 🚀 Features
+
+### 🛒 E-Commerce Module
+*   **Product Browsing:** Advanced search and filtering by category, author, and availability.
+*   **Shopping Cart:** Persistent shopping cart experience.
+*   **Order Management:** Secure checkout process and order history tracking.
+*   **Coupons & Discounts:** Admin-managed promotional codes for discounts.
+
+### 📖 Library & Lending Module
+*   **Book Loans:** System for users to borrow books for a specific period.
+*   **Overdue Tracking:** Automatic calculation of overdue loans.
+*   **Availability Status:** Real-time stock and loan status for books.
+
+### 👤 User Features
+*   **Authentication:** Secure user registration and login (Custom Auth with BCrypt).
+*   **Profile Management:** Update personal details and password.
+*   **Social Interactions:** 
+    *   **Reviews & Ratings:** Users can rate and review books.
+    *   **Favorites:** Mark books as favorites for quick access.
+    *   **Wishlist:** Save books for future purchase.
+
+### 🛠️ Admin Panel
+A comprehensive dashboard for administrators to manage the platform:
+*   **Dashboard:** Key metrics and statistics.
+*   **Catalog Management:** CRUD operations for **Books** and **Categories**.
+*   **Order Management:** View and update order statuses.
+*   **Loan Management:** Track active and returned loans.
+*   **User Management:** Manage customer accounts.
+*   **Coupon Management:** Create and manage discount coupons.
+
+### 🌍 Other Highlights
+*   **Localization:** Multi-language support (English & Turkish supported).
+*   **Responsive Design:** Mobile-friendly UI built with **Bootstrap**.
+*   **Clean Architecture:** Separation of concerns (Core, Data, Service, Web).
+
+---
+
+## 🏗️ Technical Architecture
+
+The solution is divided into four main projects adhering to the **N-Layer Architecture**:
+
+1.  **BookStore.Core** 🧱
+    *   Contains the domain entities, interfaces, enums, and constants.
+    *   Has no external dependencies (Pure C#).
+    
+2.  **BookStore.Data** 💾
+    *   Implements data access logic using **Entity Framework Core**.
+    *   Handles Database Context, Migrations, and Repositories.
+    
+3.  **BookStore.Service** ⚙️
+    *   Contains business logic and DTOs (Data Transfer Objects).
+    *   Uses **AutoMapper** for object mapping.
+    *   Implements interfaces defined in the Core layer.
+
+4.  **BookStore.Web** 🌐
+    *   The Presentation Layer (ASP.NET Core MVC).
+    *   Handles HTTP requests, View rendering, and UI logic.
+    *   Configures Dependency Injection and Middleware.
+
+---
+
+## 💻 Tech Stack
+
+*   **Framework:** [.NET 9.0](https://dotnet.microsoft.com/download/dotnet/9.0)
+*   **Web Framework:** ASP.NET Core MVC
+*   **Database:** Microsoft SQL Server
+*   **ORM:** Entity Framework Core 9.0
+*   **Mapping:** AutoMapper
+*   **Security:** BCrypt.Net-Next (Password Hashing)
+*   **Frontend:** Razor Views, Bootstrap 5, jQuery, jQuery Validation
+*   **IDE:** Visual Studio 2022 / VS Code
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
+*   [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
+*   SQL Server (LocalDB or Standard)
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/yourusername/Kitabika.git
+    cd Kitabika
+    ```
+
+2.  **Configure Database**
+    Update the connection string in `BookStore.Web/appsettings.json`:
+    ```json
+    "ConnectionStrings": {
+      "DefaultConnection": "Server=.;Database=KitabikaDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+    }
+    ```
+
+3.  **Run Migrations**
+    Apply the database schema:
+    ```bash
+    cd BookStore.Web
+    dotnet ef database update --project ../BookStore.Data
+    ```
+
+4.  **Run the Application**
+    ```bash
+    dotnet run
+    ```
+    The application will be available at `https://localhost:7148` (or similar port).
+
+---
+
+## 📸 Project Structure
+
+```text
+Kitabika/
+├── 📂 BookStore.Core      # Domain Layer (Entities, Interfaces)
+├── 📂 BookStore.Data      # Data Layer (EF Core Context, Repositories)
+├── 📂 BookStore.Service   # Business Layer (Services, DTOs)
+└── 📂 BookStore.Web       # Presentation Layer (MVC Controllers, Views)
+```
+
+---
+
+## 🤝 Contribution
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1.  Fork the project
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
